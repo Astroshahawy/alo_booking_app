@@ -1,17 +1,52 @@
-import 'package:alo_booking_app/features/authentication/data/models/auth_model.dart';
+import 'package:alo_booking_app/core/datasource/network/dio_helper.dart';
+import 'package:alo_booking_app/core/exceptions/exceptions.dart';
 import 'package:alo_booking_app/features/authentication/data/models/login_model.dart';
-import 'package:dio/dio.dart';
+import 'package:alo_booking_app/features/authentication/domain/entities/auth.dart';
+import 'package:dartz/dartz.dart';
 
 import '../../constants/constants.dart';
-import 'package:retrofit/retrofit.dart';
 
-part 'booking_remote_data_source.g.dart';
+abstract class BaseBookingRemoteDataSource {
+  Future<Either<PrimaryServerException, LoginModel>> login(Auth auth);
+}
 
-@RestApi(baseUrl: AppApis.baseUrl)
-abstract class BookingRemoteDataSource {
-  factory BookingRemoteDataSource(Dio dio, {String baseUrl}) =
-      _BookingRemoteDataSource;
+class BookingRemoteDataSource extends BaseBookingRemoteDataSource {
+  final BaseDioHelper baseDioHelper;
 
-  @POST(AppApis.version + AppApis.loginEndPoint)
-  Future<LoginModel> login(@Body() AuthModel auth);
+  BookingRemoteDataSource(this.baseDioHelper);
+
+  @override
+  Future<Either<PrimaryServerException, LoginModel>> login(Auth auth) async {
+    return basicErrorHandling<LoginModel>(
+      onSuccess: () async {
+        final response = await baseDioHelper.post(
+          endPoint: AppApis.loginEndPoint,
+          data: {
+            'email': auth.email,
+            'password': auth.password,
+          },
+        );
+        return LoginModel.fromJson(response);
+      },
+      onPrimaryServerException: (e) async {
+        return e;
+      },
+    );
+  }
+}
+
+extension on BaseBookingRemoteDataSource {
+  Future<Either<PrimaryServerException, T>> basicErrorHandling<T>({
+    required Future<T> Function() onSuccess,
+    Future<PrimaryServerException> Function(PrimaryServerException exception)?
+        onPrimaryServerException,
+  }) async {
+    try {
+      final r = await onSuccess();
+
+      return Right(r);
+    } on PrimaryServerException catch (e) {
+      return Left(e);
+    }
+  }
 }
