@@ -1,4 +1,4 @@
-import 'package:alo_booking_app/features/feature/domain/entities/status.dart';
+import 'package:alo_booking_app/features/authentication/domain/entities/status.dart';
 
 class StatusModel extends Status {
   const StatusModel({

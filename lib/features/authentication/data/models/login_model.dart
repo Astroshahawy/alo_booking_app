@@ -1,6 +1,6 @@
-import 'package:alo_booking_app/features/feature/data/models/status_model.dart';
-import 'package:alo_booking_app/features/feature/data/models/user_model.dart';
-import 'package:alo_booking_app/features/feature/domain/entities/Login.dart';
+import 'package:alo_booking_app/features/authentication/data/models/status_model.dart';
+import 'package:alo_booking_app/features/authentication/data/models/user_model.dart';
+import 'package:alo_booking_app/features/authentication/domain/entities/login.dart';
 
 class LoginModel extends Login {
   const LoginModel({

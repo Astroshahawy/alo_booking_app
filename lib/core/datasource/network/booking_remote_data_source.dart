@@ -1,5 +1,5 @@
-import 'package:alo_booking_app/features/feature/data/models/auth_model.dart';
-import 'package:alo_booking_app/features/feature/data/models/login_model.dart';
+import 'package:alo_booking_app/features/authentication/data/models/auth_model.dart';
+import 'package:alo_booking_app/features/authentication/data/models/login_model.dart';
 import 'package:dio/dio.dart';
 
 import '../../constants/constants.dart';

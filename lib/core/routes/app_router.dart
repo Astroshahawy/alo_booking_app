@@ -1,5 +1,5 @@
 import 'package:alo_booking_app/core/constants/constants.dart';
-import 'package:alo_booking_app/features/feature/presentation/screens/home_screen.dart';
+import 'package:alo_booking_app/features/authentication/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 

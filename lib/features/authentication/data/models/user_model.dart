@@ -1,4 +1,4 @@
-import 'package:alo_booking_app/features/feature/domain/entities/user.dart';
+import 'package:alo_booking_app/features/authentication/domain/entities/user.dart';
 
 class UserModel extends User {
   const UserModel({

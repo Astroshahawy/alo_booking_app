@@ -1,4 +1,4 @@
-import 'package:alo_booking_app/features/feature/domain/entities/auth.dart';
+import 'package:alo_booking_app/features/authentication/domain/entities/auth.dart';
 
 class AuthModel extends Auth {
   const AuthModel({
