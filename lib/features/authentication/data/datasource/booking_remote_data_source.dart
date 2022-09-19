@@ -1,10 +1,10 @@
-import 'package:alo_booking_app/core/datasource/network/dio_helper.dart';
 import 'package:alo_booking_app/core/exceptions/exceptions.dart';
+import 'package:alo_booking_app/core/network/dio_helper.dart';
 import 'package:alo_booking_app/features/authentication/data/models/login_model.dart';
 import 'package:alo_booking_app/features/authentication/domain/entities/auth.dart';
 import 'package:dartz/dartz.dart';
 
-import '../../constants/constants.dart';
+import '../../../../core/constants/constants.dart';
 
 abstract class BaseBookingRemoteDataSource {
   Future<Either<PrimaryServerException, LoginModel>> login(Auth auth);

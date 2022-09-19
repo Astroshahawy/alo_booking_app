@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Material App',
+        title: 'Alo Booking',
         restorationScopeId: 'app',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

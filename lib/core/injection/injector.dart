@@ -1,5 +1,5 @@
-import 'package:alo_booking_app/core/datasource/network/booking_remote_data_source.dart';
-import 'package:alo_booking_app/core/datasource/network/dio_helper.dart';
+import 'package:alo_booking_app/core/network/dio_helper.dart';
+import 'package:alo_booking_app/features/authentication/data/datasource/booking_remote_data_source.dart';
 import 'package:alo_booking_app/features/authentication/data/repository/home_repository.dart';
 import 'package:alo_booking_app/features/authentication/domain/repository/base_home_repository.dart';
 import 'package:alo_booking_app/features/authentication/domain/usecases/login_usecase.dart';
