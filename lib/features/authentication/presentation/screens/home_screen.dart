@@ -1,3 +1,4 @@
+import 'package:alo_booking_app/features/authentication/presentation/widgets/home_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -6,12 +7,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-      );
+      appBar: AppBar(
+        title: const Text('Material App Bar'),
+      ),
+      body: const HomeWidget(),
+    );
   }
 }
