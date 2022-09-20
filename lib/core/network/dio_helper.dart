@@ -1,6 +1,7 @@
 import 'package:alo_booking_app/core/constants/constants.dart';
 import 'package:alo_booking_app/core/exceptions/exceptions.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 
 abstract class BaseDioHelper {
   Future<dynamic> post({
@@ -28,52 +29,43 @@ abstract class BaseDioHelper {
 }
 
 class DioHelper extends BaseDioHelper {
-  Dio _dio() {
-    Dio dio = Dio(
-      BaseOptions(
-        baseUrl: AppApis.baseUrl + AppApis.version,
-        receiveDataWhenStatusError: true,
-        connectTimeout: 10000,
-        receiveTimeout: 10000,
-      ),
-    );
-
-    dio.interceptors.add(LogInterceptor(
-      requestBody: true,
-      error: true,
-      requestHeader: false,
-      responseHeader: false,
-      request: true,
-      responseBody: true,
-    ));
-
-    return dio;
-  }
+  final Dio dio = Dio(
+    BaseOptions(
+      baseUrl: '${AppApis.baseUrl}${AppApis.version}',
+      receiveDataWhenStatusError: true,
+      connectTimeout: 5000,
+    ),
+  );
 
   @override
-  Future get({
+  Future<dynamic> get({
     String? base,
     required String endPoint,
-    data,
-    query,
+    dynamic data,
+    dynamic query,
     String? token,
     CancelToken? cancelToken,
     int? timeOut,
     bool isMultipart = false,
   }) async {
     if (timeOut != null) {
-      _dio().options.connectTimeout = timeOut;
+      dio.options.connectTimeout = timeOut;
     }
 
-    _dio().options.headers = {
+    dio.options.headers = {
       if (isMultipart) 'Content-Type': 'multipart/form-data',
       if (!isMultipart) 'Content-Type': 'application/json',
       if (!isMultipart) 'Accept': 'application/json',
       if (token != null) 'token': token,
     };
 
+    debugPrint('URL => ${dio.options.baseUrl + endPoint}');
+    debugPrint('Header => ${dio.options.headers.toString()}');
+    debugPrint('Body => $data');
+    debugPrint('Query => $query');
+
     return await request(
-      call: () async => await _dio().get(
+      call: () async => await dio.get(
         endPoint,
         queryParameters: query,
         cancelToken: cancelToken,
@@ -82,11 +74,11 @@ class DioHelper extends BaseDioHelper {
   }
 
   @override
-  Future post({
+  Future<dynamic> post({
     String? base,
     required String endPoint,
-    data,
-    query,
+    dynamic data,
+    dynamic query,
     String? token,
     ProgressCallback? progressCallback,
     CancelToken? cancelToken,
@@ -94,18 +86,23 @@ class DioHelper extends BaseDioHelper {
     bool isMultipart = false,
   }) async {
     if (timeOut != null) {
-      _dio().options.connectTimeout = timeOut;
+      dio.options.connectTimeout = timeOut;
     }
 
-    _dio().options.headers = {
+    dio.options.headers = {
       if (isMultipart) 'Content-Type': 'multipart/form-data',
       if (!isMultipart) 'Content-Type': 'application/json',
       if (!isMultipart) 'Accept': 'application/json',
       if (token != null) 'token': token,
     };
 
+    debugPrint('URL => ${dio.options.baseUrl + endPoint}');
+    debugPrint('Header => ${dio.options.headers.toString()}');
+    debugPrint('Body => $data');
+    debugPrint('Query => $query');
+
     return await request(
-      call: () async => await _dio().post(
+      call: () async => await dio.post(
         endPoint,
         data: data,
         queryParameters: query,

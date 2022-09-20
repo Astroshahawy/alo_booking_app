@@ -1,6 +1,7 @@
 import 'package:alo_booking_app/core/injection/injector.dart';
 import 'package:alo_booking_app/core/routes/app_router.dart';
 import 'package:alo_booking_app/features/authentication/presentation/cubit/booking_cubit.dart';
+import 'package:alo_booking_app/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<BookingBloc>(
           create: (context) => getIt<BookingBloc>(),
+        ),
+        BlocProvider<ProfileBloc>(
+          create: (context) => getIt<ProfileBloc>(),
         ),
       ],
       child: MaterialApp(
