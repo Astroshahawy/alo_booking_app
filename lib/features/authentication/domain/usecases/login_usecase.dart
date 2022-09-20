@@ -15,4 +15,5 @@ class LoginUseCase extends BaseUseCase<Auth, LoginModel> {
       LoginModel parameters) async {
     return await baseHomeRepository.login(parameters);
   }
+  //comment
 }
