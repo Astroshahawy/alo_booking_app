@@ -1,15 +1,17 @@
+import 'package:alo_booking_app/features/authentication/data/models/status_model.dart';
+import 'package:alo_booking_app/features/authentication/data/models/user_model.dart';
 import 'package:alo_booking_app/features/authentication/domain/entities/auth.dart';
 
 class AuthModel extends Auth {
   const AuthModel({
-    required super.email,
-    required super.password,
+    required super.status,
+    required super.userData,
   });
 
   factory AuthModel.fromJson(Map<String, dynamic> json) {
     return AuthModel(
-      email: json['email'] ?? '',
-      password: json['password'] ?? '',
+      status: StatusModel.fromJson(json['status']),
+      userData: UserModel.fromJson(json['data']),
     );
   }
 }
