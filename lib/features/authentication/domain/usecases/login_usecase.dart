@@ -1,5 +1,6 @@
 import 'package:alo_booking_app/core/exceptions/exceptions.dart';
 import 'package:alo_booking_app/core/usecase/base_usecase.dart';
+
 import 'package:alo_booking_app/features/authentication/domain/entities/login.dart';
 import 'package:alo_booking_app/features/authentication/domain/entities/auth.dart';
 import 'package:alo_booking_app/features/authentication/domain/repository/base_auth_repository.dart';
