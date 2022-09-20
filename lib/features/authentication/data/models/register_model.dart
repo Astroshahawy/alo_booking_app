@@ -8,6 +8,15 @@ class RegisterModel extends Register {
     required super.passwordConfirmation,
   });
 
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'email': email,
+      'password': password,
+      'passwordConfirmation': passwordConfirmation,
+    };
+  }
+
   factory RegisterModel.fromJson(Map<String, dynamic> json) {
     return RegisterModel(
       name: json['name'] ?? '',
