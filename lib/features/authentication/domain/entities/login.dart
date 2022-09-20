@@ -1,17 +1,14 @@
 import 'package:equatable/equatable.dart';
 
-import 'package:alo_booking_app/features/authentication/domain/entities/status.dart';
-import 'package:alo_booking_app/features/authentication/domain/entities/user.dart';
-
 class Login extends Equatable {
-  final Status status;
-  final User data;
+  final String email;
+  final String password;
 
   const Login({
-    required this.status,
-    required this.data,
+    required this.email,
+    required this.password,
   });
 
   @override
-  List<Object> get props => [status, data];
+  List<Object> get props => [email, password];
 }
