@@ -4,8 +4,11 @@ part of 'hotels_cubit.dart';
 abstract class HotelsState {}
 
 class HotelsInitial extends HotelsState {}
-class GetHotelsLoadingState extends HotelsState{}
-class GetHotelsSucessState extends HotelsState{}
+
+class GetHotelsLoadingState extends HotelsState {}
+
+class GetHotelsSuccessState extends HotelsState {}
+
 class GetHotelsErrorState extends HotelsState {
   final PrimaryServerException exception;
 

@@ -1,5 +1,5 @@
 import 'package:alo_booking_app/features/hotels/data/models/hotels_model.dart';
-import 'package:alo_booking_app/features/hotels/domian/entities/hotels_data.dart';
+import 'package:alo_booking_app/features/hotels/domain/entities/hotels_data.dart';
 
 class HotelsDataModel extends HotelData {
   HotelsDataModel({required super.currentPage, required super.hotels});

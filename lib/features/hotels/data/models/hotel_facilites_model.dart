@@ -1,4 +1,4 @@
-import 'package:alo_booking_app/features/hotels/domian/entities/hotel_facilites.dart';
+import 'package:alo_booking_app/features/hotels/domain/entities/hotel_facilites.dart';
 
 class HotelFacilitesModel extends HotelFacilites {
   HotelFacilitesModel(
