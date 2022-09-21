@@ -1,5 +1,5 @@
-import 'package:alo_booking_app/features/authentication/presentation/cubit/booking_cubit.dart';
-import 'package:alo_booking_app/features/authentication/presentation/cubit/booking_state.dart';
+import 'package:alo_booking_app/features/authentication/presentation/cubit/auth_cubit.dart';
+import 'package:alo_booking_app/features/authentication/presentation/cubit/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,7 +8,7 @@ class HomeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<BookingBloc, BookingState>(
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is ErrorState) {
           debugPrint(state.exception.message.toString());
@@ -18,11 +18,25 @@ class HomeWidget extends StatelessWidget {
       },
       builder: (context, state) {
         return Center(
-          child: ElevatedButton(
-            onPressed: () {
-              BookingBloc.get(context).userLogin();
-            },
-            child: const Text('Login'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  AuthBloc.get(context).userLogin();
+                },
+                child: const Text('Login'),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  AuthBloc.get(context).userRegister();
+                },
+                child: const Text('Register'),
+              ),
+            ],
           ),
         );
       },
