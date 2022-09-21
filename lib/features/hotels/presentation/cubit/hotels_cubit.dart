@@ -1,7 +1,7 @@
 import 'package:alo_booking_app/core/exceptions/exceptions.dart';
-import 'package:alo_booking_app/core/usecase/base_usecase.dart';
+import 'package:alo_booking_app/core/use_case/base_use_case.dart';
 import 'package:alo_booking_app/features/hotels/domain/entities/hotels.dart';
-import 'package:alo_booking_app/features/hotels/domain/use_cases/get_hotels_usecase.dart';
+import 'package:alo_booking_app/features/hotels/domain/use_cases/get_hotels_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 

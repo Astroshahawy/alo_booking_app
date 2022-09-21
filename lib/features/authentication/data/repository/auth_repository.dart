@@ -1,4 +1,4 @@
-import 'package:alo_booking_app/features/authentication/data/datasource/auth_remote_data_source.dart';
+import 'package:alo_booking_app/features/authentication/data/data_source/auth_remote_data_source.dart';
 import 'package:alo_booking_app/core/exceptions/exceptions.dart';
 import 'package:alo_booking_app/features/authentication/data/models/login_model.dart';
 import 'package:alo_booking_app/features/authentication/data/models/register_model.dart';
