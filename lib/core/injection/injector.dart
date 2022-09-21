@@ -9,9 +9,14 @@ import 'package:alo_booking_app/features/profile/data/repository/profile_reposit
 import 'package:alo_booking_app/features/profile/domain/repository/profile_repository.dart';
 import 'package:alo_booking_app/features/profile/domain/usecases/profile_usecase.dart';
 import 'package:alo_booking_app/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:alo_booking_app/features/search_hotels/domain/usecases/profile_usecase.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
+import '../../features/search_hotels/data/datasource/search_hotels_remote_data_source.dart';
+import '../../features/search_hotels/data/repository/search_hotels_repository_impl.dart';
+import '../../features/search_hotels/domain/repository/search_hotel_repository.dart';
+import '../../features/search_hotels/presentation/cubit/search_hotels_cubit.dart';
 import '../network/network_info.dart';
 
 final getIt = GetIt.instance;
@@ -20,10 +25,12 @@ void initGetIt() {
   /// BLoC
   getIt.registerFactory(() => BookingBloc(getIt()));
   getIt.registerFactory(() => ProfileBloc(getIt()));
+  getIt.registerFactory(() => SearchHotelsBloc(getIt()));
 
   /// UseCases
   getIt.registerLazySingleton(() => LoginUseCase(getIt()));
   getIt.registerLazySingleton(() => GetProfileInfo(profileRepository: getIt()));
+  getIt.registerLazySingleton(() => SearchHotelsInfo(searchHotelsRepository: getIt()));
 
 
   /// Repository
@@ -32,9 +39,15 @@ void initGetIt() {
       ProfileRepositoryImpl(networkInfo: getIt(),
       profileRemoteDataSource: getIt()));
 
+  getIt.registerLazySingleton<SearchHotelsRepository>(() =>
+      SearchHotelsRepositoryImpl(networkInfo: getIt(),
+          searchHotelsRemoteDataSource: getIt()));
+
   /// DataSource
   getIt.registerLazySingleton<BaseBookingRemoteDataSource>(() => BookingRemoteDataSource(getIt()));
   getIt.registerLazySingleton<ProfileRemoteDataSource>(() => ProfileRemoteDataSourceImpl(getIt()));
+  getIt.registerLazySingleton<SearchHotelsRemoteDataSource>(() => SearchHotelsRemoteDataSourceImpl(getIt()));
+
 
   /// Dio
   getIt.registerLazySingleton<BaseDioHelper>(() => DioHelper());
