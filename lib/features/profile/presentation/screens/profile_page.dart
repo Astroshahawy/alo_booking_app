@@ -1,8 +1,10 @@
-import 'package:alo_booking_app/features/authentication/presentation/widgets/home_widget.dart';
+
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+import '../widgets/profile_widget.dart';
+
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +12,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Material App Bar'),
       ),
-      body: const HomeWidget(),
+      body: const ProfileWidget(),
     );
   }
 }
