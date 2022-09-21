@@ -9,3 +9,7 @@ class PrimaryServerException implements Exception {
     required this.message,
   });
 }
+
+class ServerException implements Exception {}
+
+class OfflineException implements Exception {}
