@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 
-class HotelFacilites extends Equatable {
+class HotelFacilities extends Equatable {
   final String facilityId;
   final String hotelId;
   final int id;
 
-  const HotelFacilites(
+  const HotelFacilities(
       {required this.facilityId, required this.hotelId, required this.id});
 
   @override

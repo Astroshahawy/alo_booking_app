@@ -1,9 +1,9 @@
-import 'package:alo_booking_app/features/hotels/data/models/hotel_facilites_model.dart';
+import 'package:alo_booking_app/features/hotels/data/models/hotel_facilities_model.dart';
 import 'package:alo_booking_app/features/hotels/data/models/hotel_images_model.dart';
 import 'package:alo_booking_app/features/hotels/domain/entities/hotels.dart';
 
 class HotelsModel extends Hotels {
-  HotelsModel(
+  const HotelsModel(
       {required super.hotelName,
       required super.hotelAddress,
       required super.hotelPrice,
@@ -18,5 +18,5 @@ class HotelsModel extends Hotels {
       hotelImages: List.from(
           (json['hotel_images'].map((e) => HotelImagesModel.fromJson(e)))),
       hotelFacilites: List.from((json['hotel_facilities']
-          .map((e) => HotelFacilitesModel.fromJson(e)))));
+          .map((e) => HotelFacilitiesModel.fromJson(e)))));
 }

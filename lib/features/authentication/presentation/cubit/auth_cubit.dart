@@ -1,8 +1,8 @@
 import 'package:alo_booking_app/features/authentication/data/models/login_model.dart';
 import 'package:alo_booking_app/features/authentication/data/models/register_model.dart';
 import 'package:alo_booking_app/features/authentication/domain/entities/auth.dart';
-import 'package:alo_booking_app/features/authentication/domain/usecases/login_usecase.dart';
-import 'package:alo_booking_app/features/authentication/domain/usecases/register_usecase.dart';
+import 'package:alo_booking_app/features/authentication/domain/use_cases/login_use_case.dart';
+import 'package:alo_booking_app/features/authentication/domain/use_cases/register_use_case.dart';
 import 'package:alo_booking_app/features/authentication/presentation/cubit/auth_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

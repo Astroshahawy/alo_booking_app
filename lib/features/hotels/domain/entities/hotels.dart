@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'hotel_facilites.dart';
+import 'hotel_facilities.dart';
 import 'hotel_images.dart';
 
 class Hotels extends Equatable {
@@ -8,19 +8,19 @@ class Hotels extends Equatable {
   final String hotelAddress;
   final String hotelPrice;
   final String hotelRate;
-  final List<HotelImages>hotelImages;
-  final List<HotelFacilites>hotelFacilites;
+  final List<HotelImages> hotelImages;
+  final List<HotelFacilities> hotelFacilites;
 
-  Hotels({required this.hotelName,
-    required this.hotelAddress,
-    required this.hotelPrice,
-    required this.hotelRate,
-    required this.hotelImages,
-    required this.hotelFacilites});
+  const Hotels(
+      {required this.hotelName,
+      required this.hotelAddress,
+      required this.hotelPrice,
+      required this.hotelRate,
+      required this.hotelImages,
+      required this.hotelFacilites});
 
   @override
-  List<Object> get props =>
-      [
+  List<Object> get props => [
         hotelName,
         hotelAddress,
         hotelPrice,
