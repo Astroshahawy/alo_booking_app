@@ -1,12 +1,17 @@
 import 'package:alo_booking_app/core/network/dio_helper.dart';
-import 'package:alo_booking_app/features/authentication/data/datasource/booking_remote_data_source.dart';
-import 'package:alo_booking_app/features/authentication/data/repository/home_repository.dart';
-import 'package:alo_booking_app/features/authentication/domain/repository/base_home_repository.dart';
-import 'package:alo_booking_app/features/authentication/domain/usecases/login_usecase.dart';
-import 'package:alo_booking_app/features/authentication/presentation/cubit/booking_cubit.dart';
+import 'package:alo_booking_app/features/authentication/data/data_source/auth_remote_data_source.dart';
+import 'package:alo_booking_app/features/authentication/data/repository/auth_repository.dart';
+import 'package:alo_booking_app/features/authentication/domain/repository/base_auth_repository.dart';
+import 'package:alo_booking_app/features/authentication/domain/use_cases/login_use_case.dart';
+import 'package:alo_booking_app/features/authentication/domain/use_cases/register_use_case.dart';
+import 'package:alo_booking_app/features/authentication/presentation/cubit/auth_cubit.dart';
+import 'package:alo_booking_app/features/hotels/data/data_source/base_hotels_data_source.dart';
+import 'package:alo_booking_app/features/hotels/data/repository/hotels_repository.dart';
+import 'package:alo_booking_app/features/hotels/domain/repository/base_hotel_repository.dart';
+import 'package:alo_booking_app/features/hotels/domain/use_cases/get_hotels_use_case.dart';
+import 'package:alo_booking_app/features/hotels/presentation/cubit/hotels_cubit.dart';
 import 'package:alo_booking_app/features/profile/data/datasource/profile_remote_data_source.dart';
 import 'package:alo_booking_app/features/profile/data/repository/profile_repository_impl.dart';
-import 'package:alo_booking_app/features/profile/domain/entities/update_profile.dart';
 import 'package:alo_booking_app/features/profile/domain/repository/profile_repository.dart';
 import 'package:alo_booking_app/features/profile/domain/usecases/profile_usecase.dart';
 import 'package:alo_booking_app/features/profile/presentation/cubit/profile_cubit.dart';
@@ -25,21 +30,16 @@ final getIt = GetIt.instance;
 
 void initGetIt() {
   /// BLoC
-  getIt.registerFactory(() => BookingBloc(getIt()));
+  getIt.registerFactory(() => AuthBloc(getIt(), getIt()));
   getIt.registerFactory(() => ProfileBloc(getIt(),getIt()));
   getIt.registerFactory(() => SearchHotelsBloc(getIt()));
 
-  /// UseCases
-  getIt.registerLazySingleton(() => LoginUseCase(getIt()));
   /// usecase of profile
   getIt.registerLazySingleton(() => GetProfileInfo(profileRepository: getIt()));
   getIt.registerLazySingleton(() => UpdateProfileInfo(updateProfileRepository: getIt()));
   /// usecase of search about hotels
   getIt.registerLazySingleton(() => SearchHotelsInfo(searchHotelsRepository: getIt()));
 
-
-  /// Repository
-  getIt.registerLazySingleton<BaseHomeRepository>(() => HomeRepository(getIt()));
   /// Repository of profile
   getIt.registerLazySingleton<ProfileRepository>(() =>
       ProfileRepositoryImpl(networkInfo: getIt(),
@@ -49,13 +49,30 @@ void initGetIt() {
       SearchHotelsRepositoryImpl(networkInfo: getIt(),
           searchHotelsRemoteDataSource: getIt()));
 
-  /// DataSource
-  getIt.registerLazySingleton<BaseBookingRemoteDataSource>(() => BookingRemoteDataSource(getIt()));
   /// DataSource of profile
   getIt.registerLazySingleton<ProfileRemoteDataSource>(() => ProfileRemoteDataSourceImpl(getIt()));
   /// DataSource of search about hotels
   getIt.registerLazySingleton<SearchHotelsRemoteDataSource>(() => SearchHotelsRemoteDataSourceImpl(getIt()));
 
+  getIt.registerFactory(() => AuthBloc(getIt(), getIt()));
+  getIt.registerFactory(() => HotelsCubit(getIt()));
+
+  /// UseCases
+  getIt.registerLazySingleton(() => LoginUseCase(getIt()));
+  getIt.registerLazySingleton(() => RegisterUseCase(getIt()));
+  getIt.registerLazySingleton(() => GetHotelsUseCase(getIt()));
+
+  /// Repository
+  getIt
+      .registerLazySingleton<BaseAuthRepository>(() => AuthRepository(getIt()));
+  getIt.registerLazySingleton<BaseHotelRepository>(
+      () => HotelsRepository(getIt()));
+
+  /// DataSource
+  getIt.registerLazySingleton<BaseAuthRemoteDataSource>(
+      () => AuthRemoteDataSource(getIt()));
+  getIt.registerLazySingleton<BaseHotelsRemoteDataSource>(
+      () => HotelsRemoteDataSource(getIt()));
 
   /// Dio
   getIt.registerLazySingleton<BaseDioHelper>(() => DioHelper());

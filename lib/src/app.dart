@@ -1,5 +1,5 @@
 import 'package:alo_booking_app/core/injection/injector.dart';
-import 'package:alo_booking_app/features/authentication/presentation/cubit/booking_cubit.dart';
+import 'package:alo_booking_app/features/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:alo_booking_app/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:alo_booking_app/features/profile/presentation/screens/profile_page.dart';
 import 'package:alo_booking_app/features/search_hotels/presentation/cubit/search_hotels_cubit.dart';
@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
     );
     return MultiBlocProvider(
       providers: [
-        BlocProvider<BookingBloc>(
-          create: (context) => getIt<BookingBloc>(),
+        BlocProvider<AuthBloc>(
+          create: (context) => getIt<AuthBloc>(),
         ),
         BlocProvider<ProfileBloc>(
           create: (context) => getIt<ProfileBloc>(),
