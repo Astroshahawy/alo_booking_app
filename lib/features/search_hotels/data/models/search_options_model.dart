@@ -1,19 +1,18 @@
-
-
 import 'package:alo_booking_app/features/search_hotels/domain/entities/search_options.dart';
 
 class SearchOptionsModel extends SearchOptions {
-  SearchOptionsModel(
-      super.name,
-      super.minPrice,
-      super.address,
-      super.maxPrice,
-      super.latitude,
-      super.longitude,
-      super.distance,
-      super.count,
-      super.page,
-      super.facilities,);
+  const SearchOptionsModel(
+    super.name,
+    super.minPrice,
+    super.address,
+    super.maxPrice,
+    super.latitude,
+    super.longitude,
+    super.distance,
+    super.count,
+    super.page,
+    super.facilities,
+  );
 
   Map<String, dynamic> toJson() {
     return {
@@ -24,7 +23,6 @@ class SearchOptionsModel extends SearchOptions {
       'latitude': latitude,
       'longitude': longitude,
       'distance': distance,
-      'longitude': longitude,
       'count': count,
       'page': page,
       'facilities': facilities,

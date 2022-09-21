@@ -18,3 +18,7 @@ class AppApis {
 class AppColors {
   static const Color defaultColor = Color(0xFF4FBE9E);
 }
+
+const String serverFailureMessage = 'Please try again later .';
+const String offlineFailureMessage = 'Please Check your Internet Connection';
+const String addSuccessMessage = 'Weather Location Added Successfully';

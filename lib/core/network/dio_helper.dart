@@ -31,9 +31,10 @@ abstract class BaseDioHelper {
 class DioHelper extends BaseDioHelper {
   final Dio dio = Dio(
     BaseOptions(
-      baseUrl: '${AppApis.baseUrl}${AppApis.version}',
+      baseUrl: AppApis.baseUrl + AppApis.version,
       receiveDataWhenStatusError: true,
-      connectTimeout: 5000,
+      connectTimeout: 10000,
+      receiveTimeout: 10000,
     ),
   );
 
@@ -58,6 +59,15 @@ class DioHelper extends BaseDioHelper {
       if (!isMultipart) 'Accept': 'application/json',
       if (token != null) 'token': token,
     };
+
+    dio.interceptors.add(LogInterceptor(
+      requestBody: true,
+      error: true,
+      requestHeader: false,
+      responseHeader: false,
+      request: true,
+      responseBody: true,
+    ));
 
     debugPrint('URL => ${dio.options.baseUrl + endPoint}');
     debugPrint('Header => ${dio.options.headers.toString()}');
@@ -95,6 +105,15 @@ class DioHelper extends BaseDioHelper {
       if (!isMultipart) 'Accept': 'application/json',
       if (token != null) 'token': token,
     };
+
+    dio.interceptors.add(LogInterceptor(
+      requestBody: true,
+      error: true,
+      requestHeader: false,
+      responseHeader: false,
+      request: true,
+      responseBody: true,
+    ));
 
     debugPrint('URL => ${dio.options.baseUrl + endPoint}');
     debugPrint('Header => ${dio.options.headers.toString()}');

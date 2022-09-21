@@ -23,7 +23,7 @@ class UserSearchHotelsSuccessState extends SearchHotelsState {
 class SearchHotelsErrorState extends SearchHotelsState {
   final PrimaryServerException exception;
 
-  SearchHotelsErrorState({
+  const SearchHotelsErrorState({
     required this.exception,
   });
 

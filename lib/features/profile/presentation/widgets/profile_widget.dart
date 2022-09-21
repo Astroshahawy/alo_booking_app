@@ -1,4 +1,5 @@
 import 'package:alo_booking_app/features/profile/data/models/update_profile_model.dart';
+import 'package:alo_booking_app/features/profile/domain/use_cases/update_profile_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,25 +26,36 @@ class ProfileWidget extends StatelessWidget {
           children: [
             Center(
               child: ElevatedButton(
-                onPressed: () async{
+                onPressed: () async {
                   // await DioHelper().get(
                   //   endPoint: AppApis.profileEndPoint,
                   //   token: 'DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u',
                   // );
-                  ProfileBloc.get(context).getProfile(token: 'DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u');
+                  ProfileBloc.get(context).getProfile(
+                      token:
+                          'DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u');
                 },
                 child: const Text('Profile'),
               ),
             ),
             Center(
               child: ElevatedButton(
-                onPressed: () async{
+                onPressed: () async {
                   // await DioHelper().get(
                   //   endPoint: AppApis.profileEndPoint,
                   //   token: 'DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u',
                   // );
-                  ProfileBloc.get(context).updateProfile(token: 'DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u',
-                  upadetProfileModel: UpdateProfileModel(name: 'Abdullaah Mansour', image: '', email: 'abdullaah.mansour@gmail.com'));
+                  ProfileBloc.get(context).updateProfile(
+                    updateProfileInfoParameters:
+                        const UpdateProfileInfoParameters(
+                      token:
+                          'DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u',
+                      updateProfile: UpdateProfileModel(
+                          name: 'Abdullaah Mansour',
+                          image: '',
+                          email: 'abdullaah.mansour@gmail.com'),
+                    ),
+                  );
                 },
                 child: const Text('Profile'),
               ),

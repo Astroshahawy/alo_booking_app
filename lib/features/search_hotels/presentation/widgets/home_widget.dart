@@ -23,13 +23,14 @@ class SearchWidget extends StatelessWidget {
       builder: (context, state) {
         return Center(
           child: ElevatedButton(
-            onPressed: () async{
+            onPressed: () async {
               // await DioHelper().get(
               //   endPoint: AppApis.profileEndPoint,
               //   token: 'DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u',
               // );
-              SearchHotelsBloc.get(context).
-              searchHotels(searchOptionsModel: SearchOptionsModel('', '', '', '', '', '', '', '', '', []));
+              SearchHotelsBloc.get(context).searchHotels(
+                  searchOptionsModel: const SearchOptionsModel(
+                      '', '', '', '', '', '', '', '', '', []));
             },
             child: const Text('Filter Button'),
           ),

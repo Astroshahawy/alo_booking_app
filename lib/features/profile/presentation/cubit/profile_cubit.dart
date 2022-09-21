@@ -1,11 +1,8 @@
-
-import 'package:alo_booking_app/features/authentication/domain/entities/login.dart';
-import 'package:alo_booking_app/features/profile/domain/usecases/profile_usecase.dart';
+import 'package:alo_booking_app/features/profile/domain/use_cases/profile_use_case.dart';
 import 'package:alo_booking_app/features/profile/presentation/cubit/profile_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/models/update_profile_model.dart';
-import '../../domain/usecases/update_profile_usecase.dart';
+import '../../domain/use_cases/update_profile_use_case.dart';
 
 class ProfileBloc extends Cubit<ProfileState> {
   final GetProfileInfo getProfileInfo;
@@ -13,7 +10,7 @@ class ProfileBloc extends Cubit<ProfileState> {
 
   ProfileBloc(
     this.getProfileInfo,
-      this.updateProfileInfo,
+    this.updateProfileInfo,
   ) : super(ProfileInitialState());
 
   static ProfileBloc get(context) => BlocProvider.of<ProfileBloc>(context);
@@ -24,27 +21,29 @@ class ProfileBloc extends Cubit<ProfileState> {
     final response = await getProfileInfo(token);
 
     return response.fold(
-          (l) {
+      (l) {
         emit(ProfileErrorState(exception: l));
       },
-          (r) {
+      (r) {
         //profileModel = r;
-            print(r);
+        print(r);
         emit(UserProfileSuccessState());
       },
     );
   }
 
-  void updateProfile({required String token, required UpdateProfileModel upadetProfileModel}) async {
+  void updateProfile(
+      {required UpdateProfileInfoParameters
+          updateProfileInfoParameters}) async {
     emit(UserProfileLoadingState());
 
-    final response = await updateProfileInfo(token, upadetProfileModel);
+    final response = await updateProfileInfo(updateProfileInfoParameters);
 
     return response.fold(
-          (l) {
+      (l) {
         emit(ProfileErrorState(exception: l));
       },
-          (r) {
+      (r) {
         //profileModel = r;
         print(r);
         emit(UserProfileSuccessState());

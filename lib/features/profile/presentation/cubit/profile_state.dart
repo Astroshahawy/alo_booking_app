@@ -7,26 +7,23 @@ abstract class ProfileState extends Equatable {
 
 class ProfileInitialState extends ProfileState {
   @override
-  // TODO: implement props
   List<Object?> get props => [];
 }
 
 class UserProfileLoadingState extends ProfileState {
   @override
-  // TODO: implement props
   List<Object?> get props => [];
 }
 
 class UserProfileSuccessState extends ProfileState {
   @override
-  // TODO: implement props
   List<Object?> get props => [];
 }
 
 class ProfileErrorState extends ProfileState {
   final PrimaryServerException exception;
 
-  ProfileErrorState({
+  const ProfileErrorState({
     required this.exception,
   });
 

@@ -1,10 +1,11 @@
-
-
 import 'package:alo_booking_app/features/profile/domain/entities/update_profile.dart';
 
 class UpdateProfileModel extends UpdateProfile {
-
-  UpdateProfileModel({required super.name, required super.image, required super.email});
+  const UpdateProfileModel({
+    required super.name,
+    required super.image,
+    required super.email,
+  });
 
 /*
   factory UpdateProfileModel.fromJson(Map<String, dynamic> json) {
@@ -24,5 +25,4 @@ class UpdateProfileModel extends UpdateProfile {
       'image': image,
     };
   }
-
 }

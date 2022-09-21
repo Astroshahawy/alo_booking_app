@@ -1,8 +1,7 @@
-
 import '../../domain/entities/hotel.dart';
 
 class HotelModel extends Hotel {
-  HotelModel({
+  const HotelModel({
     super.id,
     super.name,
     super.address,
@@ -18,13 +17,13 @@ class HotelModel extends Hotel {
   });
 
   factory HotelModel.fromJson(Map<String, dynamic> json) {
-    final List<HotelImagesModel> hotelImageslist = [];
+    final List<HotelImagesModel> hotelImagesList = [];
     json['hotel_images'].forEach((v) {
-      hotelImageslist.add(new HotelImagesModel.fromJson(v));
+      hotelImagesList.add(HotelImagesModel.fromJson(v));
     });
-    final List<FacilitiesModel> facilitieslist = [];
+    final List<FacilitiesModel> facilitiesList = [];
     json['facilities'].forEach((v) {
-      facilitieslist.add(new FacilitiesModel.fromJson(v));
+      facilitiesList.add(FacilitiesModel.fromJson(v));
     });
 
     return HotelModel(
@@ -36,8 +35,8 @@ class HotelModel extends Hotel {
       longitude: json['longitude'],
       latitude: json['latitude'],
       rate: json['rate'],
-      facilities: facilitieslist,
-      hotelImages: hotelImageslist,
+      facilities: facilitiesList,
+      hotelImages: hotelImagesList,
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
     );
@@ -55,14 +54,16 @@ class HotelModel extends Hotel {
       'rate': rate,
       'created_at': createdAt,
       'updated_at': updatedAt,
-      'hotel_images': hotelImages!.map((v) => HotelImagesModel().toJson()).toList(),
-      'facilities': facilities!.map((v) => HotelImagesModel().toJson()).toList(),
+      'hotel_images':
+          hotelImages!.map((v) => const HotelImagesModel().toJson()).toList(),
+      'facilities':
+          facilities!.map((v) => const HotelImagesModel().toJson()).toList(),
     };
   }
 }
 
 class HotelImagesModel extends HotelImages {
-  HotelImagesModel({
+  const HotelImagesModel({
     super.id,
     super.hotelId,
     super.image,
@@ -92,7 +93,7 @@ class HotelImagesModel extends HotelImages {
 }
 
 class FacilitiesModel extends Facilities {
-  FacilitiesModel({
+  const FacilitiesModel({
     super.id,
     super.name,
     super.image,

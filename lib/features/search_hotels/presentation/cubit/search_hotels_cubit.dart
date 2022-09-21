@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/models/search_options_model.dart';
-import '../../domain/usecases/profile_usecase.dart';
+import '../../domain/use_cases/profile_use_case.dart';
 import 'search_hotels_state.dart';
 
 class SearchHotelsBloc extends Cubit<SearchHotelsState> {
