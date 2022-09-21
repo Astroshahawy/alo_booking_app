@@ -4,6 +4,11 @@ import 'package:alo_booking_app/features/authentication/data/repository/home_rep
 import 'package:alo_booking_app/features/authentication/domain/repository/base_home_repository.dart';
 import 'package:alo_booking_app/features/authentication/domain/usecases/login_usecase.dart';
 import 'package:alo_booking_app/features/authentication/presentation/cubit/booking_cubit.dart';
+import 'package:alo_booking_app/features/hotels/data/data_source/base_hotels_data_source.dart';
+import 'package:alo_booking_app/features/hotels/data/repository/hotels_repository.dart';
+import 'package:alo_booking_app/features/hotels/domian/repository/base_hotel_repository.dart';
+import 'package:alo_booking_app/features/hotels/domian/use_cases/get_hotels_usecase.dart';
+import 'package:alo_booking_app/features/hotels/presentation/cubit/hotels_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
@@ -11,17 +16,20 @@ final getIt = GetIt.instance;
 void initGetIt() {
   /// BLoC
   getIt.registerFactory(() => BookingBloc(getIt()));
+  getIt.registerFactory(() => HotelsCubit(getIt()));
+
 
   /// UseCases
   getIt.registerLazySingleton(() => LoginUseCase(getIt()));
+  getIt.registerLazySingleton(() =>GetHotelsUseCase(getIt()) );
 
   /// Repository
-  getIt
-      .registerLazySingleton<BaseHomeRepository>(() => HomeRepository(getIt()));
+  getIt.registerLazySingleton<BaseHomeRepository>(() => HomeRepository(getIt()));
+  getIt.registerLazySingleton<BaseHotelRepository>(() => HotelsRepository(getIt()));
 
   /// DataSource
   getIt.registerLazySingleton<BaseBookingRemoteDataSource>(() => BookingRemoteDataSource(getIt()));
-
+   getIt.registerLazySingleton<BaseHotelsRemoteDataSource>(() =>HotelsRemoteDataSource(getIt()));
   /// Dio
   getIt.registerLazySingleton<BaseDioHelper>(() => DioHelper());
 }
