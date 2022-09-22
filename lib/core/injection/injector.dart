@@ -39,13 +39,9 @@ void initGetIt() {
   getIt.registerLazySingleton(() => LoginUseCase(getIt()));
   getIt.registerLazySingleton(() => RegisterUseCase(getIt()));
   getIt.registerLazySingleton(() => GetHotelsUseCase(getIt()));
-
-  /// UseCase of profile
   getIt.registerLazySingleton(() => GetProfileInfo(profileRepository: getIt()));
   getIt.registerLazySingleton(
       () => UpdateProfileInfo(updateProfileRepository: getIt()));
-
-  /// UseCase of search about hotels
   getIt.registerLazySingleton(
       () => SearchHotelsInfo(searchHotelsRepository: getIt()));
 
@@ -54,12 +50,8 @@ void initGetIt() {
       .registerLazySingleton<BaseAuthRepository>(() => AuthRepository(getIt()));
   getIt.registerLazySingleton<BaseHotelRepository>(
       () => HotelsRepository(getIt()));
-
-  /// Repository of profile
   getIt.registerLazySingleton<ProfileRepository>(() => ProfileRepositoryImpl(
       networkInfo: getIt(), profileRemoteDataSource: getIt()));
-
-  /// Repository of search about hotels
   getIt.registerLazySingleton<SearchHotelsRepository>(() =>
       SearchHotelsRepositoryImpl(
           networkInfo: getIt(), searchHotelsRemoteDataSource: getIt()));
@@ -69,12 +61,8 @@ void initGetIt() {
       () => AuthRemoteDataSource(getIt()));
   getIt.registerLazySingleton<BaseHotelsRemoteDataSource>(
       () => HotelsRemoteDataSource(getIt()));
-
-  /// DataSource of profile
   getIt.registerLazySingleton<ProfileRemoteDataSource>(
       () => ProfileRemoteDataSourceImpl(getIt()));
-
-  /// DataSource of search about hotels
   getIt.registerLazySingleton<SearchHotelsRemoteDataSource>(
       () => SearchHotelsRemoteDataSourceImpl(getIt()));
 
