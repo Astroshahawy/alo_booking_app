@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../features/search_hotels/presentation/screens/filtter_screen/filter_page.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -41,8 +43,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
         darkTheme: ThemeData.dark(),
-        onGenerateRoute: AppRouter.generateRoutes,
-        // home: const ProfilePage(),
+        //onGenerateRoute: AppRouter.generateRoutes,
+         home: const FilterPage(),
       ),
     );
   }
