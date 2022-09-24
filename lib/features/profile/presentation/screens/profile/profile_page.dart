@@ -1,3 +1,5 @@
+
+import 'package:alo_booking_app/core/constants/constants.dart';
 import 'package:alo_booking_app/features/profile/presentation/screens/update_page/update_profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +12,9 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF1a1a1a),
+      backgroundColor: AppColors.baseColor,
       body: SafeArea(
         child: Container(
-          //color: Color(0xFF555555),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

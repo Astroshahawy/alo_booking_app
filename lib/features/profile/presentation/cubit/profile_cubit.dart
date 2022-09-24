@@ -2,11 +2,14 @@ import 'package:alo_booking_app/features/profile/domain/use_cases/profile_use_ca
 import 'package:alo_booking_app/features/profile/presentation/cubit/profile_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../domain/entities/profile.dart';
 import '../../domain/use_cases/update_profile_use_case.dart';
 
 class ProfileBloc extends Cubit<ProfileState> {
   final GetProfileInfo getProfileInfo;
   final UpdateProfileInfo updateProfileInfo;
+
+  static Profile? profileInfo;
 
   ProfileBloc(
     this.getProfileInfo,
@@ -25,7 +28,7 @@ class ProfileBloc extends Cubit<ProfileState> {
         emit(ProfileErrorState(exception: l));
       },
       (r) {
-        //profileModel = r;
+        profileInfo = r;
         print(r);
         emit(UserProfileSuccessState());
       },
