@@ -2,12 +2,13 @@ import 'package:alo_booking_app/core/injection/injector.dart';
 import 'package:alo_booking_app/core/routes/app_router.dart';
 import 'package:alo_booking_app/features/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:alo_booking_app/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:alo_booking_app/features/profile/presentation/screens/profile/profile_page.dart';
 import 'package:alo_booking_app/features/search_hotels/presentation/cubit/search_hotels_cubit.dart';
+import 'package:alo_booking_app/features/search_hotels/presentation/screens/explore_page/explore_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../features/search_hotels/presentation/screens/filtter_screen/filter_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
         ),
         darkTheme: ThemeData.dark(),
         //onGenerateRoute: AppRouter.generateRoutes,
-         home: const FilterPage(),
+         home: const ExplorePage(),
       ),
     );
   }

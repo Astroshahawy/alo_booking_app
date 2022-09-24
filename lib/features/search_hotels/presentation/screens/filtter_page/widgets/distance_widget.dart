@@ -22,7 +22,8 @@ class _DistanceWidgetState extends State<DistanceWidget> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20,vertical: 5),
-            child: Text('Distance from city center', style: TextStyle(color: AppColors.borderSideColor,fontSize: 15),),
+            child: Text('Distance from city center',
+              style: TextStyle(color: AppColors.borderSideColor,fontSize: 15),),
           ),
           slider(),
         ],

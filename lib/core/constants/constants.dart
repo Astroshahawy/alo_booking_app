@@ -19,6 +19,7 @@ class AppColors {
   static const Color baseColor = Color(0xFF1A1A1A);
   static const Color defaultColor = Color(0xFF4FBE9E);
   static const Color borderSideColor = Color(0xFF717171);
+  static const Color cardColor = Color(0xFF2C2C2C);
 }
 
 const String serverFailureMessage = 'Please try again later .';

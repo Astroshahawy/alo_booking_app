@@ -1,10 +1,10 @@
-import 'package:alo_booking_app/features/search_hotels/presentation/screens/filtter_screen/widgets/distance_widget.dart';
-import 'package:alo_booking_app/features/search_hotels/presentation/screens/filtter_screen/widgets/range_slider_widget.dart';
-import 'package:alo_booking_app/features/search_hotels/presentation/screens/filtter_screen/widgets/type_accommodation_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/home_widget.dart';
+import 'widgets/distance_widget.dart';
 import 'widgets/popular_filter_widget.dart';
+import 'widgets/range_slider_widget.dart';
+import 'widgets/type_accommodation_widget.dart';
+
 
 class FilterPage extends StatelessWidget {
   const FilterPage({super.key});
