@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 class AppRoutes {
   static const initScreen = '/';
+  static const loginScreen = 'login_screen';
+  static const registerScreen = 'register_screen';
+  static const onBoardingScreen = 'on_boarding_screen';
+
 }
 
 class AppApis {
