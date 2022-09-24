@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         ),
         darkTheme: ThemeData.dark(),
         onGenerateRoute: AppRouter.generateRoutes,
-        // home: const FilterPage(),
+        // home: const ProfilePage(),
       ),
     );
   }
