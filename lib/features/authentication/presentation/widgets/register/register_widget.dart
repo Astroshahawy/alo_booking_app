@@ -166,11 +166,10 @@ class RegisterWidget extends StatelessWidget {
                 ),
                 onPress: () {
                   FocusScope.of(context).unfocus();
-                  AuthBloc.get(context).validateRegistration();
+                  AuthBloc.get(context).validateRegistration().then((value) =>
+                      Navigator.pushReplacementNamed(
+                          context, AppRoutes.loginScreen));
                 },
-                // onPress: () => AuthBloc.get(context).userRegister().then(
-                //       (value) => Navigator.pop(context),
-                //     ),
               ),
             ),
             const SizedBox(

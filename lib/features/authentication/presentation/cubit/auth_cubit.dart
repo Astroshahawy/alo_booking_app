@@ -31,10 +31,6 @@ class AuthBloc extends Cubit<AuthState> {
         email: loginEmailController.text,
         password: loginPasswordController.text,
       ),
-      // const LoginModel(
-      //   email: 'ahmedshahawy1@gmail.com',
-      //   password: '123456',
-      // ),
     );
 
     response.fold(
@@ -102,12 +98,6 @@ class AuthBloc extends Cubit<AuthState> {
         password: registerPasswordController.text.trim(),
         passwordConfirmation: registerConfirmPasswordController.text.trim(),
       ),
-      // const RegisterModel(
-      //   name: 'ahmed Shahawy2',
-      //   email: 'ahmedshahawy2@gmail.com',
-      //   password: '123456',
-      //   passwordConfirmation: '123456',
-      // ),
     );
 
     response.fold(
