@@ -5,6 +5,7 @@ class AppRoutes {
   static const loginScreen = 'login_screen';
   static const registerScreen = 'register_screen';
   static const onBoardingScreen = 'on_boarding_screen';
+  static const bottomNavigationBaseScreen = 'bottom_navigation_screen';
   static const hotelsScreen = 'hotels_screen';
 }
 
