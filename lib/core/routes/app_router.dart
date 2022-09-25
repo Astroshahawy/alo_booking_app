@@ -3,6 +3,7 @@ import 'package:alo_booking_app/features/authentication/presentation/screens/log
 import 'package:alo_booking_app/features/authentication/presentation/screens/on_boarding_screen.dart';
 import 'package:alo_booking_app/features/authentication/presentation/screens/register_screen.dart';
 import 'package:alo_booking_app/features/authentication/presentation/screens/welcome_screen.dart';
+import 'package:alo_booking_app/features/hotels/presentation/screens/hotels_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {
@@ -11,6 +12,8 @@ class AppRouter {
       settings: settings,
       builder: (context) {
         switch (settings.name) {
+          case AppRoutes.hotelsScreen:
+            return const HotelsScreen();
           case AppRoutes.onBoardingScreen:
             return const OnBoardingScreen();
           case AppRoutes.loginScreen:
