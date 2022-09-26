@@ -42,7 +42,7 @@ class DioHelper extends BaseDioHelper {
       requestBody: true,
       error: true,
       requestHeader: true,
-      responseHeader: true,
+      responseHeader: false,
       request: true,
       responseBody: true,
     ));
