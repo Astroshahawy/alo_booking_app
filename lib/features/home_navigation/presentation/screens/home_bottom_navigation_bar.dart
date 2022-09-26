@@ -1,4 +1,7 @@
 import 'package:alo_booking_app/core/constants/constants.dart';
+import 'package:alo_booking_app/core/themes/app_colors.dart';
+import 'package:alo_booking_app/core/themes/cubit/app_theme_cubit.dart';
+import 'package:alo_booking_app/core/themes/cubit/app_theme_state.dart';
 import 'package:alo_booking_app/features/home_navigation/presentation/cubit/home_navigation_cubit.dart';
 import 'package:alo_booking_app/features/home_navigation/presentation/cubit/home_navigation_state.dart';
 import 'package:flutter/material.dart';
@@ -17,40 +20,49 @@ class HomeBottomNavigationBar extends StatelessWidget {
             index: HomeNavigationBloc.get(context).currentIndex,
             children: [...HomeNavigationBloc.get(context).screens],
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: Colors.white,
-            type: BottomNavigationBarType.fixed,
-            items: HomeNavigationBloc.get(context)
-                .icons
-                .map(
-                  (title, icon) => MapEntry(
-                    title,
-                    BottomNavigationBarItem(
-                      icon: Padding(
-                        padding: const EdgeInsets.only(bottom: 5),
-                        child: Icon(icon),
+          bottomNavigationBar: BlocBuilder<AppThemeBloc, AppThemeState>(
+            builder: (context, state) {
+              return BottomNavigationBar(
+                backgroundColor: AppThemeBloc.get(context).isDarkMode
+                    ? AppDarkColors.primaryColor
+                    : AppLightColors.primaryColor,
+                type: BottomNavigationBarType.fixed,
+                items: HomeNavigationBloc.get(context)
+                    .icons
+                    .map(
+                      (title, icon) => MapEntry(
+                        title,
+                        BottomNavigationBarItem(
+                          icon: Padding(
+                            padding: const EdgeInsets.only(bottom: 3),
+                            child: Icon(icon),
+                          ),
+                          label: title,
+                        ),
                       ),
-                      label: title,
-                    ),
-                  ),
-                )
-                .values
-                .toList(),
-            currentIndex: HomeNavigationBloc.get(context).currentIndex,
-            selectedItemColor: AppColors.defaultColor,
-            iconSize: 32,
-            unselectedFontSize: 14,
-            selectedLabelStyle: const TextStyle(
-              letterSpacing: 1,
-              fontWeight: FontWeight.w500,
-            ),
-            unselectedLabelStyle: const TextStyle(
-              letterSpacing: 1,
-              fontWeight: FontWeight.w500,
-            ),
-            unselectedItemColor: Colors.grey.shade400,
-            onTap: (index) =>
-                HomeNavigationBloc.get(context).changeScreen(index),
+                    )
+                    .values
+                    .toList(),
+                currentIndex: HomeNavigationBloc.get(context).currentIndex,
+                selectedItemColor: AppColors.defaultColor,
+                iconSize: 30,
+                elevation: 0,
+                unselectedFontSize: 14,
+                selectedLabelStyle: const TextStyle(
+                  letterSpacing: 0.5,
+                  fontWeight: FontWeight.w500,
+                ),
+                unselectedLabelStyle: const TextStyle(
+                  letterSpacing: 0.5,
+                  fontWeight: FontWeight.w500,
+                ),
+                unselectedItemColor: AppThemeBloc.get(context).isDarkMode
+                    ? AppDarkColors.accentColor1
+                    : AppLightColors.accentColor1,
+                onTap: (index) =>
+                    HomeNavigationBloc.get(context).changeScreen(index),
+              );
+            },
           ),
         );
       },

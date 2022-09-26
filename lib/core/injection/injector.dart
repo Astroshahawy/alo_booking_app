@@ -1,4 +1,5 @@
 import 'package:alo_booking_app/core/network/dio_helper.dart';
+import 'package:alo_booking_app/core/themes/cubit/app_theme_cubit.dart';
 import 'package:alo_booking_app/features/authentication/data/data_source/auth_remote_data_source.dart';
 import 'package:alo_booking_app/features/authentication/data/repository/auth_repository.dart';
 import 'package:alo_booking_app/features/authentication/domain/repository/base_auth_repository.dart';
@@ -32,6 +33,7 @@ final getIt = GetIt.instance;
 
 void initGetIt() {
   /// BLoC
+  getIt.registerFactory(() => AppThemeBloc());
   getIt.registerFactory(() => AuthBloc(getIt(), getIt()));
   getIt.registerFactory(() => HomeNavigationBloc());
   getIt.registerFactory(() => HotelsCubit(getIt()));
