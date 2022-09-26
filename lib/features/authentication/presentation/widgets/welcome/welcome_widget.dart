@@ -1,6 +1,9 @@
 import 'package:alo_booking_app/core/constants/constants.dart';
+import 'package:alo_booking_app/core/themes/cubit/app_theme_cubit.dart';
+import 'package:alo_booking_app/core/themes/cubit/app_theme_state.dart';
 import 'package:alo_booking_app/core/widgets/bouncing_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WelcomeWidget extends StatelessWidget {
   const WelcomeWidget({super.key});
@@ -10,12 +13,20 @@ class WelcomeWidget extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Image.asset(
-          'assets/images/welcome_photo.png',
-          fit: BoxFit.fitHeight,
-          height: MediaQuery.of(context).size.height,
-          color: Colors.black.withOpacity(0.25),
-          colorBlendMode: BlendMode.darken,
+        BlocBuilder<AppThemeBloc, AppThemeState>(
+          builder: (context, state) {
+            return Image.asset(
+              'assets/images/welcome_photo.png',
+              fit: BoxFit.fitHeight,
+              height: MediaQuery.of(context).size.height,
+              color: AppThemeBloc.get(context).isDarkMode
+                  ? Colors.black.withOpacity(0.25)
+                  : null,
+              colorBlendMode: AppThemeBloc.get(context).isDarkMode
+                  ? BlendMode.darken
+                  : null,
+            );
+          },
         ),
         Positioned(
           top: MediaQuery.of(context).size.height * 0.1,
@@ -38,7 +49,7 @@ class WelcomeWidget extends StatelessWidget {
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.w900,
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
         ),
@@ -48,8 +59,8 @@ class WelcomeWidget extends StatelessWidget {
             'Best hotel deals for your holiday',
             style: TextStyle(
               fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
+              fontWeight: FontWeight.w400,
+              color: Colors.black,
             ),
           ),
         ),

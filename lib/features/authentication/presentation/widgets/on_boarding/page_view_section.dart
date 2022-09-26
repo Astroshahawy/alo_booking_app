@@ -1,8 +1,12 @@
 import 'dart:async';
 
 import 'package:alo_booking_app/core/constants/constants.dart';
+import 'package:alo_booking_app/core/themes/app_colors.dart';
+import 'package:alo_booking_app/core/themes/cubit/app_theme_cubit.dart';
+import 'package:alo_booking_app/core/themes/cubit/app_theme_state.dart';
 import 'package:alo_booking_app/features/authentication/presentation/widgets/on_boarding/page_content.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PageViewSection extends StatefulWidget {
@@ -86,16 +90,22 @@ class _PageViewSectionState extends State<PageViewSection> {
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.1,
         ),
-        SmoothPageIndicator(
-          controller: _pageController,
-          count: _pages.length,
-          effect: WormEffect(
-            activeDotColor: AppColors.defaultColor,
-            dotColor: Colors.grey.shade300,
-            dotHeight: 10,
-            dotWidth: 10,
-            spacing: 4.0,
-          ),
+        BlocBuilder<AppThemeBloc, AppThemeState>(
+          builder: (context, state) {
+            return SmoothPageIndicator(
+              controller: _pageController,
+              count: _pages.length,
+              effect: WormEffect(
+                activeDotColor: AppColors.defaultColor,
+                dotColor: AppThemeBloc.get(context).isDarkMode
+                    ? AppDarkColors.accentColor
+                    : AppLightColors.accentColor,
+                dotHeight: 10,
+                dotWidth: 10,
+                spacing: 4.0,
+              ),
+            );
+          },
         ),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.03,
