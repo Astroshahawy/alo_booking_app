@@ -22,9 +22,15 @@ class HotelModel extends Hotel {
       hotelImagesList.add(HotelImagesModel.fromJson(v));
     });
     final List<FacilitiesModel> facilitiesList = [];
-    json['facilities'].forEach((v) {
-      facilitiesList.add(FacilitiesModel.fromJson(v));
-    });
+    if( json['facilities'] != null){
+      json['facilities'].forEach((v) {
+        facilitiesList.add(FacilitiesModel.fromJson(v));
+      });
+    }else{
+      json['hotel_facilities'].forEach((v) {
+        facilitiesList.add(FacilitiesModel.fromJson(v));
+      });
+    }
 
     return HotelModel(
       id: json['id'],
@@ -95,6 +101,8 @@ class HotelImagesModel extends HotelImages {
 class FacilitiesModel extends Facilities {
   const FacilitiesModel({
     super.id,
+    super.hotelId,
+    super.facilityId,
     super.name,
     super.image,
     super.createdAt,
@@ -104,8 +112,10 @@ class FacilitiesModel extends Facilities {
   factory FacilitiesModel.fromJson(Map<String, dynamic> json) {
     return FacilitiesModel(
       id: json['id'],
-      name: json['name'],
-      image: json['image'],
+      hotelId : json['hotel_id'] != null ? json['hotel_id'] : '',
+      facilityId : json['facility_id'] != null ? json['facility_id'] : '',
+      name: json['name'] != null ? json['name'] : '',
+      image: json['image'] != null ? json['image'] : '',
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
     );

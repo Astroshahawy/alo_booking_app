@@ -1,6 +1,5 @@
 import 'package:alo_booking_app/features/search_hotels/data/models/hotel_model.dart';
 import 'package:alo_booking_app/features/search_hotels/domain/entities/hotels_data.dart';
-import 'package:flutter/cupertino.dart';
 
 class HotelsDataModel extends HotelsData {
   const HotelsDataModel({
@@ -8,7 +7,7 @@ class HotelsDataModel extends HotelsData {
   });
 
   factory HotelsDataModel.fromJson(Map<String, dynamic> json) {
-    debugPrint(json.toString());
+    //debugPrint(json.toString());
     return HotelsDataModel(
       data: List<HotelModel>.from(
         json['data'].map(
