@@ -14,6 +14,7 @@ class SearchOptionsModel extends SearchOptions {
     super.facilities,
   );
 
+
   Map<String, dynamic> toJson() {
     return {
       'min_price': minPrice,

@@ -36,7 +36,7 @@ class _PopularFilterWidgetState extends State<PopularFilterWidget> {
 
   filterComponent() {
     return GridView.builder(
-      shrinkWrap: true,
+      shrinkWrap: true,primary: false,
       itemCount: filterComponents.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(

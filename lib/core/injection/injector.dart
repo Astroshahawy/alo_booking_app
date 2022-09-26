@@ -8,14 +8,14 @@ import 'package:alo_booking_app/features/authentication/presentation/cubit/auth_
 import 'package:alo_booking_app/features/hotels/data/data_source/base_hotels_data_source.dart';
 import 'package:alo_booking_app/features/hotels/data/repository/hotels_repository.dart';
 import 'package:alo_booking_app/features/hotels/domain/repository/base_hotel_repository.dart';
-import 'package:alo_booking_app/features/hotels/domain/use_cases/get_hotels_use_case.dart';
+//import 'package:alo_booking_app/features/hotels/domain/use_cases/get_hotels_use_case.dart';
 import 'package:alo_booking_app/features/hotels/presentation/cubit/hotels_cubit.dart';
 import 'package:alo_booking_app/features/profile/data/data_source/profile_remote_data_source.dart';
 import 'package:alo_booking_app/features/profile/data/repository/profile_repository_impl.dart';
 import 'package:alo_booking_app/features/profile/domain/repository/profile_repository.dart';
 import 'package:alo_booking_app/features/profile/domain/use_cases/profile_use_case.dart';
 import 'package:alo_booking_app/features/profile/presentation/cubit/profile_cubit.dart';
-import 'package:alo_booking_app/features/search_hotels/domain/use_cases/profile_use_case.dart';
+import 'package:alo_booking_app/features/search_hotels/domain/use_cases/search_hotel_use_case.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -23,6 +23,7 @@ import '../../features/profile/domain/use_cases/update_profile_use_case.dart';
 import '../../features/search_hotels/data/data_source/search_hotels_remote_data_source.dart';
 import '../../features/search_hotels/data/repository/search_hotels_repository_impl.dart';
 import '../../features/search_hotels/domain/repository/search_hotel_repository.dart';
+import '../../features/search_hotels/domain/use_cases/get_hotels_use_case.dart';
 import '../../features/search_hotels/presentation/cubit/search_hotels_cubit.dart';
 import '../network/network_info.dart';
 
@@ -33,17 +34,19 @@ void initGetIt() {
   getIt.registerFactory(() => AuthBloc(getIt(), getIt()));
   getIt.registerFactory(() => HotelsCubit(getIt()));
   getIt.registerFactory(() => ProfileBloc(getIt(), getIt()));
-  getIt.registerFactory(() => SearchHotelsBloc(getIt()));
+  getIt.registerFactory(() => SearchHotelsBloc(getIt(),getIt()));
 
   /// UseCases
   getIt.registerLazySingleton(() => LoginUseCase(getIt()));
   getIt.registerLazySingleton(() => RegisterUseCase(getIt()));
-  getIt.registerLazySingleton(() => GetHotelsUseCase(getIt()));
+  //getIt.registerLazySingleton(() => GetHotelsUseCase(getIt()));
   getIt.registerLazySingleton(() => GetProfileInfo(profileRepository: getIt()));
   getIt.registerLazySingleton(
       () => UpdateProfileInfo(updateProfileRepository: getIt()));
   getIt.registerLazySingleton(
       () => SearchHotelsInfo(searchHotelsRepository: getIt()));
+  getIt.registerLazySingleton(
+          () => GetHotelsUseCase(getIt()));
 
   /// Repository
   getIt
