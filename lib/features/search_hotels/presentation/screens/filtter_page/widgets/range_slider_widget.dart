@@ -5,7 +5,9 @@ import '../../../../../../core/constants/constants.dart';
 
 
 class RangeSliderWidget extends StatefulWidget {
-  const RangeSliderWidget({Key? key}) : super(key: key);
+  RangeSliderWidget({Key? key, required this.minPriceController, required this.maxPriceController}) : super(key: key);
+  TextEditingController minPriceController;
+  TextEditingController maxPriceController;
 
   @override
   State<RangeSliderWidget> createState() => _RangeSliderWidgetState();
@@ -38,6 +40,8 @@ class _RangeSliderWidgetState extends State<RangeSliderWidget> {
           onChanged: (RangeValues values) {
             setState(() {
               _currentRangeValues = values;
+              widget.minPriceController.text = values.start.round().toString() ;
+              widget.maxPriceController.text = values.end.round().toString() ;
             });
           },
         ),

@@ -52,9 +52,6 @@ class LoginWidget extends StatelessWidget {
             FieldSection(
               title: 'Your email',
               child: TextFormField(
-                style: TextStyle(
-                  color: Colors.grey.shade900,
-                ),
                 controller: AuthBloc.get(context).loginEmailController,
                 keyboardType: TextInputType.emailAddress,
                 cursorColor: AppColors.defaultColor,
@@ -76,9 +73,6 @@ class LoginWidget extends StatelessWidget {
             FieldSection(
               title: 'Password',
               child: TextFormField(
-                style: TextStyle(
-                  color: Colors.grey.shade900,
-                ),
                 controller: AuthBloc.get(context).loginPasswordController,
                 obscureText: true,
                 cursorColor: AppColors.defaultColor,
@@ -132,7 +126,11 @@ class LoginWidget extends StatelessWidget {
                 ),
                 onPress: () {
                   FocusScope.of(context).unfocus();
-                  AuthBloc.get(context).validateLogin().then((value) => Navigator.pushNamedAndRemoveUntil(context, AppRoutes.hotelsScreen, (route) => false));
+                  AuthBloc.get(context).validateLogin().then((value) =>
+                      Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          AppRoutes.bottomNavigationBaseScreen,
+                          (route) => false));
                 },
               ),
             ),

@@ -1,8 +1,12 @@
 
 import 'package:alo_booking_app/core/constants/constants.dart';
+import 'package:alo_booking_app/core/themes/app_colors.dart';
+import 'package:alo_booking_app/core/themes/cubit/app_theme_cubit.dart';
+import 'package:alo_booking_app/core/themes/cubit/app_theme_state.dart';
 import 'package:alo_booking_app/features/profile/presentation/screens/update_page/update_profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../widgets/divider_widget.dart';
 import 'widget/profile_items_widget.dart';
 
@@ -12,7 +16,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.baseColor,
+      // backgroundColor: AppColors.baseColor,
       body: SafeArea(
         child: Container(
           child: Column(
@@ -84,7 +88,33 @@ class ProfilePage extends StatelessWidget {
               dividerWidget(30, 30,0),
               profileItemsWidget(icon:Icons.settings, text:"Setting"),
               dividerWidget(30, 30,0),
-
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 35),
+                height: 56,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Dark Mode',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
+                      ),
+                    ),
+                    BlocBuilder<AppThemeBloc, AppThemeState>(
+                      builder: (context, state) {
+                        return CupertinoSwitch(
+                          activeColor: AppColors.defaultColor,
+                          trackColor: AppDarkColors.accentColor1,
+                          value: AppThemeBloc.get(context).isDarkMode,
+                          onChanged: (value) =>
+                              AppThemeBloc.get(context).toggleTheme(value),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

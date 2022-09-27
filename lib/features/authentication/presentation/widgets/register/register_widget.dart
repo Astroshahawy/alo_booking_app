@@ -1,4 +1,6 @@
 import 'package:alo_booking_app/core/constants/constants.dart';
+import 'package:alo_booking_app/core/themes/app_colors.dart';
+import 'package:alo_booking_app/core/themes/cubit/app_theme_cubit.dart';
 import 'package:alo_booking_app/core/utils/mac_alert_dialog.dart';
 import 'package:alo_booking_app/core/widgets/bouncing_button.dart';
 import 'package:alo_booking_app/features/authentication/presentation/cubit/auth_cubit.dart';
@@ -41,7 +43,9 @@ class RegisterWidget extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   letterSpacing: 1,
-                  color: Colors.grey.shade500,
+                  color: AppThemeBloc.get(context).isDarkMode
+                      ? AppDarkColors.accentColor1
+                      : AppLightColors.accentColor1,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -53,9 +57,6 @@ class RegisterWidget extends StatelessWidget {
               title: 'Your name',
               child: TextFormField(
                 controller: AuthBloc.get(context).registerNameController,
-                style: TextStyle(
-                  color: Colors.grey.shade900,
-                ),
                 keyboardType: TextInputType.name,
                 cursorColor: AppColors.defaultColor,
                 decoration: InputDecoration(
@@ -64,7 +65,9 @@ class RegisterWidget extends StatelessWidget {
                   hintStyle: TextStyle(
                     fontSize: 14,
                     letterSpacing: 1,
-                    color: Colors.grey.shade400,
+                    color: AppThemeBloc.get(context).isDarkMode
+                        ? AppDarkColors.accentColor2
+                        : AppLightColors.accentColor2,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -76,9 +79,6 @@ class RegisterWidget extends StatelessWidget {
             FieldSection(
               title: 'Your email',
               child: TextFormField(
-                style: TextStyle(
-                  color: Colors.grey.shade900,
-                ),
                 controller: AuthBloc.get(context).registerEmailController,
                 keyboardType: TextInputType.emailAddress,
                 cursorColor: AppColors.defaultColor,
@@ -88,7 +88,9 @@ class RegisterWidget extends StatelessWidget {
                   hintStyle: TextStyle(
                     fontSize: 14,
                     letterSpacing: 1,
-                    color: Colors.grey.shade400,
+                    color: AppThemeBloc.get(context).isDarkMode
+                        ? AppDarkColors.accentColor2
+                        : AppLightColors.accentColor2,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -100,9 +102,6 @@ class RegisterWidget extends StatelessWidget {
             FieldSection(
               title: 'Password',
               child: TextFormField(
-                style: TextStyle(
-                  color: Colors.grey.shade900,
-                ),
                 obscureText: true,
                 controller: AuthBloc.get(context).registerPasswordController,
                 cursorColor: AppColors.defaultColor,
@@ -112,7 +111,9 @@ class RegisterWidget extends StatelessWidget {
                   hintStyle: TextStyle(
                     fontSize: 14,
                     letterSpacing: 1,
-                    color: Colors.grey.shade400,
+                    color: AppThemeBloc.get(context).isDarkMode
+                        ? AppDarkColors.accentColor2
+                        : AppLightColors.accentColor2,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -124,9 +125,6 @@ class RegisterWidget extends StatelessWidget {
             FieldSection(
               title: 'Confirm password',
               child: TextFormField(
-                style: TextStyle(
-                  color: Colors.grey.shade900,
-                ),
                 obscureText: true,
                 controller:
                     AuthBloc.get(context).registerConfirmPasswordController,
@@ -137,7 +135,9 @@ class RegisterWidget extends StatelessWidget {
                   hintStyle: TextStyle(
                     fontSize: 14,
                     letterSpacing: 1,
-                    color: Colors.grey.shade400,
+                    color: AppThemeBloc.get(context).isDarkMode
+                        ? AppDarkColors.accentColor2
+                        : AppLightColors.accentColor2,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -185,7 +185,9 @@ class RegisterWidget extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14,
                     letterSpacing: 1,
-                    color: Colors.grey.shade500,
+                    color: AppThemeBloc.get(context).isDarkMode
+                        ? AppDarkColors.accentColor1
+                        : AppLightColors.accentColor1,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -202,7 +204,9 @@ class RegisterWidget extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14,
                     letterSpacing: 1,
-                    color: Colors.grey.shade500,
+                    color: AppThemeBloc.get(context).isDarkMode
+                        ? AppDarkColors.accentColor1
+                        : AppLightColors.accentColor1,
                     fontWeight: FontWeight.w400,
                   ),
                 ),

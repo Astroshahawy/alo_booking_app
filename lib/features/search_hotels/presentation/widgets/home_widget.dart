@@ -1,4 +1,3 @@
-import 'package:alo_booking_app/features/search_hotels/data/models/search_options_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,9 +27,11 @@ class SearchWidget extends StatelessWidget {
               //   endPoint: AppApis.profileEndPoint,
               //   token: 'DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u',
               // );
-              SearchHotelsBloc.get(context).searchHotels(
-                  searchOptionsModel: const SearchOptionsModel(
-                      '', '', '', '', '', '', '', '', '', []));
+              SearchHotelsBloc.get(context).searchHotels(hotelName: ''
+                  // searchOptionsModel: const SearchOptionsModel(
+                  //     '', '', '', '', '', '', '', '', '', []
+                  // ),
+              );
             },
             child: const Text('Filter Button'),
           ),
