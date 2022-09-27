@@ -16,6 +16,9 @@ class AppApis {
   static const String registerEndPoint = '/auth/register';
   static const String profileEndPoint = '/auth/profile-info';
   static const String updateProfileEndPoint = '/auth/update-info';
+  static const String createBookingEndPoint = '/create-booking';
+  static const String updateBookingStatusEndPoint = '/update-booking-status';
+  static const String getBookingsEndPoint = '/get-bookings';
   static const String hotelsEndPoint = '/hotels';
   static const String searchHotelsEndPoint = '/search-hotels';
   static const String imagesEndPoint = '/images';

@@ -26,7 +26,7 @@ class AppRouter {
             return const RegisterScreen();
           case AppRoutes.initScreen:
           default:
-            return  PreDetailsScreen();
+            return const WelcomeScreen();
         }
       },
     );
