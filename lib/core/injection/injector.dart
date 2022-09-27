@@ -1,10 +1,12 @@
 import 'package:alo_booking_app/core/network/dio_helper.dart';
+import 'package:alo_booking_app/core/themes/cubit/app_theme_cubit.dart';
 import 'package:alo_booking_app/features/authentication/data/data_source/auth_remote_data_source.dart';
 import 'package:alo_booking_app/features/authentication/data/repository/auth_repository.dart';
 import 'package:alo_booking_app/features/authentication/domain/repository/base_auth_repository.dart';
 import 'package:alo_booking_app/features/authentication/domain/use_cases/login_use_case.dart';
 import 'package:alo_booking_app/features/authentication/domain/use_cases/register_use_case.dart';
 import 'package:alo_booking_app/features/authentication/presentation/cubit/auth_cubit.dart';
+import 'package:alo_booking_app/features/home_navigation/presentation/cubit/home_navigation_cubit.dart';
 import 'package:alo_booking_app/features/hotels/data/data_source/base_hotels_data_source.dart';
 import 'package:alo_booking_app/features/hotels/data/repository/hotels_repository.dart';
 import 'package:alo_booking_app/features/hotels/domain/repository/base_hotel_repository.dart';
@@ -32,7 +34,9 @@ final getIt = GetIt.instance;
 
 void initGetIt() {
   /// BLoC
+  getIt.registerFactory(() => AppThemeBloc());
   getIt.registerFactory(() => AuthBloc(getIt(), getIt()));
+  getIt.registerFactory(() => HomeNavigationBloc());
   getIt.registerFactory(() => HotelsCubit(getIt()));
   getIt.registerFactory(() => ProfileBloc(getIt(), getIt()));
   getIt.registerFactory(() => SearchHotelsBloc(getIt(),getIt(), getIt()));

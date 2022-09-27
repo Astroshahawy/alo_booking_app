@@ -5,6 +5,7 @@ class AppRoutes {
   static const loginScreen = 'login_screen';
   static const registerScreen = 'register_screen';
   static const onBoardingScreen = 'on_boarding_screen';
+  static const bottomNavigationBaseScreen = 'bottom_navigation_screen';
   static const hotelsScreen = 'hotels_screen';
 }
 
@@ -17,6 +18,8 @@ class AppApis {
   static const String updateProfileEndPoint = '/auth/update-info';
   static const String hotelsEndPoint = '/hotels';
   static const String searchHotelsEndPoint = '/search-hotels';
+  static const String imagesEndPoint = '/images';
+  static String getImageUrl(String imagePath)=>'$baseUrl$imagesEndPoint/$imagePath';
   static const String facilitiesEndPoint = '/facilities';
 }
 

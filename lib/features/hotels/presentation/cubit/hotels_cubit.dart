@@ -2,6 +2,9 @@ import 'package:alo_booking_app/core/exceptions/exceptions.dart';
 import 'package:alo_booking_app/core/use_case/base_use_case.dart';
 import 'package:alo_booking_app/features/hotels/domain/entities/hotels.dart';
 import 'package:alo_booking_app/features/hotels/domain/use_cases/get_hotels_use_case.dart';
+import 'package:alo_booking_app/features/search_hotels/domain/entities/hotel.dart';
+import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -11,6 +14,8 @@ class HotelsCubit extends Cubit<HotelsState> {
   final GetHotelsUseCase getHotelsUseCase;
   HotelsCubit(this.getHotelsUseCase) : super(HotelsInitial());
   List<Hotels> hotels = [];
+  List<String> images = [];
+
   void getHotels() async {
     final result = await getHotelsUseCase.call(const NoParameters());
     result.fold(
@@ -18,10 +23,22 @@ class HotelsCubit extends Cubit<HotelsState> {
         emit(GetHotelsErrorState(exception: left));
       },
       (right) {
+        getHotelsImages(right.hotels);
         hotels = right.hotels;
+
         print(hotels.length);
+        print(images.length);
         emit(GetHotelsSuccessState());
+
       },
     );
+  }
+
+  void getHotelsImages(List<Hotels>hotels) {
+    for (int i = 0; i < hotels.length; i++) {
+      for (int j = 0; j < hotels[i].hotelImages.length; j++) {
+        images.add(hotels[i].hotelImages[j].image);
+      }
+    }
   }
 }

@@ -32,7 +32,6 @@ class PageContent extends StatelessWidget {
             style: const TextStyle(
               fontSize: 26,
               wordSpacing: 1,
-              color: Colors.black,
               fontWeight: FontWeight.w900,
             ),
           ),

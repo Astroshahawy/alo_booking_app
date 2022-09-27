@@ -20,8 +20,10 @@ class AuthBloc extends Cubit<AuthState> {
 
   late Auth auth;
 
-  final TextEditingController loginEmailController = TextEditingController();
-  final TextEditingController loginPasswordController = TextEditingController();
+  final TextEditingController loginEmailController =
+      TextEditingController(text: 'alobooking@alo.com');
+  final TextEditingController loginPasswordController =
+      TextEditingController(text: '123456');
 
   Future<void> userLogin() async {
     emit(UserLoginLoadingState());

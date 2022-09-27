@@ -1,7 +1,6 @@
 import 'package:alo_booking_app/features/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:alo_booking_app/features/authentication/presentation/widgets/login/login_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -16,15 +15,10 @@ class LoginScreen extends StatelessWidget {
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
-          backgroundColor: Colors.grey.shade50.withOpacity(0.99),
           appBar: AppBar(
             leadingWidth: 68,
-            foregroundColor: Colors.black,
             backgroundColor: Colors.transparent,
             elevation: 0,
-            systemOverlayStyle: const SystemUiOverlayStyle(
-              statusBarIconBrightness: Brightness.dark,
-            ),
           ),
           body: const LoginWidget(),
         ),
