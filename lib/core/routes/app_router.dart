@@ -5,6 +5,7 @@ import 'package:alo_booking_app/features/authentication/presentation/screens/reg
 import 'package:alo_booking_app/features/authentication/presentation/screens/welcome_screen.dart';
 import 'package:alo_booking_app/features/home_navigation/presentation/screens/home_bottom_navigation_bar.dart';
 import 'package:alo_booking_app/features/hotels/presentation/screens/hotels_screen.dart';
+import 'package:alo_booking_app/features/hotels/presentation/screens/details_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {
@@ -25,7 +26,7 @@ class AppRouter {
             return const RegisterScreen();
           case AppRoutes.initScreen:
           default:
-            return const WelcomeScreen();
+            return  PreDetailsScreen();
         }
       },
     );

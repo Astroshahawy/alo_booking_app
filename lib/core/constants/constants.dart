@@ -18,6 +18,8 @@ class AppApis {
   static const String updateProfileEndPoint = '/auth/update-info';
   static const String hotelsEndPoint = '/hotels';
   static const String searchHotelsEndPoint = '/search-hotels';
+  static const String imagesEndPoint = '/images';
+  static String getImageUrl(String imagePath)=>'$baseUrl$imagesEndPoint/$imagePath';
 }
 
 class AppColors {
