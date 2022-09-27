@@ -1,13 +1,15 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 
 class UpdateProfile extends Equatable {
   final String name;
   final String email;
-  final String image;
+  final File? image;
 
   const UpdateProfile({
     required this.name,
-    required this.image,
+     this.image,
     required this.email,
   });
 

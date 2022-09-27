@@ -1,5 +1,6 @@
 import 'package:alo_booking_app/core/exceptions/exceptions.dart';
 import 'package:alo_booking_app/core/network/dio_helper.dart';
+import 'package:alo_booking_app/features/search_hotels/data/models/facilities_data_model.dart';
 import 'package:alo_booking_app/features/search_hotels/data/models/hotels_data_model.dart';
 import 'package:alo_booking_app/features/search_hotels/data/models/search_hotels_model.dart';
 import 'package:alo_booking_app/features/search_hotels/data/models/search_options_model.dart';
@@ -10,6 +11,7 @@ abstract class SearchHotelsRemoteDataSource {
   Future<Either<PrimaryServerException, SearchHotelsModel>> searchHotelsInfo(
       SearchOptionsModel searchOptionsModel);
   Future<Either<PrimaryServerException, HotelsDataModel>> getHotels();
+  Future<Either<PrimaryServerException, FacilitiesDataModel>> getFacilities();
 }
 
 class SearchHotelsRemoteDataSourceImpl extends SearchHotelsRemoteDataSource {
@@ -46,6 +48,22 @@ class SearchHotelsRemoteDataSourceImpl extends SearchHotelsRemoteDataSource {
           },
         );
         return HotelsDataModel.fromJson(response['data']);
+      },
+      onPrimaryServerException: (e) async {
+        return e;
+      },
+    );
+  }
+
+  @override
+  Future<Either<PrimaryServerException, FacilitiesDataModel>> getFacilities() async {
+    return basicErrorHandling(
+      onSuccess: () async {
+        final response = await baseDioHelper.get(
+          endPoint: AppApis.facilitiesEndPoint,
+        );
+        //return response.map((x) => FacilitiesModel.fromJson(x)).toList();
+        return FacilitiesDataModel.fromJson(response);
       },
       onPrimaryServerException: (e) async {
         return e;

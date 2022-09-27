@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:alo_booking_app/features/profile/domain/use_cases/profile_use_case.dart';
 import 'package:alo_booking_app/features/profile/presentation/cubit/profile_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,8 +39,8 @@ class ProfileBloc extends Cubit<ProfileState> {
   void updateProfile(
       {required UpdateProfileInfoParameters
           updateProfileInfoParameters}) async {
-    emit(UserProfileLoadingState());
-
+    emit(ImageUploadingState());
+    print(updateProfileInfoParameters.toString());
     final response = await updateProfileInfo(updateProfileInfoParameters);
 
     return response.fold(
@@ -47,10 +48,16 @@ class ProfileBloc extends Cubit<ProfileState> {
         emit(ProfileErrorState(exception: l));
       },
       (r) {
-        //profileModel = r;
+        profileInfo = r;
         print(r);
-        emit(UserProfileSuccessState());
+        emit(ImageUploadedState());
       },
     );
+  }
+
+  static File? imageProfile;
+  saveImage(File image){
+    imageProfile = image;
+    print(image.path.toString()+"sssssssssssssssssssssssssss");
   }
 }

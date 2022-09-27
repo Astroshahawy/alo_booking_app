@@ -15,7 +15,7 @@ class RangeSliderWidget extends StatefulWidget {
 
 class _RangeSliderWidgetState extends State<RangeSliderWidget> {
 
-  RangeValues _currentRangeValues = const RangeValues(100, 600);
+  RangeValues _currentRangeValues = const RangeValues(10, 5000);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,8 +31,8 @@ class _RangeSliderWidgetState extends State<RangeSliderWidget> {
           inactiveColor: AppColors.borderSideColor,
           values: _currentRangeValues,
           min: 10,
-          max: 1000,
-          divisions: 200,
+          max: 5000,
+          divisions: 2500,
           labels: RangeLabels(
             '${_currentRangeValues.start.round().toString()}\$',
             '${_currentRangeValues.end.round().toString()}\$',

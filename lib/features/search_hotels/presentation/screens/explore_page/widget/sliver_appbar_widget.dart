@@ -30,6 +30,7 @@ class _SliverAppBarWidgetState extends State<SliverAppBarWidget> {
     // debugPrint(SearchHotelsBloc.hotels!.data[0].toString());
     HotelsData  hotels =  HotelsDataModel(data:[HotelModel(),HotelModel(),HotelModel(),HotelModel()]
     );
+    searchController.text.isNotEmpty ? SearchHotelsBloc.get(context).searchHotels(hotelName:searchController.text) : null;
     return BlocBuilder<SearchHotelsBloc, SearchHotelsState>(
         builder: (context, state)
     {
@@ -88,7 +89,7 @@ class _SliverAppBarWidgetState extends State<SliverAppBarWidget> {
                     ),
                     IconButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => FilterPage(),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => FilterPage(searchText: searchController.text),));
                         }, icon: Icon(Icons.ac_unit)),
                   ],
                 )

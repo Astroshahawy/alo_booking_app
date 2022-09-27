@@ -1,3 +1,8 @@
+import 'package:alo_booking_app/core/widgets/bouncing_button.dart';
+import 'package:alo_booking_app/features/profile/domain/entities/update_profile.dart';
+import 'package:alo_booking_app/features/profile/domain/use_cases/update_profile_use_case.dart';
+import 'package:alo_booking_app/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:alo_booking_app/features/profile/presentation/widgets/image_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +24,9 @@ class UpdateProfilePage extends StatelessWidget {
       backgroundColor: Color(0xFF1a1a1a),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Padding(
+          child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
+            height: MediaQuery.of(context).size.height,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -64,7 +70,9 @@ class UpdateProfilePage extends StatelessWidget {
                             bottom: 0,
                             right: -25,
                             child: RawMaterialButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                ImageHelper().selectAvatarOperation(context);
+                              },
                               elevation: 2.0,
                               fillColor: Color(0xFF4fbe9e),
                               child: Icon(
@@ -94,7 +102,22 @@ class UpdateProfilePage extends StatelessWidget {
                 UpdateProfileItemWidget(text:"Address", controller:addressController,hintText:"egypt, cairo"),
                 dividerWidget(15, 15,1),
 
-
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: BouncingButton(
+                      child: Text('Update'),
+                      onPress: (){
+                        ProfileBloc.get(context).updateProfile(
+                            updateProfileInfoParameters:
+                            UpdateProfileInfoParameters(token: 'DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u',
+                                updateProfile: UpdateProfile(email: 'abdullaaah.mansoour@gmail.com',name: 'Abdullaaah Mansoour', image: ProfileBloc.imageProfile))
+                        );
+                      },
+                      height: 52,
+                    ),
+                  ),
+                )
               ],
             ),
           ),

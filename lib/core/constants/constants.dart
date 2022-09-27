@@ -17,6 +17,7 @@ class AppApis {
   static const String updateProfileEndPoint = '/auth/update-info';
   static const String hotelsEndPoint = '/hotels';
   static const String searchHotelsEndPoint = '/search-hotels';
+  static const String facilitiesEndPoint = '/facilities';
 }
 
 class AppColors {

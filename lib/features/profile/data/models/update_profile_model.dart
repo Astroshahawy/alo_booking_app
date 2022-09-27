@@ -3,7 +3,7 @@ import 'package:alo_booking_app/features/profile/domain/entities/update_profile.
 class UpdateProfileModel extends UpdateProfile {
   const UpdateProfileModel({
     required super.name,
-    required super.image,
+     super.image,
     required super.email,
   });
 

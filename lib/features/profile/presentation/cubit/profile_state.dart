@@ -30,3 +30,15 @@ class ProfileErrorState extends ProfileState {
   @override
   List<Object> get props => [exception];
 }
+
+class ImageUploadingState extends ProfileState {
+
+  @override
+  List<Object> get props => [];
+}
+
+class ImageUploadedState extends ProfileState {
+
+  @override
+  List<Object> get props => [];
+}
