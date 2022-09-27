@@ -17,6 +17,7 @@ import 'package:alo_booking_app/features/profile/data/repository/profile_reposit
 import 'package:alo_booking_app/features/profile/domain/repository/profile_repository.dart';
 import 'package:alo_booking_app/features/profile/domain/use_cases/profile_use_case.dart';
 import 'package:alo_booking_app/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:alo_booking_app/features/search_hotels/domain/use_cases/get_facilities_use_case.dart';
 import 'package:alo_booking_app/features/search_hotels/domain/use_cases/search_hotel_use_case.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -38,7 +39,7 @@ void initGetIt() {
   getIt.registerFactory(() => HomeNavigationBloc());
   getIt.registerFactory(() => HotelsCubit(getIt()));
   getIt.registerFactory(() => ProfileBloc(getIt(), getIt()));
-  getIt.registerFactory(() => SearchHotelsBloc(getIt(),getIt()));
+  getIt.registerFactory(() => SearchHotelsBloc(getIt(),getIt(), getIt()));
 
   /// UseCases
   getIt.registerLazySingleton(() => LoginUseCase(getIt()));
@@ -51,6 +52,8 @@ void initGetIt() {
       () => SearchHotelsInfo(searchHotelsRepository: getIt()));
   getIt.registerLazySingleton(
           () => GetHotelsUseCase(getIt()));
+  getIt.registerLazySingleton(
+          () => GetFacilitiesInfo(getFacilitiesRepository: getIt()));
 
   /// Repository
   getIt

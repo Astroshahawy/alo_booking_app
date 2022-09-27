@@ -1,9 +1,11 @@
 import 'package:alo_booking_app/features/search_hotels/domain/entities/hotels_data.dart';
+import 'package:alo_booking_app/features/search_hotels/domain/use_cases/get_facilities_use_case.dart';
 import 'package:alo_booking_app/features/search_hotels/domain/use_cases/get_hotels_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/use_case/base_use_case.dart';
 import '../../data/models/search_options_model.dart';
+import '../../domain/entities/facilities_data.dart';
 import '../../domain/entities/search_hotels.dart';
 import '../../domain/use_cases/search_hotel_use_case.dart';
 import 'search_hotels_state.dart';
@@ -11,16 +13,19 @@ import 'search_hotels_state.dart';
 class SearchHotelsBloc extends Cubit<SearchHotelsState> {
   final  SearchHotelsInfo searchHotelsInfo;
   final GetHotelsUseCase getHotelsUseCase;
-  SearchOptionsModel? searchOptionsModel = SearchOptionsModel(
-      '', '', '', '', '', '', '', '', '', []);
+  final GetFacilitiesInfo getFacilitiesInfo;
+  static SearchOptionsModel? searchOptionsModel = SearchOptionsModel(
+      '', '', '', '', '', '', '', '', '', ['','']);
 
   SearchHotelsBloc(
     this.searchHotelsInfo,
       this.getHotelsUseCase,
+      this.getFacilitiesInfo,
   ) : super(SearchHotelsInitialState());
 
   static SearchHotels? searchHotelsList;
   static HotelsData? hotels ;
+  static FacilitiesData? facilities;
 
   static SearchHotelsBloc get(context) => BlocProvider.of<SearchHotelsBloc>(context);
 
@@ -41,8 +46,8 @@ class SearchHotelsBloc extends Cubit<SearchHotelsState> {
   void searchHotels({required String hotelName}) async {
     emit(UserSearchHotelsLoadingState());
     final searchFilter = SearchOptionsModel(
-        hotelName, '150',
-        searchOptionsModel!.address, '',//searchOptionsModel!.maxPrice,
+        hotelName, searchOptionsModel!.minPrice,
+        searchOptionsModel!.address, searchOptionsModel!.maxPrice,
         searchOptionsModel!.latitude, searchOptionsModel!.longitude,
         searchOptionsModel!.distance,  searchOptionsModel!.count,
         searchOptionsModel!.page, searchOptionsModel!.facilities);
@@ -65,5 +70,25 @@ class SearchHotelsBloc extends Cubit<SearchHotelsState> {
   searchFilter({SearchOptionsModel? searchOptions}){
     searchOptionsModel = searchOptions;
     emit(state);
+  }
+  static List<String> selectedFacilities = [];
+  selectFacilities(List<String> facilities){
+    print(facilities);
+      selectedFacilities = facilities;
+  }
+
+  getFacilities() async{
+    final response = await getFacilitiesInfo.call(const NoParameters());
+
+    return response.fold(
+          (l) {
+        print(l.message);
+        emit(SearchHotelsErrorState(exception: l));
+      }, (r) {
+        facilities = r;
+        print(r.data!.length);
+        emit(GetFacilitiesSuccessState(r));
+      },
+    );
   }
 }

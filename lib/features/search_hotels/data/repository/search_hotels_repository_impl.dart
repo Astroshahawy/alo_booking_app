@@ -1,4 +1,5 @@
 import 'package:alo_booking_app/core/exceptions/exceptions.dart';
+import 'package:alo_booking_app/features/search_hotels/domain/entities/facilities_data.dart';
 import 'package:alo_booking_app/features/search_hotels/domain/entities/hotels_data.dart';
 import 'package:alo_booking_app/features/search_hotels/domain/entities/search_hotels.dart';
 import 'package:dartz/dartz.dart';
@@ -35,6 +36,25 @@ class SearchHotelsRepositoryImpl extends SearchHotelsRepository {
   @override
   Future<Either<PrimaryServerException, HotelsData>> getHotels() async{
     return await searchHotelsRemoteDataSource.getHotels();
+  }
+
+  @override
+  Future<Either<PrimaryServerException, FacilitiesData>> getFacilities() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final facilitiesModel = await searchHotelsRemoteDataSource
+            .getFacilities();
+        return facilitiesModel;
+      } on PrimaryServerException catch (e) {
+        //debugPrint(s.toString());
+        return Left(e);
+      }
+    } else {
+      return Left(PrimaryServerException(
+          code: 500,
+          error: 'Connection Failure ',
+          message: 'Please Check your Internet Connection'));
+    }
   }
 /*
   @override

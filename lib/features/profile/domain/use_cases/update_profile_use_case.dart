@@ -16,7 +16,7 @@ class UpdateProfileInfo
 
   @override
   Future<Either<PrimaryServerException, Profile>> call(
-      UpdateProfileInfoParameters parameters) async {
+      dynamic parameters) async {
     return await updateProfileRepository.updateProfileInfo(
       parameters.token,
       parameters.updateProfile,

@@ -36,7 +36,7 @@ class ProfileRepositoryImpl extends ProfileRepository {
     if (await networkInfo.isConnected) {
       try {
         final profile = await profileRemoteDataSource.updateProfileInfo(
-            token, updateProfile);
+            token , updateProfile);
         return profile;
       } on PrimaryServerException catch (e) {
         // debugPrint(s.toString());

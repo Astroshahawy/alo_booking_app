@@ -1,5 +1,6 @@
 
 import 'package:alo_booking_app/core/exceptions/exceptions.dart';
+import 'package:alo_booking_app/features/search_hotels/domain/entities/facilities_data.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class SearchHotelsState extends Equatable {
@@ -51,4 +52,14 @@ class SearchHotelsErrorState extends SearchHotelsState {
 
   @override
   List<Object> get props => [exception];
+}
+
+class GetFacilitiesSuccessState extends SearchHotelsState {
+  FacilitiesData facilitiesData;
+
+
+  GetFacilitiesSuccessState(this.facilitiesData);
+
+  @override
+  List<Object?> get props => [facilitiesData];
 }

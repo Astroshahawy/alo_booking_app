@@ -20,6 +20,7 @@ class AppApis {
   static const String searchHotelsEndPoint = '/search-hotels';
   static const String imagesEndPoint = '/images';
   static String getImageUrl(String imagePath)=>'$baseUrl$imagesEndPoint/$imagePath';
+  static const String facilitiesEndPoint = '/facilities';
 }
 
 class AppColors {

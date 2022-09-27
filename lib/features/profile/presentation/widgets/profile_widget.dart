@@ -52,7 +52,6 @@ class ProfileWidget extends StatelessWidget {
                           'DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u',
                       updateProfile: UpdateProfileModel(
                           name: 'Abdullaah Mansour',
-                          image: '',
                           email: 'abdullaah.mansour@gmail.com'),
                     ),
                   );
