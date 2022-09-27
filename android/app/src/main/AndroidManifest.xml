@@ -4,9 +4,12 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
    <application
+
         android:label="Alo Booking"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyCgyLJ0tzZ-WJNkpJ3QIIVjyIvwKKVikYU"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
