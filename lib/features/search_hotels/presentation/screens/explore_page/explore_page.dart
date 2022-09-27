@@ -2,6 +2,7 @@ import 'package:alo_booking_app/core/constants/constants.dart';
 import 'package:alo_booking_app/features/profile/presentation/widgets/divider_widget.dart';
 import 'package:alo_booking_app/features/search_hotels/presentation/screens/explore_page/widget/hotel_card_widget.dart';
 import 'package:alo_booking_app/features/search_hotels/presentation/screens/explore_page/widget/sliver_appbar_widget.dart';
+import 'package:alo_booking_app/features/search_hotels/presentation/screens/hotels_on_google_map.dart';
 import 'package:flutter/material.dart';
 
 class ExplorePage extends StatefulWidget {
@@ -30,7 +31,9 @@ class _ExplorePageState extends State<ExplorePage>
             )),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HotelsOnGoogleMap()));
+              },
               icon: Icon(
                 Icons.location_history,
                 size: 22,
