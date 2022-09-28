@@ -4,6 +4,7 @@ import 'package:alo_booking_app/core/themes/app_themes.dart';
 import 'package:alo_booking_app/core/themes/cubit/app_theme_cubit.dart';
 import 'package:alo_booking_app/core/themes/cubit/app_theme_state.dart';
 import 'package:alo_booking_app/features/authentication/presentation/cubit/auth_cubit.dart';
+import 'package:alo_booking_app/features/bookings/presentation/cubit/bookings_cubit.dart';
 import 'package:alo_booking_app/features/home_navigation/presentation/cubit/home_navigation_cubit.dart';
 import 'package:alo_booking_app/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:alo_booking_app/features/search_hotels/presentation/cubit/search_hotels_cubit.dart';
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<HomeNavigationBloc>(
           create: (context) => getIt<HomeNavigationBloc>(),
+        ),
+        BlocProvider<BookingsBloc>(
+          create: (context) => getIt<BookingsBloc>(),
         ),
         BlocProvider<ProfileBloc>(
           create: (context) => getIt<ProfileBloc>(),

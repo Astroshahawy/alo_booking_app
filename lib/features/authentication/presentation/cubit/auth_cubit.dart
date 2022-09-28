@@ -21,7 +21,7 @@ class AuthBloc extends Cubit<AuthState> {
   late Auth auth;
 
   final TextEditingController loginEmailController =
-      TextEditingController(text: 'alobooking@alo.com');
+      TextEditingController(text: 'alobookingapp@alo.com');
   final TextEditingController loginPasswordController =
       TextEditingController(text: '123456');
 

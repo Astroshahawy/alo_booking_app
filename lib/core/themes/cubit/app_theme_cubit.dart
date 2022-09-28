@@ -7,7 +7,7 @@ class AppThemeBloc extends Cubit<AppThemeState> {
 
   static AppThemeBloc get(context) => BlocProvider.of<AppThemeBloc>(context);
 
-  ThemeMode themeMode = ThemeMode.light;
+  ThemeMode themeMode = ThemeMode.system;
 
   bool get isDarkMode => themeMode == ThemeMode.dark;
 
