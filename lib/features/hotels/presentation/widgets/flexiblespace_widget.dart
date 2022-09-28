@@ -1,6 +1,7 @@
 import 'package:alo_booking_app/core/constants/constants.dart';
 import 'package:alo_booking_app/core/widgets/bouncing_button.dart';
 import 'package:alo_booking_app/features/hotels/presentation/cubit/hotels_cubit.dart';
+import 'package:alo_booking_app/features/search_hotels/presentation/screens/explore_page/explore_page.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -121,7 +122,9 @@ class FlexibleSpaceWidget extends StatelessWidget {
                                         color: Colors.white,
                                         fontWeight: FontWeight.w400),
                                   ),
-                                  onPress: () {}),
+                                  onPress: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ExplorePage(),));
+                                  }),
                             ],
                           ),
                         ),
