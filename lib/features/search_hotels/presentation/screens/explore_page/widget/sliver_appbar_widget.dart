@@ -1,9 +1,13 @@
+import 'package:alo_booking_app/features/hotels/presentation/cubit/hotels_cubit.dart';
 import 'package:alo_booking_app/features/search_hotels/data/models/hotel_model.dart';
 import 'package:alo_booking_app/features/search_hotels/data/models/hotels_data_model.dart';
 import 'package:alo_booking_app/features/search_hotels/domain/entities/hotels_data.dart';
 import 'package:alo_booking_app/features/search_hotels/presentation/screens/filtter_page/filter_page.dart';
+import 'package:alo_booking_app/features/search_hotels/presentation/screens/hotels_on_google_map/hotels_on_google_map_page.dart';
+import 'package:alo_booking_app/features/search_hotels/presentation/screens/hotels_on_google_map/widget/hotels_on_google_map_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../../../core/constants/constants.dart';
 import '../../../../../profile/presentation/widgets/divider_widget.dart';
@@ -21,6 +25,7 @@ class SliverAppBarWidget extends StatefulWidget {
 class _SliverAppBarWidgetState extends State<SliverAppBarWidget> {
 
   final searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     // SearchHotelsBloc.get(context).searchHotels(hotelName: '');
@@ -28,40 +33,84 @@ class _SliverAppBarWidgetState extends State<SliverAppBarWidget> {
     // print(hotels.toString());
     //hotels!.data[0];
     // debugPrint(SearchHotelsBloc.hotels!.data[0].toString());
-    HotelsData  hotels =  HotelsDataModel(data:[HotelModel(),HotelModel(),HotelModel(),HotelModel()]
-    );
     searchController.text.isNotEmpty ? SearchHotelsBloc.get(context).searchHotels(hotelName:searchController.text) : null;
-    return BlocBuilder<SearchHotelsBloc, SearchHotelsState>(
-        builder: (context, state)
-    {
-      // print(SearchHotelsBloc.hotels!);
-      return NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverAppBar(
-                backgroundColor: AppColors.baseColor,
-                expandedHeight: 170,
-                collapsedHeight: 60,
-                titleSpacing: 10,
-                flexibleSpace: bookingDetails(),
-                pinned: true,
-                floating: true,
-                forceElevated: innerBoxIsScrolled,
-                bottom: resultFiltter(),
-              ),
-            ];
-          },
-          body: //Container(),
-        HotelCardWidget(
-            searchHotels:
-            //SearchHotelsBloc.searchHotelsList == null
-              searchController.text.isEmpty?
-            hotels
-               :  SearchHotelsBloc.searchHotelsList != null ? SearchHotelsBloc.searchHotelsList!.data!: hotels,
-          ),
+    return Scaffold(
 
-      );
-   });
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: AppColors.baseColor,
+        title: Text('Explore',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
+        leading: IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.arrow_back,
+              size: 22,
+            )),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                    HotelsOnMapPage(hotelsMap: searchController.text.isEmpty?
+                    SearchHotelsBloc.hotels!.data :
+                    // SearchHotelsBloc.searchHotelsList
+                        // != null ?
+                    SearchHotelsBloc.searchHotelsList!.data!.data
+                        // : hotels.data,
+                    )));
+              },
+              icon: Icon(
+                Icons.location_history,
+                size: 22,
+              )),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.favorite_border_outlined,
+                size: 22,
+              )),
+        ],
+      ),
+      body: BlocBuilder<SearchHotelsBloc, SearchHotelsState>(
+          builder: (context, state)
+          {
+            // print(SearchHotelsBloc.hotels!);
+            if(SearchHotelsBloc.hotels!= null) {
+              return NestedScrollView(
+                headerSliverBuilder: (BuildContext context,
+                    bool innerBoxIsScrolled) {
+                  return <Widget>[
+                    SliverAppBar(
+                      backgroundColor: AppColors.baseColor,
+                      expandedHeight: 170,
+                      collapsedHeight: 60,
+                      titleSpacing: 10,
+                      flexibleSpace: bookingDetails(),
+                      pinned: true,
+                      floating: true,
+                      forceElevated: innerBoxIsScrolled,
+                      bottom: resultFiltter(),
+                    ),
+                  ];
+                },
+                body: //Container(),
+                SearchHotelsBloc.hotels != null ?
+                HotelCardWidget(
+                  searchHotels:
+                  //SearchHotelsBloc.searchHotelsList == null
+                  searchController.text.isEmpty ?
+                  SearchHotelsBloc.hotels!.data
+                      : SearchHotelsBloc.searchHotelsList != null
+                      ? SearchHotelsBloc.searchHotelsList!.data!.data
+                      : SearchHotelsBloc.hotels!.data,
+                ) : Center(child: Lottie.asset("assets/config/spinner.json")),
+
+              );
+            }else{
+              return  Center(child: Lottie.asset("assets/config/spinner.json"));
+            }
+          }),
+    );
   }
 
   PreferredSize resultFiltter(){
@@ -76,7 +125,8 @@ class _SliverAppBarWidgetState extends State<SliverAppBarWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '350 Hotel Found',
+                  SearchHotelsBloc.hotels != null? '10 Hotel Found'
+                      :'${SearchHotelsBloc.hotels!.data.length} Hotel Found',
                   style: TextStyle(
                       fontSize: 16, fontWeight: FontWeight.w600),
                 ),
