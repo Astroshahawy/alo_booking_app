@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../features/hotels/presentation/screens/hotels_screen.dart';
 import '../features/search_hotels/presentation/screens/explore_page/explore_page.dart';
 
 class MyApp extends StatelessWidget {

@@ -12,7 +12,7 @@ import 'search_hotels_state.dart';
 
 class SearchHotelsBloc extends Cubit<SearchHotelsState> {
   final  SearchHotelsInfo searchHotelsInfo;
-  final GetHotelsUseCase getHotelsUseCase;
+  final GetHotelsInfoUseCase getHotelsUseCase;
   final GetFacilitiesInfo getFacilitiesInfo;
   static SearchOptionsModel? searchOptionsModel = SearchOptionsModel(
       '', '', '', '', '', '', '', '', '', ['','']);

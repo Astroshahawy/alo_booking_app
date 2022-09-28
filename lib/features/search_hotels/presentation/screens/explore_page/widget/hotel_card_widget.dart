@@ -1,4 +1,7 @@
 
+import 'dart:math';
+
+import 'package:alo_booking_app/features/search_hotels/domain/entities/hotel.dart';
 import 'package:alo_booking_app/features/search_hotels/domain/entities/hotels_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +12,7 @@ import '../../../cubit/search_hotels_state.dart';
 
 class HotelCardWidget extends StatefulWidget {
   HotelCardWidget({Key? key, required this.searchHotels}) : super(key: key);
-  HotelsData searchHotels;
+  List<Hotel> searchHotels;
   @override
   State<HotelCardWidget> createState() => _HotelCardWidgetState();
 }
@@ -17,7 +20,7 @@ class HotelCardWidget extends StatefulWidget {
 class _HotelCardWidgetState extends State<HotelCardWidget> {
   @override
   Widget build(BuildContext context) {
-    final hotelsList = widget.searchHotels.data;
+    final hotelsList = widget.searchHotels;
     return  BlocConsumer<SearchHotelsBloc, SearchHotelsState>(
         listener: (context, state) {
           if (state is SearchHotelsErrorState) {
@@ -56,10 +59,9 @@ class _HotelCardWidgetState extends State<HotelCardWidget> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
-                    // hotel.hotelImages == null ||  hotel.hotelImages == []
-                    // ?
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEToqDOfAtJqlcLhymiSOe6TQjz7wQLWHNq3gUcP79eg&s'
-                   // :'http://api.mahmoudtaha.com/images/${hotel.hotelImages![0].image.toString()}'
+                    hotel.hotelImages == null ||  hotel.hotelImages == []
+                    ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEToqDOfAtJqlcLhymiSOe6TQjz7wQLWHNq3gUcP79eg&s'
+                   : AppApis.getImageUrl(hotel.hotelImages![(hotel.hotelImages!.length)-1].image!)
 
                     ),
                   fit: BoxFit.cover,
@@ -77,9 +79,14 @@ class _HotelCardWidgetState extends State<HotelCardWidget> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('${hotel.name}',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
+                      Expanded(
+                          child: Text('${hotel.name}',maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              softWrap: false,
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                        ),
+
                       Text('\$${hotel.price}',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold))
@@ -92,14 +99,19 @@ class _HotelCardWidgetState extends State<HotelCardWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
+                        width:MediaQuery.of(context).size.width*0.6,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text('Wembley, London',
-                                style: TextStyle(
-                                    color: AppColors.borderSideColor,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w300)),
+                            Expanded(
+                              child: Text('${hotel.address}',maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: false,
+                                  style: TextStyle(
+                                      color: AppColors.borderSideColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w300)),
+                            ),
                             Icon(
                               Icons.location_on,
                               color: AppColors.defaultColor,
@@ -130,8 +142,16 @@ class _HotelCardWidgetState extends State<HotelCardWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Row(
-                        children: List.generate(5, (index) {
-                          if (index == 4) {
+                        children: [
+                  Icon(Icons.star, color: AppColors.defaultColor,
+                    size: 18,),
+                          Text('${double.parse(hotel.rate!).toStringAsFixed(1)}', style: TextStyle(
+                              color: AppColors.borderSideColor,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w300),),
+                        ]
+                        /*List.generate(int.parse(hotel.rate!).toInt(), (index) {
+                          if (index == int.parse(hotel.rate!).toInt()) {
                             return Icon(
                               Icons.star_half, color: AppColors.defaultColor,
                               size: 17,);
@@ -139,8 +159,10 @@ class _HotelCardWidgetState extends State<HotelCardWidget> {
                           return Icon(Icons.star, color: AppColors.defaultColor,
                             size: 18,);
                         }),
+                        */
                       ),
-                      Text('80 Reviews', style: TextStyle(
+                      const SizedBox(width: 10,),
+                      Text('${Random().nextInt(200)} Reviews', style: TextStyle(
                           color: AppColors.borderSideColor,
                           fontSize: 15,
                           fontWeight: FontWeight.w300),),
@@ -162,4 +184,13 @@ class _HotelCardWidgetState extends State<HotelCardWidget> {
           );
   });
   }
+
+  /*rating(String rate){
+    double rateDouble = double.parse(rate);
+    int rateInt = int.parse(rate);
+    if(rateInt % 5 ==0){
+      oneStar = 5;
+    }
+    else
+  }*/
 }

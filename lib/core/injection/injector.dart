@@ -30,6 +30,7 @@ import 'package:alo_booking_app/features/search_hotels/domain/use_cases/search_h
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
+import '../../features/hotels/domain/use_cases/get_hotels_use_case.dart';
 import '../../features/profile/domain/use_cases/update_profile_use_case.dart';
 import '../../features/search_hotels/data/data_source/search_hotels_remote_data_source.dart';
 import '../../features/search_hotels/data/repository/search_hotels_repository_impl.dart';
@@ -58,6 +59,7 @@ void initGetIt() {
   getIt.registerLazySingleton(() => GetCompletedBookingsUseCase(getIt()));
   getIt.registerLazySingleton(() => GetCanceledBookingsUseCase(getIt()));
   //getIt.registerLazySingleton(() => GetHotelsUseCase(getIt()));
+  getIt.registerLazySingleton(() => GetHotelsUseCase(getIt()));
   getIt.registerLazySingleton(() => GetProfileInfo(profileRepository: getIt()));
   getIt.registerLazySingleton(
       () => UpdateProfileInfo(updateProfileRepository: getIt()));
@@ -66,6 +68,9 @@ void initGetIt() {
   getIt.registerLazySingleton(() => GetHotelsUseCase(getIt()));
   getIt.registerLazySingleton(
       () => GetFacilitiesInfo(getFacilitiesRepository: getIt()));
+          () => GetHotelsInfoUseCase(getIt());
+  getIt.registerLazySingleton(
+          () => GetFacilitiesInfo(getFacilitiesRepository: getIt()));
 
   /// Repository
   getIt

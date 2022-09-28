@@ -5,10 +5,10 @@ import 'package:dartz/dartz.dart';
 
 import '../repository/search_hotel_repository.dart';
 
-class GetHotelsUseCase extends BaseUseCase<HotelsData, NoParameters> {
+class GetHotelsInfoUseCase extends BaseUseCase<HotelsData, NoParameters> {
   final SearchHotelsRepository baseHotelRepository;
 
-  GetHotelsUseCase(this.baseHotelRepository);
+  GetHotelsInfoUseCase(this.baseHotelRepository);
 
   @override
   Future<Either<PrimaryServerException, HotelsData>> call(
