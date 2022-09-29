@@ -100,16 +100,27 @@ class _FilterPageState extends State<FilterPage> {
                             child: BouncingButton(
                               height: 50,
                               onPress: () {
+                                //print(SearchHotelsBloc.selectedFacilities..asMap());
                                 SearchHotelsBloc.get(context).searchFilter(
-                                  searchOptions: SearchOptionsModel('', minPrice.text, '', maxPrice.text,
-                                      '', '', '', '', '', SearchHotelsBloc.selectedFacilities),
+                                  searchOptions: SearchOptionsModel(widget.searchText, minPrice.text, '', maxPrice.text,
+                                      '', '', '', '', '', {
+                                        ...SearchHotelsBloc.selectedFacilities.asMap().map(
+                                              (key, value) => MapEntry(
+                                            'facilities[$key]',
+                                            value,
+                                          ),
+                                        ),
+                                      },
+
+                                  ),
                                   /*SearchOptionsModel(
                                       '', minPrice.text,
                                       '', maxPrice.text, '', '', '', '', '', SearchHotelsBloc.selectedFacilities
                                   ),*/
                                 );
-                                widget.searchText.isNotEmpty ?
-                                SearchHotelsBloc.get(context).searchHotels(hotelName:widget.searchText) : null;
+                                // widget.searchText.isNotEmpty ?
+                                SearchHotelsBloc.get(context).searchHotels(hotelName:widget.searchText) ;
+                                // : null;
                                 Navigator.pop(context);
 
                               },

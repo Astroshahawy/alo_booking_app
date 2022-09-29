@@ -15,7 +15,7 @@ class SearchHotelsBloc extends Cubit<SearchHotelsState> {
   final GetHotelsInfoUseCase getHotelsUseCase;
   final GetFacilitiesInfo getFacilitiesInfo;
   static SearchOptionsModel? searchOptionsModel = SearchOptionsModel(
-      '', '', '', '', '', '', '', '', '', ['','']);
+      '', '', '', '', '', '', '', '', '', {});
 
   SearchHotelsBloc(
     this.searchHotelsInfo,
@@ -26,6 +26,7 @@ class SearchHotelsBloc extends Cubit<SearchHotelsState> {
   static SearchHotels? searchHotelsList;
   static HotelsData? hotels ;
   static FacilitiesData? facilities;
+  static int? hotelsNumber;
 
   static SearchHotelsBloc get(context) => BlocProvider.of<SearchHotelsBloc>(context);
 
@@ -36,6 +37,7 @@ class SearchHotelsBloc extends Cubit<SearchHotelsState> {
         emit(GetHotelsErrorState(exception: left));
       },
           (right) {
+            hotelsNumber = right.data.length;
         hotels = right;
         //print(hotels!.data[0].facilities);
         emit(GetHotelsSuccessState());
@@ -50,7 +52,8 @@ class SearchHotelsBloc extends Cubit<SearchHotelsState> {
         searchOptionsModel!.address, searchOptionsModel!.maxPrice,
         searchOptionsModel!.latitude, searchOptionsModel!.longitude,
         searchOptionsModel!.distance,  searchOptionsModel!.count,
-        searchOptionsModel!.page, searchOptionsModel!.facilities);
+        searchOptionsModel!.page, searchOptionsModel!.facilities
+    );
     final response = await searchHotelsInfo(searchFilter);
 
     return response.fold(
@@ -60,6 +63,7 @@ class SearchHotelsBloc extends Cubit<SearchHotelsState> {
       },
           (r) {
         //profileModel = r;
+            hotelsNumber = r.data!.data.length;
             searchHotelsList = r;
             print(r.data!.data.length);
         emit(UserSearchHotelsSuccessState());
@@ -71,6 +75,7 @@ class SearchHotelsBloc extends Cubit<SearchHotelsState> {
     searchOptionsModel = searchOptions;
     emit(state);
   }
+
   static List<String> selectedFacilities = [];
   selectFacilities(List<String> facilities){
     print(facilities);
@@ -90,5 +95,11 @@ class SearchHotelsBloc extends Cubit<SearchHotelsState> {
         emit(GetFacilitiesSuccessState(r));
       },
     );
+  }
+
+  static bool searchMap = false;
+  changeSearchMap(){
+    searchMap = !searchMap;
+    print(searchMap);
   }
 }

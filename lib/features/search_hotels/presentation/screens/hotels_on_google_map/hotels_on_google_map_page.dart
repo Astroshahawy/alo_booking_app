@@ -3,6 +3,7 @@ import 'package:alo_booking_app/features/search_hotels/presentation/screens/hote
 import 'package:flutter/material.dart';
 
 import '../../../domain/entities/hotel.dart';
+import '../explore_page/widget/app_bar_widget.dart';
 
 class HotelsOnMapPage extends StatefulWidget {
   HotelsOnMapPage({Key? key, required this.hotelsMap}) : super(key: key);
@@ -15,6 +16,10 @@ class _HotelsOnMapPageState extends State<HotelsOnMapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(55),
+        child: AppBarWidget(),
+      ),
       body: Container(
         child: Stack(
           children: [
