@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:alo_booking_app/features/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:alo_booking_app/features/profile/domain/use_cases/profile_use_case.dart';
 import 'package:alo_booking_app/features/profile/presentation/cubit/profile_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,10 +20,10 @@ class ProfileBloc extends Cubit<ProfileState> {
 
   static ProfileBloc get(context) => BlocProvider.of<ProfileBloc>(context);
 
-  void getProfile({required String token}) async {
+  void getProfile(context) async {
     emit(UserProfileLoadingState());
 
-    final response = await getProfileInfo(token);
+    final response = await getProfileInfo(AuthBloc.get(context).auth.userData.token);
 
     return response.fold(
       (l) {

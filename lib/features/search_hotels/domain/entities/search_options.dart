@@ -10,7 +10,7 @@ class SearchOptions extends Equatable {
   final String distance;
   final String count;
   final String page;
-  final List<String> facilities;
+  final Map facilities;
 
   const SearchOptions(
       this.name,

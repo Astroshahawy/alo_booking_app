@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:alo_booking_app/features/search_hotels/domain/entities/hotel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,12 +45,13 @@ class _HotelsOnGoogleMapCardWidgetState
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: NetworkImage(
-                            // hotel.hotelImages == null ||  hotel.hotelImages == []
-                            // ?
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEToqDOfAtJqlcLhymiSOe6TQjz7wQLWHNq3gUcP79eg&s'
-                            // :'http://api.mahmoudtaha.com/images/${hotel.hotelImages![0].image.toString()}'
-
-                            ),
+                          hotel.hotelImages == null || hotel.hotelImages == []
+                              ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEToqDOfAtJqlcLhymiSOe6TQjz7wQLWHNq3gUcP79eg&s'
+                              : AppApis.getImageUrl(hotel
+                                  .hotelImages![Random()
+                                      .nextInt(hotel.hotelImages!.length)]
+                                  .image!),
+                        ),
                         fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.only(
@@ -75,14 +78,18 @@ class _HotelsOnGoogleMapCardWidgetState
                             crossAxisAlignment: CrossAxisAlignment.start,
                             //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('${'Grand Royal Hotel'}',overflow: TextOverflow.ellipsis,
+                              Text('${hotel.name}',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold)),
                               const SizedBox(
                                 height: 2,
                               ),
-                              Text('Wembley, London',
+                              Text('${hotel.address}',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       color: AppColors.borderSideColor,
                                       fontSize: 15,
@@ -119,7 +126,7 @@ class _HotelsOnGoogleMapCardWidgetState
                                     SizedBox(
                                       width: 20,
                                     ),
-                                    Text('\$180',
+                                    Text('\$${hotel.price}',
                                         style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold)),
@@ -131,20 +138,20 @@ class _HotelsOnGoogleMapCardWidgetState
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
-                                    children: List.generate(5, (index) {
-                                      if (index == 4) {
-                                        return Icon(
-                                          Icons.star_half,
-                                          color: AppColors.defaultColor,
-                                          size: 17,
-                                        );
-                                      }
-                                      return Icon(
+                                    children: [
+                                      Icon(
                                         Icons.star,
                                         color: AppColors.defaultColor,
                                         size: 18,
-                                      );
-                                    }),
+                                      ),
+                                      Text(
+                                        '${double.parse(hotel.rate!).toStringAsFixed(1)}',
+                                        style: TextStyle(
+                                            color: AppColors.borderSideColor,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w300),
+                                      ),
+                                    ],
                                   ),
                                   Text(
                                     '/per night',

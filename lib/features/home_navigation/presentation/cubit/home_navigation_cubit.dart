@@ -1,5 +1,6 @@
 import 'package:alo_booking_app/features/bookings/presentation/screens/bookings_screen.dart';
 import 'package:alo_booking_app/features/home_navigation/presentation/cubit/home_navigation_state.dart';
+import 'package:alo_booking_app/features/hotels/presentation/screens/hotels_screen.dart';
 import 'package:alo_booking_app/features/profile/presentation/screens/profile/profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +21,8 @@ class HomeNavigationBloc extends Cubit<HomeNavigationState> {
   };
 
   final List<Widget> screens = [
-    // const HotelsScreen(key: PageStorageKey(AppRoutes.hotelsScreen)),
-    const Scaffold(),
+    const HotelsScreen(),
+    // const Scaffold(),
     const BookingsScreen(),
     const ProfilePage(),
   ];

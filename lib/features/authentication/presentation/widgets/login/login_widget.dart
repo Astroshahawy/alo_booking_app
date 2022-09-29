@@ -128,8 +128,7 @@ class LoginWidget extends StatelessWidget {
                   FocusScope.of(context).unfocus();
                   AuthBloc.get(context).validateLogin().then((value) =>
                       Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          AppRoutes.bottomNavigationBaseScreen,
+                          context, AppRoutes.bottomNavigationBaseScreen,
                           (route) => false));
                 },
               ),
