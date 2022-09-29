@@ -59,7 +59,6 @@ void initGetIt() {
   getIt.registerLazySingleton(() => GetCompletedBookingsUseCase(getIt()));
   getIt.registerLazySingleton(() => GetCanceledBookingsUseCase(getIt()));
   //getIt.registerLazySingleton(() => GetHotelsUseCase(getIt()));
-  getIt.registerLazySingleton(() => GetHotelsUseCase(getIt()));
   getIt.registerLazySingleton(() => GetProfileInfo(profileRepository: getIt()));
   getIt.registerLazySingleton(
       () => UpdateProfileInfo(updateProfileRepository: getIt()));
@@ -68,7 +67,8 @@ void initGetIt() {
   getIt.registerLazySingleton(() => GetHotelsUseCase(getIt()));
   getIt.registerLazySingleton(
       () => GetFacilitiesInfo(getFacilitiesRepository: getIt()));
-      
+  getIt.registerLazySingleton(() => GetHotelsInfoUseCase(getIt()));
+
   /// Repository
   getIt
       .registerLazySingleton<BaseAuthRepository>(() => AuthRepository(getIt()));
