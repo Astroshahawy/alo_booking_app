@@ -48,7 +48,7 @@ class UpdateProfileItemWidget extends StatelessWidget {
                       // color: Color(0xFF5a5a5a),
                       // fontWeight: FontWeight.w500,
                       // fontSize: 15,
-                      color: Colors.white,
+                     // color: Colors.white,
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
                     ),

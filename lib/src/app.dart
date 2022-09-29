@@ -60,6 +60,7 @@ class MyApp extends StatelessWidget {
             darkTheme: AppThemes.darkTheme,
             onGenerateRoute: AppRouter.generateRoutes,
             // home: const ExplorePage(),
+            //home: const HotelsScreen(),
           );
         },
       ),
