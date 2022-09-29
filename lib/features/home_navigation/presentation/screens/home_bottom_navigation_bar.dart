@@ -16,10 +16,11 @@ class HomeBottomNavigationBar extends StatelessWidget {
       buildWhen: (previous, current) => current is ChangeScreenState,
       builder: (context, state) {
         return Scaffold(
-          body: IndexedStack(
-            index: HomeNavigationBloc.get(context).currentIndex,
-            children: [...HomeNavigationBloc.get(context).screens],
-          ),
+          body: HomeNavigationBloc.get(context).screens[HomeNavigationBloc.get(context).currentIndex],
+          // body: IndexedStack(
+          //   index: HomeNavigationBloc.get(context).currentIndex,
+          //   children: [...HomeNavigationBloc.get(context).screens],
+          // ),
           bottomNavigationBar: BlocBuilder<AppThemeBloc, AppThemeState>(
             builder: (context, state) {
               return BottomNavigationBar(
