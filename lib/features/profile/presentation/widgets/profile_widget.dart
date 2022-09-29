@@ -31,9 +31,7 @@ class ProfileWidget extends StatelessWidget {
                   //   endPoint: AppApis.profileEndPoint,
                   //   token: 'DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u',
                   // );
-                  ProfileBloc.get(context).getProfile(
-                      token:
-                          'DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u');
+                  ProfileBloc.get(context).getProfile(context);
                 },
                 child: const Text('Profile'),
               ),
