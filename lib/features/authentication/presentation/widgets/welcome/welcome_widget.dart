@@ -49,7 +49,6 @@ class WelcomeWidget extends StatelessWidget {
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.w900,
-              color: Colors.black,
             ),
           ),
         ),
@@ -60,7 +59,6 @@ class WelcomeWidget extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w400,
-              color: Colors.black,
             ),
           ),
         ),

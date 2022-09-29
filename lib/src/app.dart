@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AppThemeBloc>(
-          create: (context) => getIt<AppThemeBloc>(),
+          create: (context) => getIt<AppThemeBloc>()..fetchAppTheme(),
         ),
         BlocProvider<AuthBloc>(
           create: (context) => getIt<AuthBloc>(),
@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
             theme: AppThemes.lightTheme,
             darkTheme: AppThemes.darkTheme,
             onGenerateRoute: AppRouter.generateRoutes,
-            home: const ExplorePage(),
+            // home: const ExplorePage(),
           );
         },
       ),
