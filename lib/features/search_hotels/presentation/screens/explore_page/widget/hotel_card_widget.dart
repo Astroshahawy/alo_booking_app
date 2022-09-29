@@ -61,7 +61,7 @@ class _HotelCardWidgetState extends State<HotelCardWidget> {
                   image: NetworkImage(
                     hotel.hotelImages == null ||  hotel.hotelImages == []
                     ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEToqDOfAtJqlcLhymiSOe6TQjz7wQLWHNq3gUcP79eg&s'
-                   : AppApis.getImageUrl(hotel.hotelImages![(hotel.hotelImages!.length)-1].image!)
+                   : AppApis.getImageUrl(hotel.hotelImages![Random().nextInt(hotel.hotelImages!.length)].image!)
 
                     ),
                   fit: BoxFit.cover,

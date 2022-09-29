@@ -21,7 +21,7 @@ class HotelsOnGoogleMapWidget extends StatefulWidget{
 class _HotelsOnGoogleMapWidgetState extends State<HotelsOnGoogleMapWidget> {
   GoogleMapController? mapController; //contrller for Google map
   final Set<Marker> markers = new Set(); //markers for google map
-  static const LatLng showLocation = const LatLng(26.549999, 31.700001); //location to show in map
+  static const LatLng showLocation = const LatLng(27.257896, 33.811607); //location to show in map
 
   getLocations()async{
     await getmarkers();
@@ -35,15 +35,16 @@ class _HotelsOnGoogleMapWidgetState extends State<HotelsOnGoogleMapWidget> {
   Widget build(BuildContext context) {
     print(markers.length);
     return  Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: Text("Multiple Markers in Google Map"),
         backgroundColor: Colors.deepOrangeAccent,
       ),
+      */
       body: GoogleMap( //Map widget from google_maps_flutter package
         zoomGesturesEnabled: true, //enable Zoom in, out on map
         initialCameraPosition: CameraPosition( //innital position in map
           target: showLocation, //initial position
-          zoom: 12.0, //initial zoom level
+          zoom: 8.0, //initial zoom level
         ),
         markers: getmarkers(), //markers to show on map
         mapType: MapType.normal, //map type
@@ -68,7 +69,7 @@ class _HotelsOnGoogleMapWidgetState extends State<HotelsOnGoogleMapWidget> {
         ), //position of marker
         infoWindow: InfoWindow( //popup info
           title: '${hotel.name} ',
-          snippet: '${hotel.price}',
+          snippet: '${hotel.price}\$',
         ),
         icon: BitmapDescriptor.defaultMarker,//fromBytes(markerIcon), //Icon for Marker
       ));
