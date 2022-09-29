@@ -68,10 +68,7 @@ void initGetIt() {
   getIt.registerLazySingleton(() => GetHotelsUseCase(getIt()));
   getIt.registerLazySingleton(
       () => GetFacilitiesInfo(getFacilitiesRepository: getIt()));
-          () => GetHotelsInfoUseCase(getIt());
-  getIt.registerLazySingleton(
-          () => GetFacilitiesInfo(getFacilitiesRepository: getIt()));
-
+      
   /// Repository
   getIt
       .registerLazySingleton<BaseAuthRepository>(() => AuthRepository(getIt()));
