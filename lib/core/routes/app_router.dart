@@ -6,6 +6,7 @@ import 'package:alo_booking_app/features/authentication/presentation/screens/wel
 import 'package:alo_booking_app/features/home_navigation/presentation/screens/home_bottom_navigation_bar.dart';
 import 'package:alo_booking_app/features/hotels/presentation/screens/hotels_screen.dart';
 import 'package:alo_booking_app/features/hotels/presentation/screens/details_screen.dart';
+import 'package:alo_booking_app/features/profile/presentation/screens/update_page/update_profile_page.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {
@@ -14,6 +15,8 @@ class AppRouter {
       settings: settings,
       builder: (context) {
         switch (settings.name) {
+          case AppRoutes.updateProfilePageScreen:
+            return UpdateProfilePage();
           case AppRoutes.bottomNavigationBaseScreen:
             return const HomeBottomNavigationBar();
           case AppRoutes.hotelsScreen:

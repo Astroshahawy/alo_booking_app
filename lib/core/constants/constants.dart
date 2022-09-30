@@ -7,6 +7,7 @@ class AppRoutes {
   static const onBoardingScreen = 'on_boarding_screen';
   static const bottomNavigationBaseScreen = 'bottom_navigation_screen';
   static const hotelsScreen = 'hotels_screen';
+  static const updateProfilePageScreen = 'update_profile_page_screen';
 }
 
 class AppApis {
