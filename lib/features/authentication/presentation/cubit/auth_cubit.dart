@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:alo_booking_app/features/authentication/data/models/login_model.dart';
 import 'package:alo_booking_app/features/authentication/data/models/register_model.dart';
 import 'package:alo_booking_app/features/authentication/domain/entities/auth.dart';
@@ -6,6 +8,7 @@ import 'package:alo_booking_app/features/authentication/domain/use_cases/registe
 import 'package:alo_booking_app/features/authentication/presentation/cubit/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthBloc extends Cubit<AuthState> {
   final LoginUseCase loginUseCase;
@@ -20,27 +23,49 @@ class AuthBloc extends Cubit<AuthState> {
 
   late Auth auth;
 
-  final TextEditingController loginEmailController =
-      TextEditingController(text: 'alobookingapp@alo.com');
-  final TextEditingController loginPasswordController =
-      TextEditingController(text: '123456');
+  final TextEditingController loginEmailController = TextEditingController();
+  // TextEditingController(text: 'alobookingapp@alo.com');
+  final TextEditingController loginPasswordController = TextEditingController();
+  // TextEditingController(text: '123456');
+
+  Future<SharedPreferences> getPreferences() async {
+    return await SharedPreferences.getInstance();
+  }
+
+  Future<void> saveUserLoginCredentials(LoginModel loginCredentials) async {
+    final preferences = await getPreferences();
+    preferences.setString(
+        'LoginCredentials', jsonEncode(loginCredentials.toJson()));
+  }
+
+  Future<void> fetchUserLoginCredentials() async {
+    final preferences = await getPreferences();
+    if (preferences.getString('LoginCredentials') != null) {
+      final fetchedLoginCredentials = LoginModel.fromJson(
+        jsonDecode(preferences.getString('LoginCredentials')!),
+      );
+      loginEmailController.text = fetchedLoginCredentials.email;
+      loginPasswordController.text = fetchedLoginCredentials.password;
+    }
+  }
 
   Future<void> userLogin() async {
     emit(UserLoginLoadingState());
 
-    final response = await loginUseCase(
-      LoginModel(
-        email: loginEmailController.text,
-        password: loginPasswordController.text,
-      ),
+    final loginCredentials = LoginModel(
+      email: loginEmailController.text,
+      password: loginPasswordController.text,
     );
+
+    final response = await loginUseCase(loginCredentials);
 
     response.fold(
       (left) {
         emit(ErrorState(exception: left));
       },
-      (right) {
+      (right) async {
         auth = right;
+        saveUserLoginCredentials(loginCredentials);
         clearLoginControllers();
         emit(UserLoginSuccessState());
       },
@@ -108,6 +133,8 @@ class AuthBloc extends Cubit<AuthState> {
       },
       (right) {
         auth = right;
+        loginEmailController.text = registerEmailController.text;
+        loginPasswordController.text = registerPasswordController.text;
         clearRegisterControllers();
         emit(UserRegisterSuccessState());
       },

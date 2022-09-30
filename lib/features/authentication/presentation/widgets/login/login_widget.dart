@@ -1,4 +1,6 @@
 import 'package:alo_booking_app/core/constants/constants.dart';
+import 'package:alo_booking_app/core/themes/app_colors.dart';
+import 'package:alo_booking_app/core/themes/cubit/app_theme_cubit.dart';
 import 'package:alo_booking_app/core/utils/mac_alert_dialog.dart';
 import 'package:alo_booking_app/core/widgets/bouncing_button.dart';
 import 'package:alo_booking_app/features/authentication/presentation/cubit/auth_cubit.dart';
@@ -41,7 +43,9 @@ class LoginWidget extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   letterSpacing: 1,
-                  color: Colors.grey.shade500,
+                  color: AppThemeBloc.get(context).isDarkMode
+                      ? AppDarkColors.accentColor1
+                      : AppLightColors.accentColor1,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -61,7 +65,9 @@ class LoginWidget extends StatelessWidget {
                   hintStyle: TextStyle(
                     fontSize: 14,
                     letterSpacing: 1,
-                    color: Colors.grey.shade400,
+                    color: AppThemeBloc.get(context).isDarkMode
+                      ? AppDarkColors.accentColor2
+                      : AppLightColors.accentColor2,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -82,7 +88,9 @@ class LoginWidget extends StatelessWidget {
                   hintStyle: TextStyle(
                     fontSize: 14,
                     letterSpacing: 1,
-                    color: Colors.grey.shade400,
+                    color: AppThemeBloc.get(context).isDarkMode
+                        ? AppDarkColors.accentColor2
+                        : AppLightColors.accentColor2,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -98,7 +106,9 @@ class LoginWidget extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   letterSpacing: 1,
-                  color: Colors.grey.shade500,
+                  color: AppThemeBloc.get(context).isDarkMode
+                      ? AppDarkColors.accentColor1
+                      : AppLightColors.accentColor1,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -106,7 +116,7 @@ class LoginWidget extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            BlocListener<AuthBloc, AuthState>(
+            BlocConsumer<AuthBloc, AuthState>(
               listener: (context, state) {
                 if (state is ErrorState) {
                   macAlertDialog(context, state.exception.error);
@@ -114,24 +124,27 @@ class LoginWidget extends StatelessWidget {
                 if (state is UserLoginValidationErrorState) {
                   macAlertDialog(context, state.error);
                 }
+                if (state is UserLoginSuccessState) {
+                  Navigator.pushNamedAndRemoveUntil(context,
+                      AppRoutes.bottomNavigationBaseScreen, (route) => false);
+                }
               },
-              child: BouncingButton(
-                child: const Text(
-                  'Login',
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white,
+              builder: (context, state) {
+                return BouncingButton(
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                onPress: () {
-                  FocusScope.of(context).unfocus();
-                  AuthBloc.get(context).validateLogin().then((value) =>
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, AppRoutes.bottomNavigationBaseScreen,
-                          (route) => false));
-                },
-              ),
+                  onPress: () {
+                    FocusScope.of(context).unfocus();
+                    AuthBloc.get(context).validateLogin();
+                  },
+                );
+              },
             ),
           ],
         ),

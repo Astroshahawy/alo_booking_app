@@ -154,6 +154,10 @@ class RegisterWidget extends StatelessWidget {
                 if (state is UserRegisterValidationErrorState) {
                   macAlertDialog(context, state.error);
                 }
+                if (state is UserRegisterSuccessState) {
+                  Navigator.pushReplacementNamed(
+                      context, AppRoutes.loginScreen);
+                }
               },
               child: BouncingButton(
                 child: const Text(
@@ -166,9 +170,7 @@ class RegisterWidget extends StatelessWidget {
                 ),
                 onPress: () {
                   FocusScope.of(context).unfocus();
-                  AuthBloc.get(context).validateRegistration().then((value) =>
-                      Navigator.pushReplacementNamed(
-                          context, AppRoutes.loginScreen));
+                  AuthBloc.get(context).validateRegistration();
                 },
               ),
             ),
