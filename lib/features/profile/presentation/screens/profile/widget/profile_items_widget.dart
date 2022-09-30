@@ -22,7 +22,7 @@ class profileItemsWidget extends StatelessWidget {
           children: [
             Text(
               "$text",style: const TextStyle(
-              color: Colors.white,
+              //color: Colors.white,
               fontWeight: FontWeight.w400,
               fontSize: 15,
             ),

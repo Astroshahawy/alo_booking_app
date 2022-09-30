@@ -161,9 +161,11 @@ class _SliverAppBarWidgetState extends State<SliverAppBarWidget> {
                 children: [
                   Expanded(
                     child: TextField(
-                      // onChanged: (searchedCharacter) {
-                      //   searchAboutHotel(searchedCharacter);
-                      // },
+                      onChanged: (searchedCharacter) {
+                        if(searchController.text.isEmpty) {
+                          searchAboutHotel(searchedCharacter);
+                        }
+                      },
                       controller: searchController,
                       style: const TextStyle(
                         color: Colors.white,

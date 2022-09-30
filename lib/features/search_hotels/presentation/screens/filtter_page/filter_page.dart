@@ -6,6 +6,7 @@ import 'package:alo_booking_app/features/search_hotels/presentation/cubit/search
 import 'package:alo_booking_app/features/search_hotels/presentation/cubit/search_hotels_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 import 'widgets/distance_widget.dart';
 import 'widgets/popular_filter_widget.dart';
@@ -36,7 +37,7 @@ class _FilterPageState extends State<FilterPage> {
     return Scaffold(
       body: BlocBuilder<SearchHotelsBloc,SearchHotelsState>(
         builder: (context, state) {
-        if(state is GetFacilitiesSuccessState){
+        // if(state is GetFacilitiesSuccessState){
           return SingleChildScrollView(
             child: Container(
               height: size.height,
@@ -75,7 +76,8 @@ class _FilterPageState extends State<FilterPage> {
                           const SizedBox(
                             height: 12,
                           ),
-                          PopularFilterWidget(),
+                          SearchHotelsBloc.facilities != null?
+                          PopularFilterWidget() : Center(child: Lottie.asset("assets/config/spinner.json")),
                           const SizedBox(
                             height: 12,
                           ),
@@ -133,8 +135,8 @@ class _FilterPageState extends State<FilterPage> {
               ),
             ),
           );
-        }
-        return CircularProgressIndicator();
+        // }
+        // return CircularProgressIndicator();
       },),
     );
   }

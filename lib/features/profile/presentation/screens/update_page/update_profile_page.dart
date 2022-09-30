@@ -1,3 +1,4 @@
+import 'package:alo_booking_app/core/constants/constants.dart';
 import 'package:alo_booking_app/core/widgets/bouncing_button.dart';
 import 'package:alo_booking_app/features/profile/domain/entities/update_profile.dart';
 import 'package:alo_booking_app/features/profile/domain/use_cases/update_profile_use_case.dart';
@@ -6,6 +7,8 @@ import 'package:alo_booking_app/features/profile/presentation/widgets/image_help
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../authentication/domain/entities/user.dart';
+import '../../../../authentication/presentation/cubit/auth_cubit.dart';
 import '../../widgets/divider_widget.dart';
 import 'widget/update_profile_item_widget.dart';
 
@@ -18,10 +21,12 @@ class UpdateProfilePage extends StatelessWidget {
   TextEditingController dateOfBirthController = TextEditingController();
   TextEditingController addressController = TextEditingController();
 
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
+    User userInfo = AuthBloc.get(context).auth.userData;
     return Scaffold(
-      backgroundColor: Color(0xFF1a1a1a),
+      //backgroundColor: Color(0xFF1a1a1a),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -36,7 +41,7 @@ class UpdateProfilePage extends StatelessWidget {
                     },
                     icon: Icon(
                       Icons.arrow_back,
-                      color: Colors.white,
+                      //color: Colors.white,
                     )),
                 SizedBox(
                   height: 10,
@@ -46,7 +51,7 @@ class UpdateProfilePage extends StatelessWidget {
                   child: Text(
                     "Edit Profile",
                     style: TextStyle(
-                        color: Colors.white,
+                        //color: Colors.white,
                         fontWeight: FontWeight.w800,
                         fontSize: 20),
                   ),
@@ -64,7 +69,9 @@ class UpdateProfilePage extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           backgroundImage: NetworkImage(
-                              "http://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg"),
+                            userInfo.image != '' ? AppApis.getImageUrl(userInfo.image):
+                              "http://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg"
+                          ),
                         ),
                         Positioned(
                             bottom: 0,
@@ -91,9 +98,9 @@ class UpdateProfilePage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                UpdateProfileItemWidget(text: "UserName", controller: nameController,hintText: "Amanda Jane"),
+                UpdateProfileItemWidget(text: "UserName", controller: nameController,hintText: "${userInfo.name}"),
                 dividerWidget(15, 15,1),
-                UpdateProfileItemWidget(text:"Email", controller:emailController, hintText:"amanda@gmail.com"),
+                UpdateProfileItemWidget(text:"Email", controller:emailController, hintText:"${userInfo.email}"),
                 dividerWidget(15, 15,1),
                 UpdateProfileItemWidget(text:"Phone", controller:phoneController, hintText:"+95936575739"),
                 dividerWidget(15, 15,1),
