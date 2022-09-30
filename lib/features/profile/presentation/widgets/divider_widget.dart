@@ -1,12 +1,15 @@
-import 'package:flutter/cupertino.dart';
+import 'package:alo_booking_app/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
-Widget dividerWidget(double indent, double endIndent, double height) {
-  return Divider(
-    color: Color(0xFF272727),
-    indent: indent,
-    endIndent: endIndent,
-    height: height,
-    thickness: 1,
-  );
+class DividerWidget extends StatelessWidget {
+  const DividerWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Divider(
+      color: AppDarkColors.accentColor,
+      height: 0,
+      thickness: 0.2,
+    );
+  }
 }

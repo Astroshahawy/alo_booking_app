@@ -1,37 +1,45 @@
-import 'package:alo_booking_app/core/constants/constants.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:alo_booking_app/core/themes/app_colors.dart';
+import 'package:alo_booking_app/core/themes/cubit/app_theme_cubit.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/themes/cubit/app_theme_cubit.dart';
-
-class profileItemsWidget extends StatelessWidget {
+class ProfileItemsWidget extends StatelessWidget {
   final String text;
-  final VoidCallback? onpressed;
+  final VoidCallback? onPressed;
   final IconData icon;
 
-  const profileItemsWidget({Key? key, required this.text, this.onpressed, required this.icon}) : super(key: key);
+  const ProfileItemsWidget({
+    Key? key,
+    required this.text,
+    this.onPressed,
+    required this.icon,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: MaterialButton(
-        //color: Colors.amberAccent,
-        //ibr
-        padding: const EdgeInsets.symmetric(horizontal: 35),
-        height: 56,
-        onPressed: onpressed,
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 7),
+        height: MediaQuery.of(context).size.height * 0.055,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "$text",style: TextStyle(
-              color: AppThemeBloc.get(context).isDarkMode ?Colors.white : AppColors.baseColor,
-              fontWeight: FontWeight.w400,
-              fontSize: 15,
+              text,
+              style: const TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+                letterSpacing: 0.5,
+              ),
+
+            Icon(
+              icon,
+              color: AppThemeBloc.get(context).isDarkMode
+                  ? AppDarkColors.accentColor1.withOpacity(0.7)
+                  : AppLightColors.accentColor2,
+              size: 28,
             ),
-            ),
-            Icon(icon,  color: Color(0xFF555555),size: 27,),
-          ],
+           ],
         ),
       ),
     );

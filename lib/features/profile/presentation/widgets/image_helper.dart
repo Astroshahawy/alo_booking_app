@@ -1,170 +1,189 @@
-
 import 'dart:io';
 
 import 'package:alo_booking_app/core/constants/constants.dart';
+import 'package:alo_booking_app/core/themes/app_colors.dart';
+import 'package:alo_booking_app/core/themes/cubit/app_theme_cubit.dart';
+import 'package:alo_booking_app/core/widgets/bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../cubit/profile_cubit.dart';
 
 class ImageHelper {
-
-
   final picker = ImagePicker();
 
-  File ? userAvatar;
+  File? userAvatar;
   File get getUserAvatar => userAvatar!;
 
-  Future pickerUserAvatar(BuildContext context, ImageSource source) async{
-    final pickedUserAvatar  =await picker.getImage(source: source);
-    pickedUserAvatar == null ? print('select Image') : userAvatar = File(pickedUserAvatar.path);
+  Future pickerUserAvatar(BuildContext context, ImageSource source) async {
+    final pickedUserAvatar = await picker.getImage(source: source);
+    pickedUserAvatar == null
+        ? print('select Image')
+        : userAvatar = File(pickedUserAvatar.path);
     print(userAvatar!.path);
 
-    userAvatar != null ? showUserAvatar(context)
-        : print('Image upload error');
+    userAvatar != null ? showUserAvatar(context) : print('Image upload error');
   }
 
-  Future selectAvatarOperation(BuildContext context) async{
+  Future selectAvatarOperation(BuildContext context) async {
     return showModalBottomSheet(
-        backgroundColor: AppColors.baseColor,
-        context: context, builder: (context){
-      return Container(
-
-        height: 70,//MediaQuery.of(context).size.height * 0.1,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          color: AppColors.defaultColor,
-          borderRadius: BorderRadius.only(topRight: Radius.circular(12),topLeft: Radius.circular(12)),
+      backgroundColor: AppThemeBloc.get(context).isDarkMode
+          ? AppDarkColors.backgroundColor
+          : AppLightColors.backgroundColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(12),
+          topLeft: Radius.circular(12),
         ),
-        child: Column(
-
-          children: [
-            Padding(padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.41),
-              child: Divider(
-                thickness: 4,
-                color: AppColors.borderSideColor,
+      ),
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * 0.2,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 150),
+                child: Divider(
+                  thickness: 4,
+                  color: AppThemeBloc.get(context).isDarkMode
+                      ? AppLightColors.accentColor2
+                      : AppDarkColors.accentColor2,
+                ),
               ),
-            ),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                MaterialButton(
-                  color: AppColors.cardColor,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  onPressed: (){
-
-                    pickerUserAvatar(context, ImageSource.gallery).whenComplete((){
+              const SizedBox(height: 30),
+              BouncingButton(
+                margin: const EdgeInsets.symmetric(horizontal: 60),
+                color: AppColors.defaultColor,
+                onPress: () {
+                  pickerUserAvatar(context, ImageSource.gallery).whenComplete(
+                    () {
                       Navigator.pop(context);
                       showUserAvatar(context);
-                    });
-                  },
-                  child: Text('Gallery',style: TextStyle(
-                    //color: AppColors.,
+                    },
+                  );
+                },
+                child: const Text(
+                  'Select From Gallery',
+                  style: TextStyle(
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
-                  ),),
+                  ),
                 ),
-
-                MaterialButton(
-                  color: AppColors.cardColor,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  onPressed: (){
-                    pickerUserAvatar(context, ImageSource.camera).whenComplete((){
+              ),
+              const SizedBox(height: 20),
+              BouncingButton(
+                margin: const EdgeInsets.symmetric(horizontal: 60),
+                color: AppColors.defaultColor,
+                onPress: () {
+                  pickerUserAvatar(context, ImageSource.camera).whenComplete(
+                    () {
                       Navigator.pop(context);
                       showUserAvatar(context);
-                    });
-                  },
-                  child: Text('Camera',style: TextStyle(
-                    //color: constantColors.whiteColor,
+                    },
+                  );
+                },
+                child: const Text(
+                  'Select From Camera',
+                  style: TextStyle(
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
-                  ),),
+                  ),
                 ),
-              ],
-            ),
-          ],
-        ),
-
-      );
-    });
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   showUserAvatar(BuildContext context) {
     return showModalBottomSheet(
-        backgroundColor: AppColors.baseColor,
-        isScrollControlled: true,
-        context: context,
-        builder: (context) {
-          return Container(
-            height: MediaQuery.of(context).size.height * 0.3,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              //color: constantColors.yellowColor,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 150),
-                  child: Divider(
-                    thickness: 4,
-                    color: AppColors.borderSideColor,
-                  ),
+      backgroundColor: AppThemeBloc.get(context).isDarkMode
+          ? AppDarkColors.backgroundColor
+          : AppLightColors.backgroundColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(12),
+          topLeft: Radius.circular(12),
+        ),
+      ),
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * 0.25,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 150),
+                child: Divider(
+                  thickness: 4,
+                  color: AppThemeBloc.get(context).isDarkMode
+                      ? AppLightColors.accentColor2
+                      : AppDarkColors.accentColor2,
                 ),
-                CircleAvatar(
-                  backgroundColor: AppColors.borderSideColor,
-                  backgroundImage: FileImage(
-                    userAvatar!,
-                  ),
-                  radius: 60,
+              ),
+              const SizedBox(height: 10),
+              CircleAvatar(
+                backgroundColor: AppColors.defaultColor,
+                backgroundImage: FileImage(
+                  userAvatar!,
                 ),
-
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      MaterialButton(
-                        onPressed: () {
-                          selectAvatarOperation(context).whenComplete((){
-                            Navigator.pop(context);
-                          });
+                radius: 60,
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Flexible(
+                    child: BouncingButton(
+                      margin: const EdgeInsets.symmetric(horizontal: 30),
+                      color: AppColors.borderSideColor,
+                      onPress: () {
+                        selectAvatarOperation(context).whenComplete(() {
                           Navigator.pop(context);
-                          //pickerUserAvatar(context, ImageSource.gallery);
-                        },
-                        child: Text(
-                          'Reselect',
-                          style: TextStyle(
-                            ///color: constantColors.whiteColor,
-                            fontWeight: FontWeight.bold,
-                            decoration: TextDecoration.underline,
-                            decorationColor: AppColors.borderSideColor,
-                          ),
+                        });
+                        Navigator.pop(context);
+                        //pickerUserAvatar(context, ImageSource.gallery);
+                      },
+                      child: const Text(
+                        'Reselect',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
                         ),
                       ),
-                      MaterialButton(
-                        color: AppColors.defaultColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Text('Confirme Image',
-                            style: TextStyle(
-                              //color: constantColors.whiteColor,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        onPressed: () {
-                          ProfileBloc.get(context).saveImage(userAvatar!);
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        });
+                  Flexible(
+                    child: BouncingButton(
+                      color: AppColors.defaultColor,
+                      margin: const EdgeInsets.symmetric(horizontal: 30),
+                      onPress: () {
+                        ProfileBloc.get(context).saveImage(userAvatar!);
+                        Navigator.pop(context);
+                      },
+                      child: const Text(
+                        'Confirm',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
-
 }

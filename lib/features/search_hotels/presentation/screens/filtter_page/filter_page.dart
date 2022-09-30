@@ -35,17 +35,17 @@ class _FilterPageState extends State<FilterPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: BlocBuilder<SearchHotelsBloc,SearchHotelsState>(
+      body: BlocBuilder<SearchHotelsBloc, SearchHotelsState>(
         builder: (context, state) {
-        // if(state is GetFacilitiesSuccessState){
+          // if(state is GetFacilitiesSuccessState){
           return SingleChildScrollView(
             child: Container(
               height: size.height,
               color: AppColors.baseColor,
-              padding: EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 20),
               child: Column(
                 children: [
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height * 0.86,
                     child: SingleChildScrollView(
                       child: Column(
@@ -55,12 +55,12 @@ class _FilterPageState extends State<FilterPage> {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              icon: Icon(Icons.close)),
+                              icon: const Icon(Icons.close)),
                           const SizedBox(
                             height: 5,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16.0),
                             child: Text(
                               'Filtter',
                               style: TextStyle(
@@ -76,68 +76,81 @@ class _FilterPageState extends State<FilterPage> {
                           const SizedBox(
                             height: 12,
                           ),
-                          SearchHotelsBloc.facilities != null?
-                          PopularFilterWidget() : Center(child: Lottie.asset("assets/config/spinner.json")),
+                          SearchHotelsBloc.facilities != null
+                              ? PopularFilterWidget()
+                              : Center(
+                                  child: Lottie.asset(
+                                      "assets/config/spinner.json")),
                           const SizedBox(
                             height: 12,
                           ),
-                          DistanceWidget(),
+                          const DistanceWidget(),
                           const SizedBox(
                             height: 10,
                           ),
-                          TypeAccommodationWidget(),
+                          const TypeAccommodationWidget(),
                         ],
                       ),
                     ),
                   ),
                   Expanded(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          dividerWidget(0, 0, 2),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12.0, vertical: 10
-                            ),
-                            child: BouncingButton(
-                              height: 50,
-                              onPress: () {
-                                //print(SearchHotelsBloc.selectedFacilities..asMap());
-                                SearchHotelsBloc.get(context).searchFilter(
-                                  searchOptions: SearchOptionsModel(widget.searchText, minPrice.text, '', maxPrice.text,
-                                      '', '', '', '', '', {
-                                        ...SearchHotelsBloc.selectedFacilities.asMap().map(
-                                              (key, value) => MapEntry(
-                                            'facilities[$key]',
-                                            value,
-                                          ),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const DividerWidget(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12.0, vertical: 10),
+                        child: BouncingButton(
+                          height: 50,
+                          onPress: () {
+                            //print(SearchHotelsBloc.selectedFacilities..asMap());
+                            SearchHotelsBloc.get(context).searchFilter(
+                              searchOptions: SearchOptionsModel(
+                                widget.searchText,
+                                minPrice.text,
+                                '',
+                                maxPrice.text,
+                                '',
+                                '',
+                                '',
+                                '',
+                                '',
+                                {
+                                  ...SearchHotelsBloc.selectedFacilities
+                                      .asMap()
+                                      .map(
+                                        (key, value) => MapEntry(
+                                          'facilities[$key]',
+                                          value,
                                         ),
-                                      },
-
-                                  ),
-                                  /*SearchOptionsModel(
+                                      ),
+                                },
+                              ),
+                              /*SearchOptionsModel(
                                       '', minPrice.text,
                                       '', maxPrice.text, '', '', '', '', '', SearchHotelsBloc.selectedFacilities
                                   ),*/
-                                );
-                                // widget.searchText.isNotEmpty ?
-                                SearchHotelsBloc.get(context).searchHotels(hotelName:widget.searchText) ;
-                                // : null;
-                                Navigator.pop(context);
-
-                              },
-                              child: Text('Apply'),
-                            ),
-                          ),
-                        ],
-                      )),
+                            );
+                            // widget.searchText.isNotEmpty ?
+                            SearchHotelsBloc.get(context)
+                                .searchHotels(hotelName: widget.searchText);
+                            // : null;
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Apply'),
+                        ),
+                      ),
+                    ],
+                  )),
                 ],
               ),
             ),
           );
-        // }
-        // return CircularProgressIndicator();
-      },),
+          // }
+          // return CircularProgressIndicator();
+        },
+      ),
     );
   }
 }
