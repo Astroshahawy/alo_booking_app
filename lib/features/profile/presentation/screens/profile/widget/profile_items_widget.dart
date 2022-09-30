@@ -31,7 +31,7 @@ class ProfileItemsWidget extends StatelessWidget {
                 fontSize: 16,
                 letterSpacing: 0.5,
               ),
-
+            ),
             Icon(
               icon,
               color: AppThemeBloc.get(context).isDarkMode
@@ -39,7 +39,7 @@ class ProfileItemsWidget extends StatelessWidget {
                   : AppLightColors.accentColor2,
               size: 28,
             ),
-           ],
+          ],
         ),
       ),
     );
