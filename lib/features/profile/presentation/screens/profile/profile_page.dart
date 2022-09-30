@@ -3,10 +3,12 @@ import 'package:alo_booking_app/core/constants/constants.dart';
 import 'package:alo_booking_app/core/themes/app_colors.dart';
 import 'package:alo_booking_app/core/themes/cubit/app_theme_cubit.dart';
 import 'package:alo_booking_app/core/themes/cubit/app_theme_state.dart';
+import 'package:alo_booking_app/features/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:alo_booking_app/features/profile/presentation/screens/update_page/update_profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../authentication/domain/entities/user.dart';
 import '../../widgets/divider_widget.dart';
 import 'widget/profile_items_widget.dart';
 
@@ -15,6 +17,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User userInfo = AuthBloc.get(context).auth.userData;
     return Scaffold(
       // backgroundColor: AppColors.baseColor,
       body: SafeArea(
@@ -40,7 +43,7 @@ class ProfilePage extends StatelessWidget {
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           DefaultTextStyle(
                             style: TextStyle(
                               color: Colors.white,
@@ -48,7 +51,8 @@ class ProfilePage extends StatelessWidget {
                               fontSize: 20,
                             ),
                             child: Text(
-                              "Amanda",
+                              '${userInfo.name}',
+                              //"Amanda",
                             ),
                           ),
                           DefaultTextStyle(
@@ -63,12 +67,14 @@ class ProfilePage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 30.0,
                         backgroundImage:
                             //Image.asset('asset/food2.png'),
-                            NetworkImage(
-                                "http://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg"),
+                        NetworkImage(
+                            userInfo.image != '' ? AppApis.getImageUrl(userInfo.image):
+                            "http://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg"
+                        ),
                         backgroundColor: Colors.transparent,
                       )
                     ],
