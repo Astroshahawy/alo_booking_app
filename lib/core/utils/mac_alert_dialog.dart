@@ -1,4 +1,6 @@
 import 'package:alo_booking_app/core/constants/constants.dart';
+import 'package:alo_booking_app/core/themes/app_colors.dart';
+import 'package:alo_booking_app/core/themes/cubit/app_theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:macos_ui/macos_ui.dart';
 
@@ -9,6 +11,9 @@ macAlertDialog(BuildContext context, String message) {
     barrierColor: Colors.black.withOpacity(0.3),
     builder: (context) {
       return AlertDialog(
+        backgroundColor: AppThemeBloc.get(context).isDarkMode
+            ? AppDarkColors.accentColor
+            : AppLightColors.accentColor,
         title: const Text(
           'Warning!',
           style: TextStyle(
@@ -24,7 +29,9 @@ macAlertDialog(BuildContext context, String message) {
         content: Text(
           message,
           style: TextStyle(
-            color: Colors.grey.shade600,
+            color: AppThemeBloc.get(context).isDarkMode
+                ? AppDarkColors.accentColor2
+                : AppLightColors.accentColor2,
             fontSize: 16,
             letterSpacing: 0.5,
           ),
