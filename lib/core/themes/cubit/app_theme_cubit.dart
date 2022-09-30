@@ -25,13 +25,22 @@ class AppThemeBloc extends Cubit<AppThemeState> {
     final bool? isDarkModeFetched = preferences.getBool('AppTheme');
 
     isDarkModeFetched == null
-        ? themeMode = ThemeMode.system
+        ? setInitialThemeMode()
         : themeMode = isDarkModeFetched ? ThemeMode.dark : ThemeMode.light;
     emit(AppThemeFetchedState());
   }
 
   final brightness = SchedulerBinding.instance.window.platformBrightness;
-  bool get isDarkMode => brightness == Brightness.dark;
+
+  bool get isInitialDarkMode => brightness == Brightness.dark;
+
+  bool get isDarkMode => themeMode == ThemeMode.dark;
+
+  void setInitialThemeMode() {
+    isInitialDarkMode
+        ? themeMode = ThemeMode.dark
+        : themeMode = ThemeMode.light;
+  }
 
   void toggleTheme(bool isOn) {
     themeMode = isOn ? ThemeMode.dark : ThemeMode.light;
