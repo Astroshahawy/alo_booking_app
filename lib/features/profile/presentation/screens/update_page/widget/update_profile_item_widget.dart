@@ -37,7 +37,7 @@ class UpdateProfileItemWidget extends StatelessWidget {
                 textDirection: TextDirection.rtl,
                 controller: controller,
                 style: TextStyle(
-                  color: Colors.white,
+                  //color: Colors.white,
                   fontWeight: FontWeight.w500,
                   fontSize: 15,
                 ),

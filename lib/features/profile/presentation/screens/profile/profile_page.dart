@@ -20,7 +20,9 @@ class ProfilePage extends StatelessWidget {
     User userInfo = AuthBloc.get(context).auth.userData;
     return Scaffold(
       // backgroundColor: AppColors.baseColor,
-      body: SafeArea(
+      body:  BlocBuilder<AppThemeBloc, AppThemeState>(
+        builder: (context, state) {
+          return SafeArea(
         child: Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +48,7 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           DefaultTextStyle(
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppThemeBloc.get(context).isDarkMode ? Colors.white: AppColors.baseColor,
                               fontWeight: FontWeight.w500,
                               fontSize: 20,
                             ),
@@ -107,24 +109,27 @@ class ProfilePage extends StatelessWidget {
                         fontSize: 15,
                       ),
                     ),
-                    BlocBuilder<AppThemeBloc, AppThemeState>(
-                      builder: (context, state) {
-                        return CupertinoSwitch(
+                    // BlocBuilder<AppThemeBloc, AppThemeState>(
+                    //   builder: (context, state) {
+                    //     return
+                        CupertinoSwitch(
                           activeColor: AppColors.defaultColor,
                           trackColor: AppDarkColors.accentColor1,
                           value: AppThemeBloc.get(context).isDarkMode,
                           onChanged: (value) =>
                               AppThemeBloc.get(context).toggleTheme(value),
-                        );
-                      },
-                    ),
+                        )
+                    //     ;
+                    //   },
+                    // ),
                   ],
                 ),
               ),
             ],
           ),
         ),
-      ),
+      );
+  },),
     );
   }
 

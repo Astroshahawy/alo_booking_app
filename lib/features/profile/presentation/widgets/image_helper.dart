@@ -30,7 +30,7 @@ class ImageHelper {
         context: context, builder: (context){
       return Container(
 
-        height: MediaQuery.of(context).size.height * 0.1,
+        height: 70,//MediaQuery.of(context).size.height * 0.1,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           color: AppColors.defaultColor,
@@ -39,7 +39,7 @@ class ImageHelper {
         child: Column(
 
           children: [
-            Padding(padding: EdgeInsets.symmetric(horizontal: 150),
+            Padding(padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.41),
               child: Divider(
                 thickness: 4,
                 color: AppColors.borderSideColor,
