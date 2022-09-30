@@ -49,6 +49,13 @@ class AuthBloc extends Cubit<AuthState> {
     }
   }
 
+  Future<void> clearUserLoginCredentials() async {
+    final preferences = await getPreferences();
+    if (preferences.containsKey('LoginCredentials')) {
+      preferences.remove('LoginCredentials');
+    }
+  }
+
   Future<void> userLogin() async {
     emit(UserLoginLoadingState());
 
@@ -131,8 +138,9 @@ class AuthBloc extends Cubit<AuthState> {
       (left) {
         emit(ErrorState(exception: left));
       },
-      (right) {
+      (right) async {
         auth = right;
+        await clearUserLoginCredentials();
         loginEmailController.text = registerEmailController.text;
         loginPasswordController.text = registerPasswordController.text;
         clearRegisterControllers();
