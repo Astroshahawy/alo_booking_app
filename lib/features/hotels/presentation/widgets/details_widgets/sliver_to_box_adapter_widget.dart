@@ -1,4 +1,6 @@
 import 'package:alo_booking_app/core/constants/constants.dart';
+import 'package:alo_booking_app/core/themes/app_colors.dart';
+import 'package:alo_booking_app/core/themes/cubit/app_theme_cubit.dart';
 import 'package:alo_booking_app/core/widgets/bouncing_button.dart';
 import 'package:alo_booking_app/features/bookings/presentation/cubit/bookings_cubit.dart';
 import 'package:alo_booking_app/features/hotels/domain/entities/hotels.dart';
@@ -12,7 +14,7 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(25.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -29,65 +31,82 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
                     child: Text(
                       hotel.hotelName,
                       style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22,
+                      ),
                       maxLines: 1,
                       textAlign: TextAlign.start,
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width * 0.7,
                     child: RichText(
-                      text: TextSpan(children: [
-                        TextSpan(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
                             text: hotel.hotelAddress,
-                            style: const TextStyle(
-                                color: AppColors.borderSideColor,
+                            style: TextStyle(
+                                color: AppThemeBloc.get(context).isDarkMode
+                                    ? AppDarkColors.accentColor2
+                                    : AppLightColors.accentColor2,
                                 fontWeight: FontWeight.w400,
-                                fontSize: 14)),
-                        const WidgetSpan(
-                          child: Icon(
-                            Icons.location_on,
-                            color: AppColors.defaultColor,
-                            size: 20,
+                                fontSize: 14),
                           ),
+                          const WidgetSpan(
+                            child: Icon(
+                              Icons.location_on,
+                              color: AppColors.defaultColor,
+                              size: 20,
+                            ),
+                          ),
+                        ],
+                        style: TextStyle(
+                          color: AppThemeBloc.get(context).isDarkMode
+                              ? AppDarkColors.accentColor2
+                              : AppLightColors.accentColor2,
                         ),
-                      ], style: const TextStyle(color: Colors.black)),
+                      ),
                     ),
                   ),
                 ],
               ),
               const Spacer(),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text('\$' + hotel.hotelPrice,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20)),
-                  const Text(
+                  Text(
+                    '\$${hotel.hotelPrice}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                    ),
+                  ),
+                  Text(
                     '/per night',
                     style: TextStyle(
-                        color: AppColors.borderSideColor, fontSize: 16),
-                  )
+                      color: AppThemeBloc.get(context).isDarkMode
+                          ? AppDarkColors.accentColor2
+                          : AppLightColors.accentColor2,
+                      fontSize: 16,
+                    ),
+                  ),
                 ],
-              )
+              ),
             ],
           ),
           const SizedBox(
-            height: 5,
+            height: 10,
           ),
-          const Divider(
-            color: AppColors.borderSideColor,
-          ),
+          const Divider(),
           const SizedBox(
-            height: 5,
+            height: 10,
           ),
           const Text(
             'Summary',
             style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+              fontWeight: FontWeight.w700,
+              fontSize: 16,
+            ),
           ),
           const SizedBox(
             height: 10,
@@ -95,33 +114,39 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
           RichText(
             maxLines: 5,
             overflow: TextOverflow.ellipsis,
-
-
-            text: TextSpan(children: [
-              TextSpan(
-                text: hotel.hotelDescription,
-                style: const TextStyle(
-                    color: AppColors.borderSideColor,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                    height: 0),
-              ),
-              WidgetSpan(
-                child:  Container(
-                  padding: const EdgeInsets.only(bottom: 1, left: 6, right: 6),
-                  decoration: const BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(4),
+            text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: hotel.hotelDescription,
+                    style: TextStyle(
+                        color: AppThemeBloc.get(context).isDarkMode
+                            ? AppDarkColors.accentColor1
+                            : AppLightColors.accentColor1,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                        height: 0),
+                  ),
+                  WidgetSpan(
+                    child: Container(
+                      padding:
+                          const EdgeInsets.only(bottom: 1, left: 6, right: 6),
+                      decoration: const BoxDecoration(
+                        color: AppColors.defaultColor,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(4),
+                        ),
+                      ),
+                      child: const Text(
+                        'Read more',
+                      ),
                     ),
                   ),
-                  child:  const Text(
-                    "Read more",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            ], style: const TextStyle(color: Colors.black)),
+                ],
+                style: TextStyle(
+                  color: AppThemeBloc.get(context).isDarkMode
+                      ? AppDarkColors.primaryColor
+                      : AppLightColors.primaryColor,
+                )),
           ),
           const SizedBox(
             height: 20,
@@ -130,8 +155,17 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
             height: 200,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.cardColor,
+              color: AppThemeBloc.get(context).isDarkMode
+                  ? AppDarkColors.primaryColor
+                  : AppLightColors.primaryColor,
               borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10.0,
+                  offset: const Offset(0.0, 7.0),
+                ),
+              ],
             ),
             child: Column(
               children: [
@@ -147,13 +181,15 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
                     const SizedBox(
                       width: 5,
                     ),
-                    const Text(
+                    Text(
                       'Overall rating',
                       style: TextStyle(
-                          color: AppColors.borderSideColor,
+                          color: AppThemeBloc.get(context).isDarkMode
+                              ? AppDarkColors.accentColor1
+                              : AppLightColors.accentColor1,
                           fontWeight: FontWeight.w500,
                           fontSize: 18),
-                    )
+                    ),
                   ],
                 ),
                 const SizedBox(
@@ -163,10 +199,13 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
                   height: 20,
                   child: Row(
                     children: [
-                      const Text(
+                      Text(
                         'Room',
                         style: TextStyle(
-                            color: AppColors.borderSideColor, fontSize: 16),
+                            color: AppThemeBloc.get(context).isDarkMode
+                                ? AppDarkColors.accentColor1
+                                : AppLightColors.accentColor1,
+                            fontSize: 16),
                       ),
                       const SizedBox(
                         width: 5,
@@ -197,18 +236,24 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
                   height: 20,
                   child: Row(
                     children: [
-                      const Text('Services',
-                          style: TextStyle(
-                              color: AppColors.borderSideColor, fontSize: 16)),
+                      Text(
+                        'Services',
+                        style: TextStyle(
+                            color: AppThemeBloc.get(context).isDarkMode
+                                ? AppDarkColors.accentColor1
+                                : AppLightColors.accentColor1,
+                            fontSize: 16),
+                      ),
                       const SizedBox(
                         width: 5,
                       ),
                       Expanded(
                         child: SliderTheme(
                           data: SliderTheme.of(context).copyWith(
-                              thumbColor: Colors.transparent,
-                              thumbShape: const RoundSliderThumbShape(
-                                  enabledThumbRadius: 0.0)),
+                            thumbColor: Colors.transparent,
+                            thumbShape: const RoundSliderThumbShape(
+                                enabledThumbRadius: 0.0),
+                          ),
                           child: Slider(
                               thumbColor: Colors.transparent,
                               inactiveColor: Colors.transparent,
@@ -229,18 +274,24 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
                   height: 20,
                   child: Row(
                     children: [
-                      const Text('Location',
-                          style: TextStyle(
-                              color: AppColors.borderSideColor, fontSize: 16)),
+                      Text(
+                        'Location',
+                        style: TextStyle(
+                            color: AppThemeBloc.get(context).isDarkMode
+                                ? AppDarkColors.accentColor1
+                                : AppLightColors.accentColor1,
+                            fontSize: 16),
+                      ),
                       const SizedBox(
                         width: 5,
                       ),
                       Expanded(
                         child: SliderTheme(
                           data: SliderTheme.of(context).copyWith(
-                              thumbColor: Colors.transparent,
-                              thumbShape: const RoundSliderThumbShape(
-                                  enabledThumbRadius: 0.0)),
+                            thumbColor: Colors.transparent,
+                            thumbShape: const RoundSliderThumbShape(
+                                enabledThumbRadius: 0.0),
+                          ),
                           child: Slider(
                               thumbColor: Colors.transparent,
                               inactiveColor: Colors.transparent,
@@ -261,9 +312,14 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
                   height: 20,
                   child: Row(
                     children: [
-                      const Text('Prcie',
-                          style: TextStyle(
-                              color: AppColors.borderSideColor, fontSize: 16)),
+                      Text(
+                        'Price',
+                        style: TextStyle(
+                            color: AppThemeBloc.get(context).isDarkMode
+                                ? AppDarkColors.accentColor1
+                                : AppLightColors.accentColor1,
+                            fontSize: 16),
+                      ),
                       const SizedBox(
                         width: 5,
                       ),
@@ -282,10 +338,10 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
                               value: 100,
                               onChanged: (value) {}),
                         ),
-                      )
+                      ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -297,17 +353,18 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
               Text(
                 'Photo',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Spacer(),
               Text(
                 'View all',
                 style: TextStyle(
-                    color: AppColors.defaultColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+                  color: AppColors.defaultColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               SizedBox(
                 width: 5,
@@ -328,11 +385,11 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               itemBuilder: (conetxt, index) {
-                return  ClipRRect(
+                return ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   child: Image(
                     image: NetworkImage(
-                       AppApis.getImageUrl(hotel.hotelImages[index].image) ),
+                        AppApis.getImageUrl(hotel.hotelImages[index].image)),
                     width: 100,
                     fit: BoxFit.cover,
                   ),
@@ -354,9 +411,9 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
               Text(
                 'Reviews',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Spacer(),
               Text(
@@ -378,55 +435,65 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          Container(
+          SizedBox(
             height: 60,
             child: Row(
               children: [
-                 ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  child:
-                     Image.asset(
-                        'assets/images/person.png',
-                    width: 70,
-                    fit: BoxFit.fill,)
-
-                ),
+                ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    child: Image.asset(
+                      'assets/images/person.png',
+                      width: 70,
+                      fit: BoxFit.cover,
+                      alignment: Alignment.topCenter,
+                    )),
                 const SizedBox(
                   width: 10,
                 ),
                 Expanded(
-                    flex: 2,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text('Alexa jan',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold)),
-                        Text('last update21 May,2019',
-                            style: TextStyle(
-                                color: AppColors.borderSideColor,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                height: 0)),
-                        Text('(8.0)',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300)),
-                      ],
-                    ))
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Alexa jan',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'last update21 May,2019',
+                        style: TextStyle(
+                            color: AppThemeBloc.get(context).isDarkMode
+                                ? AppDarkColors.accentColor2
+                                : AppLightColors.accentColor2,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                            height: 0),
+                      ),
+                      const Text(
+                        '(8.0)',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
           const SizedBox(
             height: 15,
           ),
-          const Text(
+          Text(
               'This is located in a great spot close to shops and bars , very quite location',
               style: TextStyle(
-                  color: AppColors.borderSideColor,
+                  color: AppThemeBloc.get(context).isDarkMode
+                      ? AppDarkColors.accentColor2
+                      : AppLightColors.accentColor2,
                   fontWeight: FontWeight.w400,
                   fontSize: 14,
                   height: 0)),
@@ -452,9 +519,7 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
               )
             ],
           ),
-          const Divider(
-            color: Colors.white24,
-          ),
+          const Divider(),
           const SizedBox(
             height: 15,
           ),
@@ -465,7 +530,8 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
               ),
               onPress: () {
                 debugPrint(hotel.hotelId.toString());
-                BookingsBloc.get(context).createBooking(hotelId:hotel.hotelId,context: context);
+                BookingsBloc.get(context)
+                    .createBooking(hotelId: hotel.hotelId, context: context);
               })
         ],
       ),
