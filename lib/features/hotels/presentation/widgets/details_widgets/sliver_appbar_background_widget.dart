@@ -126,7 +126,9 @@ class SliverAppbarBackgroundWidget extends StatelessWidget {
                               style:
                                   TextStyle(color: Colors.white, fontSize: 18),
                             ),
-                            onPress: () {},
+                            onPress: () {
+                              BookingsBloc.get(context).createBooking(hotelId: hotel.hotelId,context: context);
+                            },
                           // onPress: () => BookingsBloc.get(context).createBooking(hotelId: hotel.hotelId),
                           ),
                         ],

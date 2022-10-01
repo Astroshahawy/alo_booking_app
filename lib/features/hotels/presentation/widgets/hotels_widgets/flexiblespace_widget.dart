@@ -10,23 +10,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FlexibleSpaceWidget extends StatelessWidget {
   final List<String> images;
+  final double offset;
 
-  const FlexibleSpaceWidget(this.images, {Key? key}) : super(key: key);
+
+  const FlexibleSpaceWidget(this.images,this.offset ,{Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HotelsCubit, HotelsState>(
       builder: (context, state) {
         var cubit = BlocProvider.of<HotelsCubit>(context);
-        return FlexibleSpaceBar(
-            collapseMode: CollapseMode.parallax,
-            background: SafeArea(
-              child: Stack(
+        return
+
+          Stack(
+            fit: StackFit.expand,
                 children: [
+
                   CarouselSlider(
                     options: CarouselOptions(
                         autoPlay: true,
                         viewportFraction: 1,
-                        height: 400,
+
                         aspectRatio: 1),
                     items: cubit.hotels.map((i) {
                       return Builder(
@@ -34,30 +37,35 @@ class FlexibleSpaceWidget extends StatelessWidget {
                           return FadeIn(
                             duration: const Duration(milliseconds: 500),
                             child:
-                            Stack(
+                            Stack( fit: StackFit.expand,
                               children: [
-                                Container(height: 400,
-                                  child: CachedNetworkImage(
-                                    width: double.infinity,
-                                    fit: BoxFit.fill,
-                                    imageUrl: AppApis.getImageUrl(i.hotelImages[0].image),
-                                    progressIndicatorBuilder:
-                                        (context, url, downloadProgress) => Center(
-                                      child: CircularProgressIndicator(color: AppColors.defaultColor,
-                                          value: downloadProgress.progress),
-                                    ),
-                                    errorWidget: (context, url, error) =>
-                                        Icon(Icons.error),
+                                CachedNetworkImage(
+                                  width: double.infinity,
+                                  fit: BoxFit.cover
+                                  ,
+                                  imageUrl: AppApis.getImageUrl(i.hotelImages[0].image),
+                                  progressIndicatorBuilder:
+                                      (context, url, downloadProgress) => Center(
+                                    child: CircularProgressIndicator(color: AppColors.defaultColor,
+                                        value: downloadProgress.progress),
                                   ),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
                                 ),
-                                Column(
-                                  children: [
-                                    Spacer(),
-                                    Padding(
+
+                                Positioned(
+                                  left: 0,right: 0,bottom: 20,
+                                  child: AnimatedOpacity(
+                                    duration: Duration(milliseconds: 0),
+                                    opacity: (1 - (offset / (MediaQuery.of(context).size.height - 200)))
+                                        .clamp(0, 1),
+                                    child: Padding(
                                       padding: const EdgeInsets.only(bottom: 30,left: 20),
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
+
+
                                            Text(
                                             i.hotelName,
                                             style: TextStyle(
@@ -93,7 +101,7 @@ class FlexibleSpaceWidget extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                  ],
+                                  ),
                                 )
                               ],
                             ),
@@ -103,7 +111,7 @@ class FlexibleSpaceWidget extends StatelessWidget {
                     }).toList(),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 30),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -146,8 +154,7 @@ class FlexibleSpaceWidget extends StatelessWidget {
                     ),
                   )
                 ],
-              ),
-            ));
+              );
       },
     );
   }

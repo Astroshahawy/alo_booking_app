@@ -5,6 +5,7 @@ import 'hotel_images.dart';
 
 class Hotels extends Equatable {
   final String hotelName;
+  final int hotelId;
   final String hotelAddress;
   final String hotelPrice;
   final String hotelRate;
@@ -15,6 +16,7 @@ class Hotels extends Equatable {
   const Hotels(
       {required this.hotelName,
       required this.hotelAddress,
+      required this.hotelId,
       required this.hotelPrice,
       required this.hotelRate,
       required this.hotelImages,
@@ -29,6 +31,7 @@ class Hotels extends Equatable {
         hotelRate,
         hotelImages,
         hotelFacilites,
-        hotelDescription
+        hotelDescription,
+        hotelId
       ];
 }
