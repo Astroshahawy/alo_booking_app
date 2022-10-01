@@ -9,6 +9,7 @@ class AppRoutes {
   static const updateProfilePageScreen = 'update_profile_screen';
   static const hotelsScreen = 'hotels_screen';
   static const detailsScreen = 'details_screen';
+  static const exploreScreen = 'explore_screen';
 }
 
 class AppApis {
