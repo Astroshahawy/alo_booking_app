@@ -1,5 +1,6 @@
 import 'package:alo_booking_app/core/constants/constants.dart';
 import 'package:alo_booking_app/core/widgets/bouncing_button.dart';
+import 'package:alo_booking_app/features/bookings/presentation/cubit/bookings_cubit.dart';
 import 'package:alo_booking_app/features/hotels/domain/entities/hotels.dart';
 import 'package:flutter/material.dart';
 
@@ -462,7 +463,10 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
                 'Book Now',
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
-              onPress: () {})
+              onPress: () {
+                debugPrint(hotel.hotelId.toString());
+                BookingsBloc.get(context).createBooking(hotelId:hotel.hotelId,context: context);
+              })
         ],
       ),
     );

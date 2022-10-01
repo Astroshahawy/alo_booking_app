@@ -6,6 +6,7 @@ class HotelsModel extends Hotels {
   const HotelsModel(
       {required super.hotelName,
       required super.hotelAddress,
+      required super.hotelId,
       required super.hotelPrice,
       required super.hotelRate,
       required super.hotelImages,
@@ -15,6 +16,7 @@ class HotelsModel extends Hotels {
       hotelName: json['name'],
       hotelAddress: json['address'],
       hotelPrice: json['price'],
+      hotelId: json['id'],
       hotelRate: json['rate'],
       hotelDescription: json['description'],
       hotelImages: List.from(
