@@ -16,7 +16,7 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen> {
   ScrollController scrollController = ScrollController();
   double offset = 0;
- 
+
   @override
   Widget build(BuildContext context) {
     debugPrint(
@@ -34,7 +34,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   elevation: 0.0,
                   pinned: true,
                   collapsedHeight: 200,
-                  expandedHeight: MediaQuery.of(context).size.height - MediaQuery.of(context).viewInsets.top,
+                  expandedHeight: MediaQuery.of(context).size.height -
+                      MediaQuery.of(context).viewInsets.top,
                   actions: const [
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10),
@@ -68,10 +69,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   flexibleSpace: StatefulBuilder(
                     builder: (context, setState) {
                       scrollController.addListener(() {
-                       
                         setState.call((() => offset = scrollController.offset));
-                          
-                        
                       });
                       return SliverAppbarBackgroundWidget(
                         hotel: hotel,
