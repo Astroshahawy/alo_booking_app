@@ -333,7 +333,7 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
                     image: NetworkImage(
                        AppApis.getImageUrl(hotel.hotelImages[index].image) ),
                     width: 100,
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                   ),
                 );
               },

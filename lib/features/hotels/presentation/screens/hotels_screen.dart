@@ -62,8 +62,8 @@ class _HotelsScreenState extends State<HotelsScreen> {
                   SliverAppBar(
                     stretch: true,
                     floating: true,
-                    collapsedHeight: 150,
-                    expandedHeight: 400,
+                    collapsedHeight: 200,
+                    expandedHeight: MediaQuery.of(context).size.height * 0.7,
                     backgroundColor: Colors.transparent,
                     flexibleSpace: FlexibleSpaceWidget(cubit.images),
                   )
