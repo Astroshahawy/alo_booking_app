@@ -29,145 +29,146 @@ class UpdateProfilePage extends StatelessWidget {
     nameController.text = userInfo.name;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: BlocConsumer<ProfileBloc, ProfileState>(
-          listener: (context, state) {
-            if(state is ImageUploadedState){
-              imageUploaded = true;
-            }
-          },
-          builder: (context, state) {
-    return Scaffold(
-    appBar: AppBar(
-    leadingWidth: 68,
-    backgroundColor: Colors.transparent,
-    elevation: 0,
-    ),
-    body: SingleChildScrollView(
-    physics: const BouncingScrollPhysics(),
-    child: Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-    child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-    const Padding(
-    padding: EdgeInsets.symmetric(horizontal: 10),
-    child: Text(
-    'Edit Profile',
-    style: TextStyle(
-    fontSize: 24,
-    fontWeight: FontWeight.w900,
-    ),
-    ),
-    ),
-    const SizedBox(
-    height: 10,
-    ),
-    Center(
-    child: SizedBox(
-    height: 120,
-    width: 120,
-    child: Stack(
-    clipBehavior: Clip.none,
-    fit: StackFit.expand,
-    children: [
-    if (userInfo.image.isEmpty)
-    const CircleAvatar(
-    backgroundImage:
-    AssetImage('assets/images/user.jpg'),
-    ),
-    if (userInfo.image.isNotEmpty)
-      imageUploaded ? CircleAvatar(
-        backgroundImage: FileImage(ProfileBloc.imageProfile)
-      ): CircleAvatar(
-    backgroundImage: NetworkImage(
-    AppApis.getImageUrl(userInfo.image)),
-    ),
-    Positioned(
-    bottom: 0,
-    right: -25,
-    child: RawMaterialButton(
-    onPressed: () {
-    ImageHelper().selectAvatarOperation(context);
-    },
-    elevation: 2.0,
-    fillColor: const Color(0xFF4fbe9e),
-    padding: const EdgeInsets.all(5.0),
-    shape: const CircleBorder(),
-    child: const Icon(
-    Icons.camera_alt,
-    color: Color(0xFF2c2c2c),
-    size: 18,
-    ),
-    ),
-    ),
-    ],
-    ),
-    ),
-    ),
-    const SizedBox(
-    height: 30,
-    ),
-    UpdateProfileItemWidget(
-    text: 'User name',
-    editable: true,
-    controller: nameController,
-    subText: userInfo.name,
-    ),
-    const DividerWidget(),
-    UpdateProfileItemWidget(
-    text: 'Email',
-    editable: true,
-    controller: emailController,
-    subText: userInfo.email,
-    ),
-    const DividerWidget(),
-    const UpdateProfileItemWidget(
-    text: 'Phone',
-    subText: '+20 1587895949',
-    ),
-    const DividerWidget(),
-    UpdateProfileItemWidget(
-    text: 'Date created',
-    subText: formatDate(userInfo.createdAt),
-    ),
-    const DividerWidget(),
-    UpdateProfileItemWidget(
-    text: 'Last updated',
-    subText: formatDate(userInfo.updatedAt),
-    ),
-    const DividerWidget(),
-    const SizedBox(
-    height: 50,
-    ),
-    BouncingButton(
-    margin: const EdgeInsets.symmetric(horizontal: 10),
-      onPress: () {
-        ProfileBloc.get(context).updateProfile(
-          updateProfileInfoParameters:
-          UpdateProfileInfoParameters(
-            token: userInfo.token,
-            updateProfile: UpdateProfile(
-                email: emailController.text,
-                name: nameController.text,
-                image: ProfileBloc.imageProfile),
+      child:
+          BlocConsumer<ProfileBloc, ProfileState>(listener: (context, state) {
+        if (state is ImageUploadedState) {
+          imageUploaded = true;
+        }
+      }, builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            leadingWidth: 68,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+          ),
+          body: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      'Edit Profile',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                    child: SizedBox(
+                      height: 120,
+                      width: 120,
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        fit: StackFit.expand,
+                        children: [
+                          if (userInfo.image.isEmpty)
+                            const CircleAvatar(
+                              backgroundImage:
+                                  AssetImage('assets/images/user.jpg'),
+                            ),
+                          if (userInfo.image.isNotEmpty)
+                            imageUploaded
+                                ? CircleAvatar(
+                                    backgroundImage:
+                                        FileImage(ProfileBloc.imageProfile))
+                                : CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                        AppApis.getImageUrl(userInfo.image)),
+                                  ),
+                          Positioned(
+                            bottom: 0,
+                            right: -25,
+                            child: RawMaterialButton(
+                              onPressed: () {
+                                ImageHelper().selectAvatarOperation(context);
+                              },
+                              elevation: 2.0,
+                              fillColor: const Color(0xFF4fbe9e),
+                              padding: const EdgeInsets.all(5.0),
+                              shape: const CircleBorder(),
+                              child: const Icon(
+                                Icons.camera_alt,
+                                color: Color(0xFF2c2c2c),
+                                size: 18,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  UpdateProfileItemWidget(
+                    text: 'User name',
+                    editable: true,
+                    controller: nameController,
+                    subText: userInfo.name,
+                  ),
+                  const DividerWidget(),
+                  UpdateProfileItemWidget(
+                    text: 'Email',
+                    editable: true,
+                    controller: emailController,
+                    subText: userInfo.email,
+                  ),
+                  const DividerWidget(),
+                  const UpdateProfileItemWidget(
+                    text: 'Phone',
+                    subText: '+20 1587895949',
+                  ),
+                  const DividerWidget(),
+                  UpdateProfileItemWidget(
+                    text: 'Date created',
+                    subText: formatDate(userInfo.createdAt),
+                  ),
+                  const DividerWidget(),
+                  UpdateProfileItemWidget(
+                    text: 'Last updated',
+                    subText: formatDate(userInfo.updatedAt),
+                  ),
+                  const DividerWidget(),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  BouncingButton(
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    onPress: () {
+                      ProfileBloc.get(context).updateProfile(
+                        updateProfileInfoParameters:
+                            UpdateProfileInfoParameters(
+                          token: userInfo.token,
+                          updateProfile: UpdateProfile(
+                              email: emailController.text,
+                              name: nameController.text,
+                              image: ProfileBloc.imageProfile),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Update',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         );
-      },
-    child: const Text(
-    'Update',
-    style: TextStyle(
-    fontSize: 17,
-    fontWeight: FontWeight.w400,
-    color: Colors.white,
-    ),
-    ),
-    ),
-    ],
-    ),
-    ),
-    ),
-    );
-    }),
+      }),
     );
   }
 }

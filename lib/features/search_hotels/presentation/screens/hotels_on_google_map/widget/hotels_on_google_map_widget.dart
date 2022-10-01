@@ -9,9 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class HotelsOnGoogleMapWidget extends StatefulWidget {
-  HotelsOnGoogleMapWidget({Key? key, required this.hotels}) : super(key: key);
+  const HotelsOnGoogleMapWidget({Key? key, required this.hotels})
+      : super(key: key);
 
-  List<Hotel>? hotels;
+  final List<Hotel>? hotels;
   @override
   _HotelsOnGoogleMapWidgetState createState() =>
       _HotelsOnGoogleMapWidgetState();
@@ -24,7 +25,7 @@ class _HotelsOnGoogleMapWidgetState extends State<HotelsOnGoogleMapWidget> {
       LatLng(27.257896, 33.811607); //location to show in map
 
   getLocations() async {
-    getmarkers();
+    getMarkers();
   }
 
   @override
@@ -50,7 +51,7 @@ class _HotelsOnGoogleMapWidgetState extends State<HotelsOnGoogleMapWidget> {
           target: showLocation, //initial position
           zoom: 11.0, //initial zoom level
         ),
-        markers: getmarkers(), //markers to show on map
+        markers: getMarkers(), //markers to show on map
         mapType: MapType.normal, //map type
         onMapCreated: (controller) {
           //method called when map is created
@@ -62,7 +63,7 @@ class _HotelsOnGoogleMapWidgetState extends State<HotelsOnGoogleMapWidget> {
     );
   }
 
-  Set<Marker> getmarkers() {
+  Set<Marker> getMarkers() {
     //final Uint8List markerIcon = await getBytesFromCanvas(200, 100);//markers to place on map
     for (var hotel in widget.hotels!) {
       markers.add(Marker(
@@ -138,7 +139,7 @@ class _HotelsOnGoogleMapWidgetState extends State<HotelsOnGoogleMapWidget> {
 
   Future<BitmapDescriptor> createCustomMarkerBitmap(String title) async {
     TextSpan span = TextSpan(
-      style: TextStyle(
+      style: const TextStyle(
         color: Colors.black,
         fontSize: 35.0,
         fontWeight: FontWeight.bold,
@@ -157,7 +158,6 @@ class _HotelsOnGoogleMapWidgetState extends State<HotelsOnGoogleMapWidget> {
         fontSize: 35.0,
         color: Theme.of(context).colorScheme.secondary,
         letterSpacing: 1.0,
-        fontFamily: 'Roboto Bold',
       ),
     );
 
@@ -183,7 +183,7 @@ class _HotelsOnGoogleMapWidgetState extends State<HotelsOnGoogleMapWidget> {
     final PictureRecorder pictureRecorder = PictureRecorder();
     final Canvas canvas = Canvas(pictureRecorder);
     final Paint paint = Paint()..color = Colors.blue;
-    final Radius radius = const Radius.circular(30.0);
+    const Radius radius = Radius.circular(30.0);
     canvas.drawRRect(
         RRect.fromRectAndCorners(
           Rect.fromLTWH(0.0, 0.0, width.toDouble(), height.toDouble()),
