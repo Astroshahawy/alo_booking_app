@@ -103,7 +103,7 @@ class _SliverAppBarWidgetState extends State<SliverAppBarWidget> {
       preferredSize: Size.zero,
       child: Column(
         children: [
-          dividerWidget(0, 0, 0),
+          const DividerWidget(),
           Container(
             padding: const EdgeInsets.only(left: 25, right: 10),
             child: Row(
@@ -162,7 +162,7 @@ class _SliverAppBarWidgetState extends State<SliverAppBarWidget> {
                   Expanded(
                     child: TextField(
                       onChanged: (searchedCharacter) {
-                        if(searchController.text.isEmpty) {
+                        if (searchController.text.isEmpty) {
                           searchAboutHotel(searchedCharacter);
                         }
                       },

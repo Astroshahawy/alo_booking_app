@@ -1,10 +1,8 @@
-
 import 'package:alo_booking_app/core/constants/constants.dart';
 import 'package:alo_booking_app/core/themes/app_colors.dart';
 import 'package:alo_booking_app/core/themes/cubit/app_theme_cubit.dart';
 import 'package:alo_booking_app/core/themes/cubit/app_theme_state.dart';
 import 'package:alo_booking_app/features/authentication/presentation/cubit/auth_cubit.dart';
-import 'package:alo_booking_app/features/profile/presentation/screens/update_page/update_profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,84 +17,95 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     User userInfo = AuthBloc.get(context).auth.userData;
     return Scaffold(
-      // backgroundColor: AppColors.baseColor,
       body: SafeArea(
-        child: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
-                onTap: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) =>  UpdateProfilePage()),
-                  );
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 30),
-                  // height: 100,
-                  // decoration: BoxDecoration(
-                  //   border: Border.all(color: Colors.white),
-                  // ),
+                onTap: () => Navigator.pushNamed(
+                    context, AppRoutes.updateProfilePageScreen),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 7),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          DefaultTextStyle(
-                            style: TextStyle(
-                              color: Colors.white,
+                          Text(
+                            userInfo.name,
+                            style: const TextStyle(
+                              fontSize: 22,
                               fontWeight: FontWeight.w500,
-                              fontSize: 20,
-                            ),
-                            child: Text(
-                              '${userInfo.name}',
-                              //"Amanda",
                             ),
                           ),
-                          DefaultTextStyle(
+                          const SizedBox(height: 2),
+                          Text(
+                            'View and Edit Profile',
                             style: TextStyle(
-                              color: Color(0xFF727272),
+                              color: AppThemeBloc.get(context).isDarkMode
+                                  ? AppDarkColors.accentColor1
+                                  : AppLightColors.accentColor2,
                               fontWeight: FontWeight.w400,
-                              fontSize: 16,
-                            ),
-                            child: Text(
-                              "View and Edit Profile",
+                              fontSize: 18,
                             ),
                           ),
                         ],
                       ),
-                      CircleAvatar(
-                        radius: 30.0,
-                        backgroundImage:
-                            //Image.asset('asset/food2.png'),
-                        NetworkImage(
-                            userInfo.image != '' ? AppApis.getImageUrl(userInfo.image):
-                            "http://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg"
+                      if (userInfo.image.isEmpty)
+                        const CircleAvatar(
+                          radius: 34.0,
+                          backgroundImage: AssetImage('assets/images/user.jpg'),
                         ),
-                        backgroundColor: Colors.transparent,
-                      )
+                      if (userInfo.image.isNotEmpty)
+                        CircleAvatar(
+                          radius: 34.0,
+                          backgroundImage:
+                              NetworkImage(AppApis.getImageUrl(userInfo.image)),
+                          backgroundColor: AppColors.borderSideColor,
+                        ),
                     ],
                   ),
                 ),
               ),
-              //SizedBox(height: 15,),
-              profileItemsWidget(text: "change Password", icon: Icons.lock,),
-              dividerWidget(30, 30,0),
-              profileItemsWidget(icon:Icons.people_rounded, text:"invite Froend"),
-              dividerWidget(30, 30,0),
-              profileItemsWidget(icon:Icons.wallet_giftcard_rounded, text:"Credit & Coupons"),
-              dividerWidget(30, 30,0),
-              profileItemsWidget(icon:Icons.error_outlined, text:"Help Center"),
-              dividerWidget(30, 30,0),
-              profileItemsWidget(icon:Icons.payment, text:"Payment"),
-              dividerWidget(30, 30,0),
-              profileItemsWidget(icon:Icons.settings, text:"Setting"),
-              dividerWidget(30, 30,0),
+              const SizedBox(
+                height: 30,
+              ),
+              const ProfileItemsWidget(
+                text: 'Change Password',
+                icon: Icons.lock,
+              ),
+              const DividerWidget(),
+              const ProfileItemsWidget(
+                icon: Icons.people_rounded,
+                text: 'Invite Friend',
+              ),
+              const DividerWidget(),
+              const ProfileItemsWidget(
+                icon: Icons.wallet_giftcard_rounded,
+                text: 'Credit & Coupons',
+              ),
+              const DividerWidget(),
+              const ProfileItemsWidget(
+                icon: Icons.error_outlined,
+                text: 'Help Center',
+              ),
+              const DividerWidget(),
+              const ProfileItemsWidget(
+                icon: Icons.payment,
+                text: 'Payment',
+              ),
+              const DividerWidget(),
+              const ProfileItemsWidget(
+                icon: Icons.settings,
+                text: 'Setting',
+              ),
+              const DividerWidget(),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 35),
-                height: 56,
+                padding: const EdgeInsets.symmetric(horizontal: 7),
+                height: MediaQuery.of(context).size.height * 0.055,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -104,14 +113,15 @@ class ProfilePage extends StatelessWidget {
                       'Dark Mode',
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
-                        fontSize: 15,
+                        fontSize: 16,
+                        letterSpacing: 0.5,
                       ),
                     ),
                     BlocBuilder<AppThemeBloc, AppThemeState>(
                       builder: (context, state) {
                         return CupertinoSwitch(
                           activeColor: AppColors.defaultColor,
-                          trackColor: AppDarkColors.accentColor1,
+                          trackColor: AppLightColors.accentColor1,
                           value: AppThemeBloc.get(context).isDarkMode,
                           onChanged: (value) =>
                               AppThemeBloc.get(context).toggleTheme(value),

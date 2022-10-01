@@ -11,7 +11,7 @@ class ProfileBloc extends Cubit<ProfileState> {
   final GetProfileInfo getProfileInfo;
   final UpdateProfileInfo updateProfileInfo;
 
-  static Profile? profileInfo;
+  static late Profile profileInfo;
 
   ProfileBloc(
     this.getProfileInfo,
@@ -32,7 +32,7 @@ class ProfileBloc extends Cubit<ProfileState> {
       (r) {
         profileInfo = r;
         print(r);
-        emit(UserProfileSuccessState());
+        emit(UserProfileSuccessState(r.data));
       },
     );
   }
@@ -51,14 +51,15 @@ class ProfileBloc extends Cubit<ProfileState> {
       (r) {
         profileInfo = r;
         print(r);
-        emit(ImageUploadedState());
+        emit(UserProfileSuccessState(r.data));
       },
     );
   }
 
-  static File? imageProfile;
+  static late File imageProfile;
   saveImage(File image){
     imageProfile = image;
     print(image.path.toString()+"sssssssssssssssssssssssssss");
+    emit(ImageUploadedState(image));
   }
 }
