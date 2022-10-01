@@ -16,6 +16,8 @@ class AppRouter {
         switch (settings.name) {
           case AppRoutes.bottomNavigationBaseScreen:
             return const HomeBottomNavigationBar();
+          case AppRoutes.detailsScreen:
+            return const DetailsScreen();
           case AppRoutes.hotelsScreen:
             return const HotelsScreen();
           case AppRoutes.onBoardingScreen:
