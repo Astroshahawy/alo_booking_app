@@ -8,6 +8,7 @@ class Hotels extends Equatable {
   final String hotelAddress;
   final String hotelPrice;
   final String hotelRate;
+  final String hotelDescription;
   final List<HotelImages> hotelImages;
   final List<HotelFacilities> hotelFacilites;
 
@@ -17,6 +18,7 @@ class Hotels extends Equatable {
       required this.hotelPrice,
       required this.hotelRate,
       required this.hotelImages,
+      required this.hotelDescription,
       required this.hotelFacilites});
 
   @override
@@ -27,5 +29,6 @@ class Hotels extends Equatable {
         hotelRate,
         hotelImages,
         hotelFacilites,
+        hotelDescription
       ];
 }

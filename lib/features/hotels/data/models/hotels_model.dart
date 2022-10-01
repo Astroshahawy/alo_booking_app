@@ -9,12 +9,14 @@ class HotelsModel extends Hotels {
       required super.hotelPrice,
       required super.hotelRate,
       required super.hotelImages,
+      required super.hotelDescription,
       required super.hotelFacilites});
   factory HotelsModel.fromJson(Map<String, dynamic> json) => HotelsModel(
       hotelName: json['name'],
       hotelAddress: json['address'],
       hotelPrice: json['price'],
       hotelRate: json['rate'],
+      hotelDescription: json['description'],
       hotelImages: List.from(
           (json['hotel_images'].map((e) => HotelImagesModel.fromJson(e)))),
       hotelFacilites: List.from((json['hotel_facilities']
