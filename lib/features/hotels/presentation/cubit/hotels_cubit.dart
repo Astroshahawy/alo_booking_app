@@ -15,8 +15,10 @@ class HotelsCubit extends Cubit<HotelsState> {
   HotelsCubit(this.getHotelsUseCase) : super(HotelsInitial());
   List<Hotels> hotels = [];
   List<String> images = [];
+  List<String> hotelNames = [];
 
   void getHotels() async {
+    emit(GetHotelsLoadingState());
     final result = await getHotelsUseCase.call(const NoParameters());
     result.fold(
       (left) {
@@ -29,16 +31,14 @@ class HotelsCubit extends Cubit<HotelsState> {
         print(hotels.length);
         print(images.length);
         emit(GetHotelsSuccessState());
-
       },
     );
   }
 
-  void getHotelsImages(List<Hotels>hotels) {
+  void getHotelsImages(List<Hotels> hotels) {
     for (int i = 0; i < hotels.length; i++) {
-      for (int j = 0; j < hotels[i].hotelImages.length; j++) {
-        images.add(hotels[i].hotelImages[j].image);
-      }
+      hotelNames.add(hotels[i].hotelName);
+      images.add(hotels[i].hotelImages[2].image);
     }
   }
 }

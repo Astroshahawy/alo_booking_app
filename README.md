@@ -1,16 +1,22 @@
-# alo_booking_app
+# Alo booking Application
 
-A new Flutter project.
+## Screenshots
 
-## Getting Started
+<img src="https://user-images.githubusercontent.com/20980869/193427792-b04b46a1-9fd7-488b-84e2-9e7f47b5ee9d.jpg" 
+     width="405" 
+     height="810" />
+<img src="https://user-images.githubusercontent.com/20980869/193427797-31c24747-3917-4628-a60c-31090ad79515.jpg" 
+     width="405" 
+     height="810" />
+<img src="https://user-images.githubusercontent.com/20980869/193427800-76f20b5b-7244-4d6f-881d-3b9c03edef67.jpg" 
+     width="405" 
+     height="810" />
+<img src="https://user-images.githubusercontent.com/20980869/193427802-43a94f94-8f2b-4623-b7e9-6f74cc47f921.jpg" 
+     width="405" 
+     height="810" />
 
-This project is a starting point for a Flutter application.
+<hr>
 
-A few resources to get you started if this is your first Flutter project:
+## Video
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Link: https://drive.google.com/file/d/1myRZCIzXDaLn1NPjxdzIebsTzGDr7Sl8/view?usp=sharing
