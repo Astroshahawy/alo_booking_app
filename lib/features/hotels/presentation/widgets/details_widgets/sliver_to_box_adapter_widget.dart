@@ -22,6 +22,7 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
             height: 10,
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -152,7 +153,6 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
             height: 20,
           ),
           Container(
-            height: 200,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: AppThemeBloc.get(context).isDarkMode
@@ -199,13 +199,16 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
                   height: 20,
                   child: Row(
                     children: [
-                      Text(
-                        'Room',
-                        style: TextStyle(
-                            color: AppThemeBloc.get(context).isDarkMode
-                                ? AppDarkColors.accentColor1
-                                : AppLightColors.accentColor1,
-                            fontSize: 16),
+                      SizedBox(
+                        width: 65,
+                        child: Text(
+                          'Room',
+                          style: TextStyle(
+                              color: AppThemeBloc.get(context).isDarkMode
+                                  ? AppDarkColors.accentColor1
+                                  : AppLightColors.accentColor1,
+                              fontSize: 16),
+                        ),
                       ),
                       const SizedBox(
                         width: 5,
@@ -236,13 +239,16 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
                   height: 20,
                   child: Row(
                     children: [
-                      Text(
-                        'Services',
-                        style: TextStyle(
-                            color: AppThemeBloc.get(context).isDarkMode
-                                ? AppDarkColors.accentColor1
-                                : AppLightColors.accentColor1,
-                            fontSize: 16),
+                      SizedBox(
+                        width: 65,
+                        child: Text(
+                          'Services',
+                          style: TextStyle(
+                              color: AppThemeBloc.get(context).isDarkMode
+                                  ? AppDarkColors.accentColor1
+                                  : AppLightColors.accentColor1,
+                              fontSize: 16),
+                        ),
                       ),
                       const SizedBox(
                         width: 5,
@@ -260,7 +266,7 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
                               activeColor: AppColors.defaultColor,
                               min: 0,
                               max: 100,
-                              value: 100,
+                              value: 90,
                               onChanged: (value) {}),
                         ),
                       )
@@ -274,13 +280,16 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
                   height: 20,
                   child: Row(
                     children: [
-                      Text(
-                        'Location',
-                        style: TextStyle(
-                            color: AppThemeBloc.get(context).isDarkMode
-                                ? AppDarkColors.accentColor1
-                                : AppLightColors.accentColor1,
-                            fontSize: 16),
+                      SizedBox(
+                        width: 65,
+                        child: Text(
+                          'Location',
+                          style: TextStyle(
+                              color: AppThemeBloc.get(context).isDarkMode
+                                  ? AppDarkColors.accentColor1
+                                  : AppLightColors.accentColor1,
+                              fontSize: 16),
+                        ),
                       ),
                       const SizedBox(
                         width: 5,
@@ -312,13 +321,16 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
                   height: 20,
                   child: Row(
                     children: [
-                      Text(
-                        'Price',
-                        style: TextStyle(
-                            color: AppThemeBloc.get(context).isDarkMode
-                                ? AppDarkColors.accentColor1
-                                : AppLightColors.accentColor1,
-                            fontSize: 16),
+                      SizedBox(
+                        width: 65,
+                        child: Text(
+                          'Price',
+                          style: TextStyle(
+                              color: AppThemeBloc.get(context).isDarkMode
+                                  ? AppDarkColors.accentColor1
+                                  : AppLightColors.accentColor1,
+                              fontSize: 16),
+                        ),
                       ),
                       const SizedBox(
                         width: 5,
@@ -351,7 +363,7 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
           Row(
             children: const [
               Text(
-                'Photo',
+                'Photos',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

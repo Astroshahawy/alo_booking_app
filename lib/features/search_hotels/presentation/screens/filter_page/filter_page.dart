@@ -83,8 +83,6 @@ class _FilterPageState extends State<FilterPage> {
                         const DistanceWidget(),
                         const DividerWidget(),
                         const SizedBox(height: 10),
-                        const DividerWidget(),
-                        const SizedBox(height: 10),
                         const TypeAccommodationWidget(),
                       ],
                     ),
