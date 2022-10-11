@@ -99,16 +99,10 @@ class _FilterPageState extends State<FilterPage> {
             onPress: () {
               SearchHotelsBloc.get(context).searchFilter(
                 searchOptions: SearchOptionsModel(
-                  widget.searchText,
-                  minPrice.text,
-                  '',
-                  maxPrice.text,
-                  '',
-                  '',
-                  '',
-                  '',
-                  '',
-                  {
+                  name: widget.searchText,
+                  minPrice: minPrice.text,
+                  maxPrice: maxPrice.text,
+                  facilities: {
                     ...SearchHotelsBloc.selectedFacilities.asMap().map(
                           (key, value) => MapEntry(
                             'facilities[$key]',

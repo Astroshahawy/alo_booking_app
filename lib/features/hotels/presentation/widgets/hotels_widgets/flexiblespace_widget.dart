@@ -3,6 +3,8 @@ import 'package:alo_booking_app/core/themes/app_colors.dart';
 import 'package:alo_booking_app/core/themes/cubit/app_theme_cubit.dart';
 import 'package:alo_booking_app/core/widgets/bouncing_button.dart';
 import 'package:alo_booking_app/features/hotels/presentation/cubit/hotels_cubit.dart';
+import 'package:alo_booking_app/features/search_hotels/data/models/search_options_model.dart';
+import 'package:alo_booking_app/features/search_hotels/presentation/cubit/search_hotels_cubit.dart';
 import 'package:alo_booking_app/features/search_hotels/presentation/screens/explore_page/explore_page.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -97,6 +99,8 @@ class FlexibleSpaceWidget extends StatelessWidget {
                                         fontWeight: FontWeight.w400),
                                   ),
                                   onPress: () {
+                                    SearchHotelsBloc.searchHotelsList = null;
+                                    SearchHotelsBloc.get(context).searchFilter(searchOptions: SearchOptionsModel());
                                     Navigator.pushNamed(
                                       context,
                                       AppRoutes.exploreScreen,

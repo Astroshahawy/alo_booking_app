@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:alo_booking_app/core/constants/constants.dart';
 import 'package:alo_booking_app/core/injection/injector.dart';
 import 'package:alo_booking_app/features/bookings/presentation/widgets/tab_bar_pages/widgets/hotel_review_mini_box.dart';
@@ -94,19 +96,20 @@ class _HotelsScreenState extends State<HotelsScreen> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
+                      final hotel = cubit.hotels[index];
                       return InkWell(
                           onTap: () {
                             Navigator.pushNamed(
                                 context, AppRoutes.detailsScreen,
-                                arguments: cubit.hotels[index]);
+                                arguments: hotel);
                           },
                           child: HotelReviewMiniBox(
                             coverImage: AppApis.getImageUrl(
-                                cubit.hotels[index].hotelImages[0].image),
-                            name: cubit.hotels[index].hotelName,
-                            price: cubit.hotels[index].hotelPrice,
-                            address: cubit.hotels[index].hotelAddress,
-                            rating: cubit.hotels[index].hotelRate,
+                                hotel.hotelImages[Random().nextInt(hotel.hotelImages.length)].image),
+                            name: hotel.hotelName,
+                            price: hotel.hotelPrice,
+                            address: hotel.hotelAddress,
+                            rating: hotel.hotelRate,
                           ));
                     },
                     itemCount: cubit.hotels.length,

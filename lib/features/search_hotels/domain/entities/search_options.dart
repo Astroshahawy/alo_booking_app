@@ -1,19 +1,19 @@
 import 'package:equatable/equatable.dart';
 
 class SearchOptions extends Equatable {
-  final String name;
-  final String minPrice;
-  final String address;
-  final String maxPrice;
-  final String latitude;
-  final String longitude;
-  final String distance;
-  final String count;
-  final String page;
-  final Map facilities;
+   String? name;
+   String? minPrice;
+   String? address;
+   String? maxPrice;
+   String? latitude;
+   String? longitude;
+   String? distance;
+   String? count;
+   String? page;
+   Map? facilities;
 
-  const SearchOptions(
-      this.name,
+   SearchOptions(
+      {this.name,
       this.minPrice,
       this.address,
       this.maxPrice,
@@ -22,7 +22,7 @@ class SearchOptions extends Equatable {
       this.distance,
       this.count,
       this.page,
-      this.facilities);
+      this.facilities});
 
   @override
   List<Object?> get props => [
