@@ -106,16 +106,17 @@ class _SliverAppBarWidgetState extends State<SliverAppBarWidget> {
             children: [
               BlocBuilder<SearchHotelsBloc, SearchHotelsState>(
                 builder: (context, state) {
-                return Text(
-                  SearchHotelsBloc.hotelsNumber != null
-                      ? '${SearchHotelsBloc.hotelsNumber} Hotel Found'
-                      : '${SearchHotelsBloc.hotels!.data.length} Hotel Found',
-                  style: const TextStyle(
-                    fontSize: 17,
-                    letterSpacing: 0.5,
-                  ),
-                );
-              },),
+                  return Text(
+                    SearchHotelsBloc.hotelsNumber != null
+                        ? '${SearchHotelsBloc.hotelsNumber} Hotel Found'
+                        : '${SearchHotelsBloc.hotels!.data.length} Hotel Found',
+                    style: const TextStyle(
+                      fontSize: 17,
+                      letterSpacing: 0.5,
+                    ),
+                  );
+                },
+              ),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -126,23 +127,34 @@ class _SliverAppBarWidgetState extends State<SliverAppBarWidget> {
                     ),
                   );
                 },
-                child: Row(
-                  children: const [
-                    Text(
-                      'Filter',
-                      style: TextStyle(
-                        fontSize: 17,
-                        letterSpacing: 0.5,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            FilterPage(searchText: searchController.text),
                       ),
-                    ),
-                    SizedBox(width: 4),
-                    Icon(
-                      Icons.filter_alt_rounded,
-                      color: AppColors.defaultColor,
-                    ),
-                  ],
+                    );
+                  },
+                  child: Row(
+                    children: const [
+                      Text(
+                        'Filter',
+                        style: TextStyle(
+                          fontSize: 17,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                      SizedBox(width: 4),
+                      Icon(
+                        Icons.filter_alt_rounded,
+                        color: AppColors.defaultColor,
+                      ),
+                    ],
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),
