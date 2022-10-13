@@ -93,20 +93,20 @@ class _SliverAppBarWidgetState extends State<SliverAppBarWidget> {
   }
 
   Widget resultFilter() {
-    return BlocBuilder<SearchHotelsBloc, SearchHotelsState>(
-      builder: (context, state) {
-        return Column(
-          children: [
-            const DividerWidget(),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
-              color: AppThemeBloc.get(context).isDarkMode
-                  ? AppDarkColors.backgroundColor
-                  : AppLightColors.backgroundColor,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
+    return Column(
+      children: [
+        const DividerWidget(),
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+          color: AppThemeBloc.get(context).isDarkMode
+              ? AppDarkColors.backgroundColor
+              : AppLightColors.backgroundColor,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              BlocBuilder<SearchHotelsBloc, SearchHotelsState>(
+                builder: (context, state) {
+                  return Text(
                     SearchHotelsBloc.hotelsNumber != null
                         ? '${SearchHotelsBloc.hotelsNumber} Hotel Found'
                         : '${SearchHotelsBloc.hotels!.data.length} Hotel Found',
@@ -114,40 +114,62 @@ class _SliverAppBarWidgetState extends State<SliverAppBarWidget> {
                       fontSize: 17,
                       letterSpacing: 0.5,
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              FilterPage(searchText: searchController.text),
-                        ),
-                      );
-                    },
-                    child: Row(
-                      children: const [
-                        Text(
-                          'Filter',
-                          style: TextStyle(
-                            fontSize: 17,
-                            letterSpacing: 0.5,
-                          ),
-                        ),
-                        SizedBox(width: 4),
-                        Icon(
-                          Icons.filter_alt_rounded,
-                          color: AppColors.defaultColor,
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                  );
+                },
               ),
-            ),
-          ],
-        );
-      },
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          FilterPage(searchText: searchController.text),
+                    ),
+                  );
+                },
+                child: Row(
+                  children: [
+                    const Text(
+                      'Filter',
+                      style: TextStyle(
+                        fontSize: 17,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                FilterPage(searchText: searchController.text),
+                          ),
+                        );
+                      },
+                      child: Row(
+                        children: const [
+                          Text(
+                            'Filter',
+                            style: TextStyle(
+                              fontSize: 17,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                          SizedBox(width: 4),
+                          Icon(
+                            Icons.filter_alt_rounded,
+                            color: AppColors.defaultColor,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 

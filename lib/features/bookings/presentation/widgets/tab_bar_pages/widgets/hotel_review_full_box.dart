@@ -49,6 +49,7 @@ class _HotelReviewFullBoxState extends State<HotelReviewFullBox>
             ],
           ),
           child: Column(
+            
             children: [
               Container(
                 height: MediaQuery.of(context).size.height * 0.25,
@@ -87,30 +88,32 @@ class _HotelReviewFullBoxState extends State<HotelReviewFullBox>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.65,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.name,
-                            style: const TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w900,
-                              wordSpacing: 1,
-                              overflow: TextOverflow.ellipsis,
+                    Expanded(
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.name,
+                              style: const TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w900,
+                                wordSpacing: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                          ),
-                          Text(
-                            widget.address,
-                            style: const TextStyle(
-                              color: AppLightColors.accentColor1,
-                              fontWeight: FontWeight.w700,
-                              overflow: TextOverflow.ellipsis,
+                            Text(
+                              widget.address,
+                              style: const TextStyle(
+                                color: AppLightColors.accentColor1,
+                                fontWeight: FontWeight.w700,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                          ),
-                          RatingStarsWidget(hotelRating: widget.rating),
-                        ],
+                            RatingStarsWidget(hotelRating: widget.rating),
+                          ],
+                        ),
                       ),
                     ),
                     Column(

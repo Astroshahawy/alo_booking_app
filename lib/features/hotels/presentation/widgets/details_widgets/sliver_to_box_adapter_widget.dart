@@ -28,7 +28,7 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.7,
+                    width: MediaQuery.of(context).size.width * 0.6,
                     child: Text(
                       hotel.hotelName,
                       style: const TextStyle(
@@ -40,7 +40,7 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.7,
+                    width: MediaQuery.of(context).size.width * 0.6,
                     child: RichText(
                       text: TextSpan(
                         children: [
@@ -76,7 +76,7 @@ class SliverToBoxAdaptorWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    '\$${hotel.hotelPrice}',
+                    '\$${hotel.hotelPrice}',textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 22,

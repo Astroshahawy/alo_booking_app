@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:alo_booking_app/core/themes/app_colors.dart';
@@ -29,7 +30,7 @@ class SliverAppbarBackgroundWidget extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: CachedNetworkImage(
-            imageUrl: AppApis.getImageUrl(hotel.hotelImages[2].image),
+            imageUrl: AppApis.getImageUrl(hotel.hotelImages[3].image),
             placeholder: (context, url) => const Center(
                 child: CircularProgressIndicator(
               color: AppColors.defaultColor,
