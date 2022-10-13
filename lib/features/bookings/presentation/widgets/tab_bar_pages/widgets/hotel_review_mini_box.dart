@@ -70,7 +70,8 @@ class _HotelReviewMiniBoxState extends State<HotelReviewMiniBox>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.name,overflow: TextOverflow.ellipsis,
+                        widget.name,
+                        overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w900,
@@ -81,7 +82,8 @@ class _HotelReviewMiniBoxState extends State<HotelReviewMiniBox>
                         widget.address,
                         style: const TextStyle(
                           color: AppLightColors.accentColor1,
-                          fontWeight: FontWeight.w400,overflow: TextOverflow.ellipsis,
+                          fontWeight: FontWeight.w400,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       const Spacer(),
