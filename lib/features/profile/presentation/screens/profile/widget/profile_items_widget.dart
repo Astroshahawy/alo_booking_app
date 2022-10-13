@@ -30,8 +30,7 @@ class ProfileItemsWidget extends StatelessWidget {
                 fontWeight: FontWeight.w400,
                 fontSize: 16,
                 letterSpacing: 0.5,
-              ),
-            ),
+              )),
             Icon(
               icon,
               color: AppThemeBloc.get(context).isDarkMode

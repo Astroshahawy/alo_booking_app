@@ -104,15 +104,18 @@ class _SliverAppBarWidgetState extends State<SliverAppBarWidget> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                SearchHotelsBloc.hotelsNumber != null
-                    ? '${SearchHotelsBloc.hotelsNumber} Hotel Found'
-                    : '${SearchHotelsBloc.hotels!.data.length} Hotel Found',
-                style: const TextStyle(
-                  fontSize: 17,
-                  letterSpacing: 0.5,
-                ),
-              ),
+              BlocBuilder<SearchHotelsBloc, SearchHotelsState>(
+                builder: (context, state) {
+                return Text(
+                  SearchHotelsBloc.hotelsNumber != null
+                      ? '${SearchHotelsBloc.hotelsNumber} Hotel Found'
+                      : '${SearchHotelsBloc.hotels!.data.length} Hotel Found',
+                  style: const TextStyle(
+                    fontSize: 17,
+                    letterSpacing: 0.5,
+                  ),
+                );
+              },),
               GestureDetector(
                 onTap: () {
                   Navigator.push(

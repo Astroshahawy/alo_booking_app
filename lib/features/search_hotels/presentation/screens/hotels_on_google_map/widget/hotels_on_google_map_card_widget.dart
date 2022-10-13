@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/constants/constants.dart';
+import '../../../../../../core/themes/app_colors.dart';
+import '../../../../../../core/themes/cubit/app_theme_cubit.dart';
 import '../../../cubit/search_hotels_cubit.dart';
 import '../../../cubit/search_hotels_state.dart';
 
@@ -64,7 +66,7 @@ class _HotelsOnGoogleMapCardWidgetState
                     child: Container(
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: AppColors.cardColor,
+                        //color: AppColors.cardColor,
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(12),
                           bottomRight: Radius.circular(12),
@@ -117,8 +119,8 @@ class _HotelsOnGoogleMapCardWidgetState
                                         ),
                                         Text('2.0km to city',
                                             style: TextStyle(
-                                                color:
-                                                    AppColors.borderSideColor,
+                                                // color:
+                                                //     AppColors.borderSideColor,
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w300)),
                                       ],
@@ -171,7 +173,9 @@ class _HotelsOnGoogleMapCardWidgetState
                 ],
               ),
               decoration: BoxDecoration(
-                color: AppColors.cardColor,
+                color: AppThemeBloc.get(context).isDarkMode
+                    ? AppDarkColors.primaryColor
+                    : AppLightColors.primaryColor,
                 borderRadius: BorderRadius.circular(12),
               ),
             );

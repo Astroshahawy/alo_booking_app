@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:alo_booking_app/features/bookings/presentation/cubit/bookings_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +27,7 @@ class SliverAppbarBackgroundWidget extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: CachedNetworkImage(
-            imageUrl: AppApis.getImageUrl(hotel.hotelImages[1].image),
+            imageUrl: AppApis.getImageUrl(hotel.hotelImages[3].image),
             placeholder: (context, url) => const Center(
                 child: CircularProgressIndicator(
               color: AppColors.defaultColor,

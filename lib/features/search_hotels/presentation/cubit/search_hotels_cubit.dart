@@ -14,8 +14,7 @@ class SearchHotelsBloc extends Cubit<SearchHotelsState> {
   final  SearchHotelsInfo searchHotelsInfo;
   final GetHotelsInfoUseCase getHotelsUseCase;
   final GetFacilitiesInfo getFacilitiesInfo;
-  static SearchOptionsModel? searchOptionsModel = SearchOptionsModel(
-      '', '', '', '', '', '', '', '', '', {});
+  static SearchOptionsModel? searchOptionsModel = SearchOptionsModel();
 
   SearchHotelsBloc(
     this.searchHotelsInfo,
@@ -48,11 +47,16 @@ class SearchHotelsBloc extends Cubit<SearchHotelsState> {
   void searchHotels({required String hotelName}) async {
     emit(UserSearchHotelsLoadingState());
     final searchFilter = SearchOptionsModel(
-        hotelName, searchOptionsModel!.minPrice,
-        searchOptionsModel!.address, searchOptionsModel!.maxPrice,
-        searchOptionsModel!.latitude, searchOptionsModel!.longitude,
-        searchOptionsModel!.distance,  searchOptionsModel!.count,
-        searchOptionsModel!.page, searchOptionsModel!.facilities
+      name: hotelName,
+        minPrice: searchOptionsModel!.minPrice,
+        // address: searchOptionsModel!.address,
+        maxPrice: searchOptionsModel!.maxPrice,
+        latitude: searchOptionsModel!.latitude,
+        longitude: searchOptionsModel!.longitude,
+        distance: searchOptionsModel!.distance,
+        // count: searchOptionsModel!.count,
+        // page: searchOptionsModel!.page,
+        facilities: searchOptionsModel!.facilities
     );
     final response = await searchHotelsInfo(searchFilter);
 
