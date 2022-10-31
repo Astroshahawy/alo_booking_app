@@ -86,4 +86,4 @@
 <hr>
 
 ## Video overview
-Link: https://drive.google.com/file/d/1myRZCIzXDaLn1NPjxdzIebsTzGDr7Sl8/view?usp=sharing
+[![Alo Booking Application](https://user-images.githubusercontent.com/20980869/199045277-08db0203-9b1a-4b05-9a25-68bafa5b2797.png)](https://drive.google.com/file/d/1myRZCIzXDaLn1NPjxdzIebsTzGDr7Sl8/view?usp=sharing)
